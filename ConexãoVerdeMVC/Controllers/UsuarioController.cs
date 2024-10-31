@@ -1,39 +1,26 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ConexãoVerdeMVC.Business.Interfaces;
-using ConexãoVerdeAppData.Entities;
 using ConexãoVerdeMVC.Models;
 
-namespace ConexãoVerdeMVC.Controllers
+namespace ConexãoVerdeMVC.Controllers;
+
+public class UsuarioController(IUsuarioBusiness usuario) : Controller
 {
-    public class UsuarioController : Controller
+    [HttpGet]
+    public IActionResult Registrar()
     {
-        private readonly IUsuarioBusiness _usuario;
+        return View();
+    }
 
-        public UsuarioController(IUsuarioBusiness usuario)
+    [HttpPost]
+    public async Task<IActionResult> Registrar(UsuarioModel usuario1)
+    {
+        if (ModelState.IsValid)
         {
-            _usuario = usuario;
+            await usuario.RegistrarUsuario(usuario1);
+            return RedirectToAction(nameof(Registrar));
         }
 
-        [HttpGet]
-        public IActionResult Registrar()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Registrar(UsuarioModel usuario)
-        {
-            if (ModelState.IsValid)
-            {
-                _usuario.RegistrarUsuario(usuario);
-                return RedirectToAction(nameof(Registrar));
-            }
-            return View(usuario);
-        }
-
+        return View(usuario1);
     }
 }
