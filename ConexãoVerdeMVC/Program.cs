@@ -1,6 +1,5 @@
 using ConexãoVerdeAppData.Context;
-using ConexãoVerdeMVC.Business.Interfaces;
-using ConexãoVerdeMVC.Business.Services;
+using ConexãoVerdeMVC.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DbContextConfig>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IUsuarioBusiness, UsuarioBusiness>();
+builder.Services.AddConexaoVerdeServices();
 
 var app = builder.Build();
 
