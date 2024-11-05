@@ -13,14 +13,14 @@ public class UsuarioController(IUsuarioBusiness usuario) : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Registrar(UsuarioModel usuario1)
+    public async Task<IActionResult> Registrar(UsuarioModel usuarioModel)
     {
         if (ModelState.IsValid)
         {
-            await usuario.RegistrarUsuario(usuario1);
+            await usuario.RegistrarUsuario(usuarioModel);
             return RedirectToAction(nameof(Registrar));
         }
 
-        return View(usuario1);
+        return View(usuarioModel);
     }
 }
