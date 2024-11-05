@@ -13,7 +13,7 @@ Para configurar acesse a pasta "ConexãoVerdeAppData" e rode os comandos:
  - dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 
 
-Para iniciar o projeto acesse a pasta "ConexãoVerdeAppData" e rode:
+Para iniciar o projeto acesse a pasta "ConexãoVerdeMVC" e rode:
 
 Para validar se tem algum erro no projeto
  - dotnet build
