@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Conexao Verde</title>
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ConexaoVerdeMVC.styles.css" asp-append-version="true" />
+</head>
+<body class="bg-background">
+    <!-- Header (Navbar) -->
+<header class="relative top-0 left-0 w-full">
+    <nav class="bg-header text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+            <div class="relative flex items-center justify-between h-16">
+                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                    <!-- Menu mobile aqui, se necessário -->
+                </div>
+                <div class=" hidden sm:block left-0 flex-grow items-center">
+                    <div class="flex items-center">
+                         <!-- Link para a página inicial com a imagem -->
+                        <a href="/" class="flex relativeitems-center">
+                            <img src="~/images/logo.png" alt="Logo Home" class="h-24 w-auto">
+                        </a>
+                        <a href="/Home/Privacy" class="text-white hover:bg-indigo-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Privacy</a>
+                    </div>
+                </div>
+
+                <!-- Botões de Cadastrar-se e Login fixos à direita -->
+                <div class="fixed right-0 mr-4 flex items-center">
+                    <!-- Botão Login (verde escuro) -->
+                    <a href="/Usuario/Login" class="text-white hover:bg-green-700 hover:text-white px-4 py-2 rounded-md text-sm font-medium bg-green-600">
+                        Login
+                    </a>
+                    <!-- Barra de Separação -->
+                    <span class="text-white">|</span>
+                    <!-- Botão Cadastrar-se (verde claro) -->
+                    <a href="/Usuario/Registrar" class="text-white hover:bg-green-300 hover:text-white px-4 py-2 rounded-md text-sm font-medium bg-green-400">
+                        Cadastrar-se
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+    <!-- Main content -->
+    <div class="container mx-auto px-4 py-6">
+        <main role="main" class="pb-6">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bottom-0 left-0 w-full bg-header text-white">
+        <div class="container mx-auto px-4 py-6">
+            <div class="text-center">
+                &copy; 2024 - Conexao Verde - <a href="/Home/Privacy" class="text-indigo-300 hover:text-white">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

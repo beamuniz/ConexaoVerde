@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Banner -->
+<section class="relative bg-cover bg-center h-[60vh] flex items-center justify-center text-white" style="background-image: url('https://via.placeholder.com/1600x900');">
+    <div class="absolute inset-0 bg-black opacity-40"></div>
+    <div class="relative z-10 text-center">
+        <h1 class="text-4xl font-bold mb-4">Bem-vindo à nossa página</h1>
+        <p class="text-lg mb-8">Aqui você encontra tudo o que precisa saber sobre nós.</p>
+        <a href="#sobre-nos" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full text-xl font-medium transition duration-300">Saiba Mais</a>
+    </div>
+</section>
+
+<!-- Carrossel -->
+<section class="py-12">
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-semibold text-center mb-8">Nossos Projetos</h2>
+
+        <!-- Carrossel de imagens -->
+        <div id="carrossel" class="relative">
+            <div class="carousel w-full h-72 overflow-hidden rounded-lg">
+                <div class="carousel-items flex transition-transform duration-700">
+                    <div class="w-full flex-shrink-0">
+                        <img src="https://via.placeholder.com/1200x600?text=Imagem+1" alt="Imagem 1" class="w-full h-full object-cover rounded-lg">
+                    </div>
+                    <div class="w-full flex-shrink-0">
+                        <img src="https://via.placeholder.com/1200x600?text=Imagem+2" alt="Imagem 2" class="w-full h-full object-cover rounded-lg">
+                    </div>
+                    <div class="w-full flex-shrink-0">
+                        <img src="https://via.placeholder.com/1200x600?text=Imagem+3" alt="Imagem 3" class="w-full h-full object-cover rounded-lg">
+                    </div>
+                </div>
+            </div>
+            <!-- Botões de navegação -->
+            <button id="prev" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg">
+                <svg class="w-6 h-6 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+            <button id="next" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg">
+                <svg class="w-6 h-6 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Sobre Nós -->
+<section id="sobre-nos" class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-semibold text-center mb-8">Sobre Nós</h2>
+        <div class="grid md:grid-cols-2 gap-12">
+            <div>
+                <p class="text-lg text-gray-700">Somos uma empresa dedicada a fornecer as melhores soluções para nossos clientes. Nossa missão é inovar constantemente, oferecendo produtos e serviços de alta qualidade que atendam às necessidades e expectativas de nossos clientes. Nossa equipe é composta por profissionais altamente qualificados, apaixonados pelo que fazem.</p>
+            </div>
+            <div>
+                <p class="text-lg text-gray-700">Com uma visão focada no futuro, buscamos transformar ideias em realidade, sempre com responsabilidade social e ambiental. Trabalhamos em parceria com nossos clientes para construir soluções personalizadas que gerem resultados reais e sustentáveis. Junte-se a nós e faça parte dessa jornada de sucesso!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Carrossel de imagens
+    const prevButton = document.getElementById('prev');
+    const nextButton = document.getElementById('next');
+    const carouselItems = document.querySelector('.carousel-items');
+    let currentIndex = 0;
+
+    function updateCarousel() {
+        const totalItems = carouselItems.children.length;
+        const newTransform = `translateX(-${currentIndex * 100}%)`;
+        carouselItems.style.transform = newTransform;
+    }
+
+    prevButton.addEventListener('click', () => {
+        currentIndex = (currentIndex === 0) ? carouselItems.children.length - 1 : currentIndex - 1;
+        updateCarousel();
+    });
+
+    nextButton.addEventListener('click', () => {
+        currentIndex = (currentIndex === carouselItems.children.length - 1) ? 0 : currentIndex + 1;
+        updateCarousel();
+    });
+</script>
+
