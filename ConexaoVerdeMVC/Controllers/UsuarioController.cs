@@ -7,18 +7,18 @@ namespace ConexaoVerdeMVC.Controllers;
 public class UsuarioController(IUsuarioBusiness usuario) : Controller
 {
     [HttpGet]
-    public IActionResult Registrar()
+    public IActionResult Cadastro()
     {
         return View();
     }
 
     [HttpPost]
-    public async Task<IActionResult> Registrar(UsuarioModel usuarioModel)
+    public async Task<IActionResult> Cadastro(UsuarioModel usuarioModel)
     {
         if (ModelState.IsValid)
         {
             await usuario.RegistrarUsuario(usuarioModel);
-            return RedirectToAction(nameof(Registrar));
+            return RedirectToAction(nameof(Cadastro));
         }
 
         return View(usuarioModel);
