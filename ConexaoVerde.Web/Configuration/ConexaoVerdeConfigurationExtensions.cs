@@ -8,5 +8,6 @@ public static class ConexaoVerdeConfigurationExtensions
     public static void AddConexaoVerdeServices(this IServiceCollection services)
     {
         services.AddScoped<IUsuarioBusiness, UsuarioBusiness>();
+        services.AddScoped<IProdutoBusiness, ProdutoBusiness>();
     }
 }

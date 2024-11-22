@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ConexaoVerde.AppData.Entities.Produto>
+
+@{
+ViewData["Title"] = "Lista de Produtos";
+}
+
+<h1>Lista de Produtos</h1>
+
+<a asp-action="Create" class="btn btn-primary">Novo Produto</a>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Categoria</th>
+        <th>Fornecedor</th>
+        <th>Descrição</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var produto in Model)
+    {
+    <tr>
+        <td>@produto.Id</td>
+        <td>@produto.NomeProduto</td>
+        <td>@produto.Preco.ToString("C")</td>
+        <td>@produto.Categoria?.NomeCategoria</td>
+        <td>@produto.Fornecedor?.RazaoSocial</td>
+        <td>@produto.Descricao</td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@produto.Id" class="btn btn-sm btn-warning">Editar</a>
+            <a asp-action="Details" asp-route-id="@produto.Id" class="btn btn-sm btn-info">Detalhes</a>
+            <a asp-action="Delete" asp-route-id="@produto.Id" class="btn btn-sm btn-danger">Excluir</a>
+        </td>
+    </tr>
+    }
+    </tbody>
+</table>
