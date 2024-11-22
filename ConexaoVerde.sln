@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConexaoVerde.AppData", "ConexaoVerde.AppData\ConexaoVerde.AppData.csproj", "{0B9AD3CB-DA37-4F28-90DD-27C83B253924}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConexaoVerde.Web", "ConexaoVerde.Web\ConexaoVerde.Web.csproj", "{3F593230-5C42-46B3-A61B-12F57EDE0307}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B9AD3CB-DA37-4F28-90DD-27C83B253924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B9AD3CB-DA37-4F28-90DD-27C83B253924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B9AD3CB-DA37-4F28-90DD-27C83B253924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B9AD3CB-DA37-4F28-90DD-27C83B253924}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F593230-5C42-46B3-A61B-12F57EDE0307}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F593230-5C42-46B3-A61B-12F57EDE0307}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F593230-5C42-46B3-A61B-12F57EDE0307}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F593230-5C42-46B3-A61B-12F57EDE0307}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

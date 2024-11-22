@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Conexão Verde</title>
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ConexaoVerdeMVC.styles.css" asp-append-version="true" />
+    <style>
+        /* Garantir que o header fique fixo na parte superior */
+        header {
+            width: 100%;
+            z-index: 10;
+        }
+
+        /* Navbar configurações */
+        nav {
+            position: sticky; /* Isso faz com que a navbar fique fixa no topo enquanto o conteúdo rola */
+            top: 0;
+            background-color: #2d7c2f; /* A cor verde da navbar */
+            z-index: 20;
+        }
+
+        /* Ajustar para garantir que os botões fiquem no canto superior direito da navbar */
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Ajustes visuais para os botões */
+        .auth-buttons a {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .auth-buttons .login {
+            background-color: #2f855a; /* Verde escuro */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .auth-buttons .login:hover {
+            background-color: #276749;
+        }
+
+        .auth-buttons .signup {
+            background-color: #48bb78; /* Verde claro */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .auth-buttons .signup:hover {
+            background-color: #38a169;
+        }
+    </style>
+</head>
+<body class="bg-background">
+<!-- Header (Navbar) -->
+<header>
+    <nav class="bg-header text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+            <div class="navbar-content">
+                <!-- Logo e links da navbar -->
+                <div class="flex items-center">
+                    <a href="/" class="flex relativeitems-center">
+                        <img src="~/images/logo.png" alt="Logo Home" class="h-24 w-auto">
+                    </a>
+                    <a href="/Home/Privacy" class="text-white hover:bg-indigo-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Privacy</a>
+                </div>
+
+                <!-- Botões Login e Cadastrar-se no canto direito -->
+                <div class="auth-buttons">
+                    <a href="/Usuario/Login" class="login">
+                        Login
+                    </a>
+                    <span class="text-white">|</span>
+                    <a href="/Usuario/Cadastro" class="signup">
+                        Cadastrar-se
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Main content -->
+<div class="container mx-auto px-4 py-6">
+    <main role="main" class="pb-6">
+        @RenderBody()
+    </main>
+</div>
+
+<!-- Footer -->
+<footer class="bottom-0 left-0 w-full bg-header text-white">
+    <div class="container mx-auto px-4 py-6">
+        <div class="text-center">
+            &copy; 2024 - Conexão Verde - <a href="/Home/Privacy" class="text-indigo-300 hover:text-white">Privacy</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
