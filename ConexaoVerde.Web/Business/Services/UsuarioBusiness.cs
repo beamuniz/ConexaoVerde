@@ -8,6 +8,7 @@ namespace ConexaoVerde.Web.Business.Services;
 
 public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
 {
+    private readonly IClienteBussines clienteBussines;
     public async Task<Usuario> AtualizarUsuario(UsuarioModel usuarioModel)
     {
         var usuarioExistente = await dbContextConfig.Usuarios.FindAsync(usuarioModel.Id);
@@ -58,6 +59,17 @@ public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
             FotoPerfil = usuarioModel.FotoPerfil,
             Perfil = usuarioModel.Perfil
         };
+
+        if (usuarioModel.Perfil == "Cliente")
+        {
+        var clienteModel = new ClienteModel
+        {
+            CPF = usuarioModel.clienteModel.CPF,
+            NomeCompleto = usuarioModel.clienteModel.NomeCompleto
+        };
+
+        await clienteBussines.RegistrarCliente(clienteModel);
+        }
 
         await dbContextConfig.Usuarios.AddAsync(usuario);
         await dbContextConfig.SaveChangesAsync();
