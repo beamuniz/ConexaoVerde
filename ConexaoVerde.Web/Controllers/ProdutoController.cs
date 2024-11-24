@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ConexaoVerde.AppData.Entities;
 using ConexaoVerde.Web.Business.Interfaces;
+using ConexaoVerde.Web.Models;
 
 namespace ConexaoVerde.Web.Controllers;
 
@@ -23,19 +24,38 @@ public class ProdutoController(IProdutoBusiness produtoBusiness) : Controller
     }
     
     [HttpGet]
-    public IActionResult CriarProduto()
+    public async Task<IActionResult> CriarProduto()
     {
-        return View(); 
+        // ViewBag.Categorias = await categoriaBusiness.ListarCategorias();
+        // ViewBag.Fornecedores = await fornecedorBusiness.ListarFornecedores();
+    
+        return View(new ProdutoModel());
     }
+
 
     [HttpPost]
-    public async Task<IActionResult> CriarProduto([FromBody] Produto produto)
+    public async Task<IActionResult> CriarProduto(ProdutoModel produtoModel)
     {
-        if (!ModelState.IsValid) return BadRequest(ModelState);
+        if (!ModelState.IsValid)
+        {
+            return View(produtoModel);
+        }
 
-        var novoProduto = await produtoBusiness.CriarProduto(produto);
-        return CreatedAtAction(nameof(ObterProdutoPorId), new { id = novoProduto.Id }, novoProduto);
+        var produto = new Produto
+        {
+            NomeProduto = produtoModel.NomeProduto,
+            Preco = produtoModel.Preco,
+            Descricao = produtoModel.Descricao,
+            CategoriaId = produtoModel.CategoriaId,
+            FornecedorId = produtoModel.FornecedorId,
+            ImgProduto = produtoModel.ImgProduto 
+        };
+        
+        await produtoBusiness.CriarProduto(produto);
+
+        return RedirectToAction(nameof(ListarProduto));
     }
+
 
     [HttpPut("{id}")]
     public async Task<IActionResult> AtualizarProduto(int id, [FromBody] Produto produto)
