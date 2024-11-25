@@ -1,17 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
+namespace ConexaoVerde.AppData.Entities;
 
-namespace ConexaoVerde.AppData.Entities
+public class Cliente : Usuario
 {
-    public class Cliente : Usuario
-    {
-        [Required]
-        public string CPF { get; set; }
-        [Required]
-        public string NomeCompleto { get; set; }
-  
-    }
+    public int Id { get; set; }
+    public string Nome { get; set; }
+    public string Sobrenome { get; set; }
+    public string Cpf { get; set; }
+    public Usuario Usuario { get; set; }
 }

@@ -34,6 +34,12 @@ public class DbContextConfig(DbContextOptions<DbContextConfig> options) : DbCont
         modelBuilder.Entity<Cliente>().ToTable("Clientes");
         modelBuilder.Entity<Fornecedor>().ToTable("Fornecedores");
 
+        modelBuilder.Entity<Cliente>()
+            .HasOne(c => c.Usuario)
+            .WithOne(u => u.Cliente)
+            .HasForeignKey<Cliente>(c => c.Id)
+            .OnDelete(DeleteBehavior.Cascade);
+        
         modelBuilder.Entity<Avaliacao>()
             .HasOne(a => a.Cliente)
             .WithMany()

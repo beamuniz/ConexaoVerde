@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ConexaoVerde.Web.Business.Services;
 
-public class UsuarioBusiness(DbContextConfig dbContextConfig, IClienteBusiness clienteBusiness) : IUsuarioBusiness
+public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
 {
     public async Task<Usuario> AtualizarUsuario(UsuarioModel usuarioModel)
     {
@@ -47,30 +47,29 @@ public class UsuarioBusiness(DbContextConfig dbContextConfig, IClienteBusiness c
         throw new NotImplementedException();
     }
 
-    public async Task RegistrarUsuario(UsuarioModel usuarioModel)
+    public async Task RegistrarCliente(UsuarioModel usuarioModel)
     {
         var senhaHash = BCrypt.Net.BCrypt.HashPassword(usuarioModel.Senha);
-        var usuario = new Usuario
-        {
-            Email = usuarioModel.Email,
-            Senha = senhaHash,
-            Telefone = usuarioModel.Telefone,
-            FotoPerfil = usuarioModel.FotoPerfil,
-            Perfil = usuarioModel.Perfil
-        };
 
-        if (usuarioModel.Perfil == "Cliente")
+        if (!usuarioModel.Perfil)
         {
-            var clienteModel = new ClienteModel
+            var clienteModel = usuarioModel.ClienteModel;
+
+            var cliente = new Cliente
             {
-                CPF = usuarioModel.clienteModel.CPF,
-                NomeCompleto = usuarioModel.clienteModel.NomeCompleto
+                Nome = clienteModel.Nome,
+                Sobrenome = clienteModel.Sobrenome,
+                Cpf = clienteModel.Cpf,
+                Id = usuarioModel.Id,
+                Email = usuarioModel.Email,
+                Senha = senhaHash,
+                Telefone = usuarioModel.Telefone,
+                FotoPerfil = usuarioModel.FotoPerfil,
+                Perfil = usuarioModel.Perfil
             };
-
-            await clienteBusiness.RegistrarCliente(clienteModel);
+            await dbContextConfig.Clientes.AddAsync(cliente);
         }
 
-        await dbContextConfig.Usuarios.AddAsync(usuario);
         await dbContextConfig.SaveChangesAsync();
     }
 }

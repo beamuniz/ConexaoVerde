@@ -1,13 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ConexaoVerde.AppData.Entities;
 
-namespace ConexaoVerde.Web.Models
+namespace ConexaoVerde.Web.Models;
+
+public class ClienteModel
 {
-    public class ClienteModel
-    {
-        public string CPF { get; set; }
-        public string NomeCompleto { get; set; }
-    }
+    public int Id { get; set; }
+    public string Nome { get; set; }
+    public string Sobrenome { get; set; }
+    public string Cpf { get; set; }
+    public Usuario Usuario { get; set; }
 }
