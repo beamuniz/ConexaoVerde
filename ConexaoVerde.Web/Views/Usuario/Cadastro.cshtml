@@ -60,22 +60,30 @@
             </div>
         </div>
 
-        <!-- Nome Completo 
+        <!-- Nome -->
         <div class="mb-4">
-            <label asp-for="Nome" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Nome Completo</label>
-            <input asp-for="Nome" type="text" placeholder="Seu nome completo"
-                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-            <span asp-validation-for="Nome" class="text-red-500"></span>
+            <label asp-for="ClienteModel.Nome" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Nome</label>
+            <input asp-for="ClienteModel.Nome" type="text" placeholder="Nome"
+                   class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+            <span asp-validation-for="ClienteModel.Nome" class="text-red-500"></span>
         </div>
-        -->
-        <!-- CPF 
+
+        <!-- SobrenomeNome -->
         <div class="mb-4">
-            <label asp-for="CPf" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">CPF</label>
-            <input asp-for="CPf" type="text" placeholder="000.000.000-00"
-                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-            <span  asp-validation-for="CPF" class="text-red-500"></span>
+            <label asp-for="ClienteModel.Sobrenome" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Nome</label>
+            <input asp-for="ClienteModel.Sobrenome" type="text" placeholder="Sobrenome"
+                   class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+            <span asp-validation-for="ClienteModel.Sobrenome" class="text-red-500"></span>
         </div>
-        -->
+ 
+        <!-- CPF   -->
+        <div class="mb-4">
+            <label asp-for="ClienteModel.Cpf" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">CPF</label>
+            <input asp-for="ClienteModel.Cpf" type="text" placeholder="000.000.000-00"
+                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+            <span  asp-validation-for="ClienteModel.Cpf" class="text-red-500"></span>
+        </div>
+      
         <!-- Telefone -->
         <div class="mb-4">
             <label asp-for="Telefone" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Telefone</label>
@@ -219,54 +227,36 @@
 
     @* botão tougle *@
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Inicialmente oculta os dois formulários
-    document.getElementById('clienteFields').style.display = 'none';
-    document.getElementById('fornecedorFields').style.display = 'none';
-
-    // Referência aos inputs para o asp-for
-    const clienteInput = document.getElementById('clienteInput');
-    const fornecedorInput = document.getElementById('fornecedorInput');
-
-    // Função para exibir ou ocultar os campos dependendo do tipo de conta
     function toggleAccountType(isCliente) {
-        // Oculta ambos os campos ao selecionar o tipo de conta
-        document.getElementById('clienteFields').style.display = 'none';
-        document.getElementById('fornecedorFields').style.display = 'none';
-
-        // Exibe o campo correspondente ao tipo de conta
-        if (isCliente) {
-            document.getElementById('clienteFields').style.display = 'block';
-            // Adiciona a cor azul no botão de Cliente e remove do Fornecedor
-            document.getElementById('clienteBtn').classList.add('bg-blue-500', 'text-white');
-            document.getElementById('fornecedorBtn').classList.remove('bg-blue-500', 'text-white');
-            
-            // Atribui o valor para o campo asp-for para "false" para Cliente
-            clienteInput.value = 'false';
-            fornecedorInput.value = 'true'; // Garante que fornecedor tenha o valor correto
-        } else {
-            document.getElementById('fornecedorFields').style.display = 'block';
-            // Adiciona a cor azul no botão de Fornecedor e remove do Cliente
-            document.getElementById('fornecedorBtn').classList.add('bg-blue-500', 'text-white');
-            document.getElementById('clienteBtn').classList.remove('bg-blue-500', 'text-white');
-            
-            // Atribui o valor para o campo asp-for para "true" para Fornecedor
-            fornecedorInput.value = 'true';
-            clienteInput.value = 'false'; // Garante que cliente tenha o valor correto
-        }
+        // A variável 'isCliente' será 'true' para cliente e 'false' para fornecedor
+        document.getElementById("perfilInput").value = isCliente;
     }
-
-    // Ações dos botões de toggle
-    document.getElementById('clienteBtn').addEventListener('click', function() {
-        toggleAccountType(true); // Mostra campos de Cliente
-    });
-    document.getElementById('fornecedorBtn').addEventListener('click', function() {
-        toggleAccountType(false); // Mostra campos de Fornecedor
-    });
-});
-
 </script>
-
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let currentType = true;
+        function toggleAccountType(isCliente) {
+            document.getElementById('clienteFields').style.display = 'none';
+            document.getElementById('fornecedorFields').style.display = 'none';
+            if (isCliente) {
+                document.getElementById('clienteBtn').classList.add('bg-blue-500', 'text-white');
+                document.getElementById('fornecedorBtn').classList.remove('bg-blue-500', 'text-white');
+                document.getElementById('clienteFields').style.display = 'block'; // Exibe os campos de Cliente
+            } else {
+                document.getElementById('fornecedorBtn').classList.add('bg-blue-500', 'text-white');
+                document.getElementById('clienteBtn').classList.remove('bg-blue-500', 'text-white');
+                document.getElementById('fornecedorFields').style.display = 'block'; // Exibe os campos de Fornecedor
+            }
+        }
+        toggleAccountType(currentType);
+        document.getElementById('clienteBtn').addEventListener('click', function() {
+            toggleAccountType(true);
+        });
+        document.getElementById('fornecedorBtn').addEventListener('click', function() {
+            toggleAccountType(false);
+        });
+    });
+</script>
 
 @*Funções da senha*@
 <script>
@@ -379,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (digito2 === 10 || digito2 === 11) digito2 = 0;
 
         // Verifica se os dígitos calculados coincidem com os fornecidos
-        if (cpf[9] == digito1 && cpf[10] == digito2) {
+        if (cpf[9] === digito1 && cpf[10] === digito2) {
             document.getElementById("cpfError").classList.add("hidden");
             return true;
         } else {
