@@ -6,9 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ConexaoVerde.Web.Business.Services;
 
-public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
+public class UsuarioBusiness(DbContextConfig dbContextConfig, IClienteBusiness clienteBusiness) : IUsuarioBusiness
 {
-    private readonly IClienteBussines clienteBussines;
     public async Task<Usuario> AtualizarUsuario(UsuarioModel usuarioModel)
     {
         var usuarioExistente = await dbContextConfig.Usuarios.FindAsync(usuarioModel.Id);
@@ -62,13 +61,13 @@ public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
 
         if (usuarioModel.Perfil == "Cliente")
         {
-        var clienteModel = new ClienteModel
-        {
-            CPF = usuarioModel.clienteModel.CPF,
-            NomeCompleto = usuarioModel.clienteModel.NomeCompleto
-        };
+            var clienteModel = new ClienteModel
+            {
+                CPF = usuarioModel.clienteModel.CPF,
+                NomeCompleto = usuarioModel.clienteModel.NomeCompleto
+            };
 
-        await clienteBussines.RegistrarCliente(clienteModel);
+            await clienteBusiness.RegistrarCliente(clienteModel);
         }
 
         await dbContextConfig.Usuarios.AddAsync(usuario);

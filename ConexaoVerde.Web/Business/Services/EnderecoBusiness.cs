@@ -10,7 +10,7 @@ public class EnderecoBusiness(DbContextConfig dbContextConfig) : IEnderecoBusine
 {
     public async Task<Endereco> CriarEndereco(Endereco endereco)
     {
-        await dbContextConfig.Produtos.AddAsync(endereco);
+        await dbContextConfig.Enderecos.AddAsync(endereco);
         await dbContextConfig.SaveChangesAsync();
         return endereco;
     }
@@ -28,7 +28,7 @@ public class EnderecoBusiness(DbContextConfig dbContextConfig) : IEnderecoBusine
             enderecoExistente.CEP = endereco.CEP;
             enderecoExistente.FornecedorId = endereco.FornecedorId;
 
-            dbContextConfig.Produtos.Update(enderecoExistente);
+            dbContextConfig.Enderecos.Update(enderecoExistente);
             await dbContextConfig.SaveChangesAsync();
         }
 
@@ -60,7 +60,7 @@ public class EnderecoBusiness(DbContextConfig dbContextConfig) : IEnderecoBusine
 
     public async Task<Endereco> ObterEnderecoPorId(int id)
     {
-        return await dbContextConfig.Produtos
+        return await dbContextConfig.Enderecos
             .Include(p => p.Fornecedor)
             .FirstOrDefaultAsync(p => p.Id == id);
     }
