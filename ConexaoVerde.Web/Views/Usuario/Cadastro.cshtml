@@ -42,175 +42,418 @@
                     </div>
                 </div>
 
+                <form asp-action="Cadastro" method="post" enctype="multipart/form-data" class="grid grid-cols-1 gap-6 mt-8">
+    <!-- Campos do Cliente (Ocultos inicialmente) -->
+    <div id="clienteFields" style="display:none;" class="lg:col-span-1">
+        <!-- Foto de Perfil -->
+        <div class="mb-4">
+            <label asp-for="FotoPerfil" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Foto de Perfil</label>
+            <div class="relative border-2 border-dashed border-gray-300 rounded-md p-6 flex flex-col items-center justify-center text-center w-full">
+                <div class="absolute inset-0 flex items-center justify-center bg-gray-100 border-4 border-dashed border-blue-300 rounded-md z-0 p-4">
+                    <span class="text-gray-500 text-sm mb-2 font-semibold">Arraste e solte uma imagem aqui ou</span>
+                </div>
+                <label for="fotoPerfilInput" class="cursor-pointer w-full py-3 px-6 bg-blue-500 text-white rounded-md hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-sm text-center z-10">
+                    Clique ou Arraste para selecionar uma imagem
+                </label>
+                <input id="fotoPerfilInput" type="file" accept="image/*" class="hidden" />
+                <span asp-validation-for="FotoPerfil" class="text-red-500"></span>
+            </div>
+        </div>
+
+        <!-- Nome Completo 
+        <div class="mb-4">
+            <label asp-for="Nome" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Nome Completo</label>
+            <input asp-for="Nome" type="text" placeholder="Seu nome completo"
+                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+            <span asp-validation-for="Nome" class="text-red-500"></span>
+        </div>
+        -->
+        <!-- CPF 
+        <div class="mb-4">
+            <label asp-for="CPf" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">CPF</label>
+            <input asp-for="CPf" type="text" placeholder="000.000.000-00"
+                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+            <span  asp-validation-for="CPF" class="text-red-500"></span>
+        </div>
+        -->
+        <!-- Telefone -->
+        <div class="mb-4">
+            <label asp-for="Telefone" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Telefone</label>
+            <input asp-for="Telefone" type="tel" id="telefone" placeholder="(11) 91234-5678"
+                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                maxlength="15" oninput="formatPhoneNumber(this)" />
+            <span asp-validation-for="Telefone" class="text-red-500"></span>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-4">
+            <label asp-for="Email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email</label>
+            <input asp-for="Email" type="email" placeholder="exemplo@email.com"
+                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+            <span asp-validation-for="Email" class="text-red-500"></span>
+        </div>
+
+        <!-- Senha -->
+        <div class="mb-4">
+            <label asp-for="Senha" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Senha</label>
+            <input asp-for="Senha" type="password" id="senha" placeholder="********"
+                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+            <span asp-validation-for="Senha" class="text-red-500"></span>
+        </div>
+
+        <!-- Barra de Força da Senha -->
+        <div class="mb-4">
+            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Força da Senha</label>
+            <div id="password-strength-container" class="w-full bg-gray-200 rounded-full">
+                <div id="password-strength-bar" class="h-1 rounded-full" style="width: 0%; background-color: #e0e0e0;"></div>
+            </div>
+        </div>
+
+        <!-- Confirmar Senha -->
+        <div class="mb-4">
+            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Confirmar Senha</label>
+            <input type="password" id="confirm-senha" placeholder="********"
+                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+            <!-- Mensagem de erro caso as senhas não coincidam -->
+            <span id="senha-error" class="text-red-500 hidden">As senhas não coincidem.</span>
+        </div>
+
+
+        <div class="lg:col-span-2">
+            <button type="submit" class="w-full px-6 py-3 mt-4 text-white bg-blue-500 border border-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Criar conta
+            </button>
+        </div>
+    </div>
+</form>
+
                 <form asp-action="Cadastro" method="post" enctype="multipart/form-data" class="grid grid-cols-1 gap-6 mt-8 lg:grid-cols-2">
-                    <!-- Campos do Cliente (Ocultos inicialmente) -->
-                    <div id="clienteFields" style="display:none;" class="lg:col-span-1">
-                        <!-- Primeiro Nome -->
-                        <div class="mb-4">
-                            <label asp-for="ClienteModel.Nome" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Primeiro Nome</label>
-                            <input asp-for="ClienteModel.Nome" type="text" placeholder="John"
-                                   class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-                            <span asp-validation-for="ClienteModel.Nome" class="text-red-500"></span>
-                        </div>
+    <!-- Campos do Fornecedor (Ocultos inicialmente) -->
+    <div id="fornecedorFields" style="display:none;" class="lg:col-span-1">
+        <!-- Razão Social -->
+        <div class="mb-4">
+            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Razão Social</label>
+            <input type="text" placeholder="Exemplo Ltda." class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+        </div>
 
-                        <!-- Sobrenome -->
-                        <div class="mb-4">
-                            <label asp-for="ClienteModel.Sobrenome" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Sobrenome</label>
-                            <input asp-for="ClienteModel.Sobrenome" type="text" placeholder="Snow"
-                                   class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-                            <span asp-validation-for="ClienteModel.Sobrenome" class="text-red-500"></span>
-                        </div>
+        <!-- Nome Fantasia -->
+        <div class="mb-4">
+            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Nome Fantasia</label>
+            <input type="text" placeholder="Exemplo Nome" class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+        </div>
 
-                        <!-- CPF -->
-                        <div class="mb-4">
-                            <label asp-for="ClienteModel.Cpf" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">CPF</label>
-                            <input asp-for="ClienteModel.Cpf" type="text" placeholder="000.000.000-00"
-                                   class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-                            <span asp-validation-for="ClienteModel.Cpf" class="text-red-500"></span>
-                        </div>
+        <!-- CNPJ -->
+        <div class="mb-4">
+            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">CNPJ</label>
+            <input type="text" placeholder="00.000.000/0000-00" class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+        </div>
 
-                        <!-- Email -->
-                        <div class="mb-4">
-                            <label asp-for="Email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email</label>
-                            <input asp-for="Email" type="email" placeholder="johndoe@example.com"
-                                   class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-                            <span asp-validation-for="Email" class="text-red-500"></span>
-                        </div>
+        <!-- Foto de Perfil -->
+        <div class="mb-4">
+            <label asp-for="FotoPerfil" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Foto de Perfil</label>
+            <input asp-for="FotoPerfil" type="file" accept="image/*"
+                class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+            <span asp-validation-for="FotoPerfil" class="text-red-500"></span>
+        </div>
 
-                        <!-- Senha -->
-                        <div class="mb-4">
-                            <label asp-for="Senha" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Senha</label>
-                            <input asp-for="Senha" type="password" placeholder="********"
-                                   class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-                            <span asp-validation-for="Senha" class="text-red-500"></span>
-                        </div>
+        <!-- Foto dos Produtos -->
+        <div class="mb-4">
+            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Fotos dos Produtos</label>
+            <input type="file" accept="image/*" multiple class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+        </div>
 
-                        <!-- Confirmar Senha -->
-                        <div class="mb-4">
-                            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Confirmar Senha</label>
-                            <input type="password" placeholder="********" class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-                        </div>
-                    </div>
+        <!-- Endereço -->
+        <div class="mb-4">
+            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Endereço</label>
+            <input type="text" placeholder="Rua Exemplo, 123" class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+        </div>
 
-                    <!-- Campos do Fornecedor (Ocultos inicialmente) -->
-                    <div id="fornecedorFields" style="display:none;" class="lg:col-span-1">
-                        <!-- Razão Social -->
-                        <div class="mb-4">
-                            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Razão Social</label>
-                            <input type="text" placeholder="Exemplo Ltda." class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-                        </div>
+        <!-- Telefone -->
+        <div class="mb-4">
+            <label asp-for="Telefone" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Telefone</label>
+            <input asp-for="Telefone" type="text" placeholder="(11) 91234-5678"
+                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+            <span asp-validation-for="Telefone" class="text-red-500"></span>
+        </div>
+        <!-- Email -->
+        <div class="mb-4">
+            <label asp-for="Email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email</label>
+            <input asp-for="Email" type="email" placeholder="contato@empresa.com"
+                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+            <span asp-validation-for="Email" class="text-red-500"></span>
+        </div>
 
-                        <!-- Nome Fantasia -->
-                        <div class="mb-4">
-                            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Nome Fantasia</label>
-                            <input type="text" placeholder="Exemplo Nome" class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-                        </div>
+        <!-- Senha -->
+        <div class="mb-4">
+            <label asp-for="Senha" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Senha</label>
+            <input asp-for="Senha" type="password" placeholder="********"
+                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+            <span asp-validation-for="Senha" class="text-red-500"></span>
+        </div>
 
-                        <!-- CNPJ -->
-                        <div class="mb-4">
-                            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">CNPJ</label>
-                            <input type="text" placeholder="00.000.000/0000-00" class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-                        </div>
+        <!-- Confirmar Senha -->
+        <div class="mb-4">
+            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Confirmar Senha</label>
+            <input type="password" placeholder="********" class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+        </div>
+    
+        <div class="lg:col-span-2">
+            <button type="submit" class="w-full px-6 py-3 mt-4 text-white bg-blue-500 border border-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Criar conta
+            </button>
+        </div>
+    </div>
+</form>
 
-                        <!-- Foto de Perfil -->
-                        <div class="mb-4">
-                            <label asp-for="FotoPerfil" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Foto de Perfil</label>
-                            <input asp-for="FotoPerfil" type="file" accept="image/*"
-                                   class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-                            <span asp-validation-for="FotoPerfil" class="text-red-500"></span>
-                        </div>
-
-
-                        <!-- Foto dos Produtos -->
-                        <div class="mb-4">
-                            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Fotos dos Produtos</label>
-                            <input type="file" accept="image/*" multiple class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-                        </div>
-
-                        <!-- Endereço -->
-                        <div class="mb-4">
-                            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Endereço</label>
-                            <input type="text" placeholder="Rua Exemplo, 123" class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-                        </div>
-
-                        <!-- Telefone -->
-                        <div class="mb-4">
-                            <label asp-for="Telefone" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Telefone</label>
-                            <input asp-for="Telefone" type="text" placeholder="(11) 91234-5678"
-                                   class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-                            <span asp-validation-for="Telefone" class="text-red-500"></span>
-                        </div>
-                        <!-- Email -->
-                        <div class="mb-4">
-                            <label asp-for="Email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email</label>
-                            <input asp-for="Email" type="email" placeholder="contato@empresa.com"
-                                   class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-                            <span asp-validation-for="Email" class="text-red-500"></span>
-                        </div>
-
-                        <!-- Senha -->
-                        <div class="mb-4">
-                            <label asp-for="Senha" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Senha</label>
-                            <input asp-for="Senha" type="password" placeholder="********"
-                                   class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-                            <span asp-validation-for="Senha" class="text-red-500"></span>
-                        </div>
-
-                        <!-- Confirmar Senha -->
-                        <div class="mb-4">
-                            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Confirmar Senha</label>
-                            <input type="password" placeholder="********" class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-2">
-                        <button type="submit" class="w-full px-6 py-3 mt-4 text-white bg-blue-500 border border-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                            Criar conta
-                        </button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
 </section>
 
+
+
+
 @* Coloque os scripts de js aqui: *@
 
 @section Scripts {
-    <script>
+
+    @* botão tougle *@
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Inicialmente oculta os dois formulários
+    document.getElementById('clienteFields').style.display = 'none';
+    document.getElementById('fornecedorFields').style.display = 'none';
+
+    // Referência aos inputs para o asp-for
+    const clienteInput = document.getElementById('clienteInput');
+    const fornecedorInput = document.getElementById('fornecedorInput');
+
+    // Função para exibir ou ocultar os campos dependendo do tipo de conta
     function toggleAccountType(isCliente) {
-        // A variável 'isCliente' será 'true' para cliente e 'false' para fornecedor
-        document.getElementById("perfilInput").value = isCliente;
+        // Oculta ambos os campos ao selecionar o tipo de conta
+        document.getElementById('clienteFields').style.display = 'none';
+        document.getElementById('fornecedorFields').style.display = 'none';
+
+        // Exibe o campo correspondente ao tipo de conta
+        if (isCliente) {
+            document.getElementById('clienteFields').style.display = 'block';
+            // Adiciona a cor azul no botão de Cliente e remove do Fornecedor
+            document.getElementById('clienteBtn').classList.add('bg-blue-500', 'text-white');
+            document.getElementById('fornecedorBtn').classList.remove('bg-blue-500', 'text-white');
+            
+            // Atribui o valor para o campo asp-for para "false" para Cliente
+            clienteInput.value = 'false';
+            fornecedorInput.value = 'true'; // Garante que fornecedor tenha o valor correto
+        } else {
+            document.getElementById('fornecedorFields').style.display = 'block';
+            // Adiciona a cor azul no botão de Fornecedor e remove do Cliente
+            document.getElementById('fornecedorBtn').classList.add('bg-blue-500', 'text-white');
+            document.getElementById('clienteBtn').classList.remove('bg-blue-500', 'text-white');
+            
+            // Atribui o valor para o campo asp-for para "true" para Fornecedor
+            fornecedorInput.value = 'true';
+            clienteInput.value = 'false'; // Garante que cliente tenha o valor correto
+        }
+    }
+
+    // Ações dos botões de toggle
+    document.getElementById('clienteBtn').addEventListener('click', function() {
+        toggleAccountType(true); // Mostra campos de Cliente
+    });
+    document.getElementById('fornecedorBtn').addEventListener('click', function() {
+        toggleAccountType(false); // Mostra campos de Fornecedor
+    });
+});
+
+</script>
+
+
+@*Funções da senha*@
+<script>
+    // Função para verificar se as senhas coincidem
+    const senhaInput = document.getElementById('senha');
+    const confirmSenhaInput = document.getElementById('confirm-senha');
+    const senhaError = document.getElementById('senha-error');
+    
+    confirmSenhaInput.addEventListener('input', () => {
+        if (confirmSenhaInput.value !== senhaInput.value) {
+            senhaError.classList.remove('hidden');
+        } else {
+            senhaError.classList.add('hidden');
+        }
+    });
+
+    // Função para calcular a força da senha
+    const strengthBar = document.getElementById('password-strength-bar');
+
+    senhaInput.addEventListener('input', () => {
+        const password = senhaInput.value;
+        let strength = 0;
+
+        // Regras para avaliar a força da senha
+        if (password.length >= 8) strength += 1; // Comprimento mínimo de 8 caracteres
+        if (/[A-Z]/.test(password)) strength += 1; // Contém uma letra maiúscula
+        if (/[a-z]/.test(password)) strength += 1; // Contém uma letra minúscula
+        if (/[0-9]/.test(password)) strength += 1; // Contém um número
+        if (/[^A-Za-z0-9]/.test(password)) strength += 1; // Contém um caractere especial
+
+        // Alterar a cor da barra de força
+        if (strength === 0) {
+            strengthBar.style.width = '0%';
+            strengthBar.style.backgroundColor = '#e0e0e0'; // cinza
+        } else if (strength === 1) {
+            strengthBar.style.width = '20%';
+            strengthBar.style.backgroundColor = '#ff4d4d'; // vermelho
+        } else if (strength === 2) {
+            strengthBar.style.width = '40%';
+            strengthBar.style.backgroundColor = '#ffcc00'; // amarelo
+        } else if (strength === 3) {
+            strengthBar.style.width = '60%';
+            strengthBar.style.backgroundColor = '#66cc66'; // verde claro
+        } else if (strength === 4) {
+            strengthBar.style.width = '80%';
+            strengthBar.style.backgroundColor = '#339933'; // verde
+        } else if (strength === 5) {
+            strengthBar.style.width = '100%';
+            strengthBar.style.backgroundColor = '#006600'; // verde escuro
+        }
+    });
+</script>
+
+@*Funções de cpf*@
+<script>
+    // Função para formatar o CPF enquanto o usuário digita
+    function formatarCpf(input) {
+        // Remove qualquer coisa que não seja número
+        let cpf = input.value.replace(/\D/g, '');
+
+        // Formata o CPF com pontos e traço
+        if (cpf.length <= 11) {
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+            cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        }
+
+        // Atualiza o campo de input com o CPF formatado
+        input.value = cpf;
+
+        // Chama a função de validação
+        validarCpf(cpf);
+    }
+
+    // Função para validar o CPF
+    function validarCpf(cpf) {
+        // Remove os caracteres especiais para validação
+        cpf = cpf.replace(/\D/g, '');
+
+        // Verifica se o CPF tem 11 dígitos
+        if (cpf.length !== 11) {
+            document.getElementById("cpfError").classList.remove("hidden");
+            return false;
+        }
+
+        // Verifica se todos os números são iguais (caso do CPF 111.111.111-11, por exemplo)
+        if (/^(\d)\1{10}$/.test(cpf)) {
+            document.getElementById("cpfError").classList.remove("hidden");
+            return false;
+        }
+
+        // Cálculo do primeiro dígito verificador
+        let soma = 0;
+        let peso = 10;
+        for (let i = 0; i < 9; i++) {
+            soma += cpf[i] * peso;
+            peso--;
+        }
+        let digito1 = 11 - (soma % 11);
+        if (digito1 === 10 || digito1 === 11) digito1 = 0;
+
+        // Cálculo do segundo dígito verificador
+        soma = 0;
+        peso = 11;
+        for (let i = 0; i < 10; i++) {
+            soma += cpf[i] * peso;
+            peso--;
+        }
+        let digito2 = 11 - (soma % 11);
+        if (digito2 === 10 || digito2 === 11) digito2 = 0;
+
+        // Verifica se os dígitos calculados coincidem com os fornecidos
+        if (cpf[9] == digito1 && cpf[10] == digito2) {
+            document.getElementById("cpfError").classList.add("hidden");
+            return true;
+        } else {
+            document.getElementById("cpfError").classList.remove("hidden");
+            return false;
+        }
     }
 </script>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        let currentType = true;  
-
-        function toggleAccountType(isCliente) {
-            document.getElementById('clienteFields').style.display = 'none';
-            document.getElementById('fornecedorFields').style.display = 'none';
-
-            if (isCliente) {
-                document.getElementById('clienteBtn').classList.add('bg-blue-500', 'text-white');
-                document.getElementById('fornecedorBtn').classList.remove('bg-blue-500', 'text-white');
-                document.getElementById('clienteFields').style.display = 'block'; // Exibe os campos de Cliente
-            } else {
-                document.getElementById('fornecedorBtn').classList.add('bg-blue-500', 'text-white');
-                document.getElementById('clienteBtn').classList.remove('bg-blue-500', 'text-white');
-                document.getElementById('fornecedorFields').style.display = 'block'; // Exibe os campos de Fornecedor
-            }
+@*Drag and drop perfil*@
+<script>
+    // Função para visualização da imagem selecionada
+    const fileInput = document.getElementById('fotoPerfilInput');
+    const imagePreview = document.getElementById('imagePreview');
+    const imageElement = imagePreview.querySelector('img');
+    
+    fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                imagePreview.classList.remove('hidden');
+                imageElement.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
         }
+    });
 
-        toggleAccountType(currentType);
+    // Função para permitir Drag and Drop
+    const dropArea = document.querySelector('.relative');
+    
+    dropArea.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        dropArea.classList.add('border-blue-500');
+    });
+    
+    dropArea.addEventListener('dragleave', function() {
+        dropArea.classList.remove('border-blue-500');
+    });
 
-        document.getElementById('clienteBtn').addEventListener('click', function() {
-            toggleAccountType(true);
-        });
-        document.getElementById('fornecedorBtn').addEventListener('click', function() {
-            toggleAccountType(false);
-        });
+    dropArea.addEventListener('drop', function(e) {
+        e.preventDefault();
+        dropArea.classList.remove('border-blue-500');
+        
+        const file = e.dataTransfer.files[0];
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                imagePreview.classList.remove('hidden');
+                imageElement.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert('Por favor, insira um arquivo de imagem válido.');
+        }
     });
 </script>
+
+@*Telefone*@
+
+<script>
+    function formatPhoneNumber(input) {
+        // Remove todos os caracteres não numéricos
+        let phoneNumber = input.value.replace(/\D/g, '');
+
+        // Formata o número conforme o padrão (XX) XXXXX-XXXX
+        if (phoneNumber.length <= 2) {
+            input.value = `(${phoneNumber}`;
+        } else if (phoneNumber.length <= 7) {
+            input.value = `(${phoneNumber.substring(0, 2)}) ${phoneNumber.substring(2)}`;
+        } else {
+            input.value = `(${phoneNumber.substring(0, 2)}) ${phoneNumber.substring(2, 7)}-${phoneNumber.substring(7, 11)}`;
+        }
+    }
+</script>
+
 }
