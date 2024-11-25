@@ -46,9 +46,9 @@ public class ProdutoBusiness(DbContextConfig dbContextConfig) : IProdutoBusiness
         return false;
     }
 
-    public async Task<Produto> ObterProdutoPorId(int id)
+    public Task<Produto> ObterProdutoPorId(int id)
     {
-        return await dbContextConfig.Produtos
+        return dbContextConfig.Produtos
             .Include(p => p.Categoria)
             .Include(p => p.Fornecedor)
             .FirstOrDefaultAsync(p => p.Id == id);

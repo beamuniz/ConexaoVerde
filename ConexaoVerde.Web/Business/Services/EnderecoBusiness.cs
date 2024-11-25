@@ -58,9 +58,9 @@ public class EnderecoBusiness(DbContextConfig dbContextConfig) : IEnderecoBusine
         return false;
     }
 
-    public async Task<Endereco> ObterEnderecoPorId(int id)
+    public Task<Endereco> ObterEnderecoPorId(int id)
     {
-        return await dbContextConfig.Enderecos
+        return dbContextConfig.Enderecos
             .Include(p => p.Fornecedor)
             .FirstOrDefaultAsync(p => p.Id == id);
     }
