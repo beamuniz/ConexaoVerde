@@ -5,51 +5,92 @@ ViewData["Title"] = "Cadastro de Produto";
 }
 
 <h1>Cadastro de Produto</h1>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+<div class="text-center">
+    <!-- Exibindo o título com estilo -->
+    <h1 class="text-4xl font-bold text-green-600 mb-7">
+        @ViewData["Title"]
+    </h1>
 
-<form asp-action="CriarProduto" method="post">
-    <div class="form-group">
-        <label asp-for="NomeProduto" class="control-label"></label>
-        <input asp-for="NomeProduto" class="form-control"/>
-        <span asp-validation-for="NomeProduto" class="text-danger"></span>
+    <!-- Formulário ou conteúdo adicional -->
+    <p class="text-green-400">Preencha as informações abaixo para cadastrar um novo produto.</p>
+</div>
+
+<form asp-action="CriarProduto" method="post" class="space-y-7">
+    <!-- Nome do Produto -->
+    <div>
+        <label asp-for="NomeProduto" class="block text-sm font-medium text-gray-700">Produto</label>
+        <input asp-for="NomeProduto"
+               type="text"
+               placeholder="Nome do Produto"
+               class="mt-1 mb-4 block max-w-96 rounded-lg border-green-300 shadow focus:ring-0 focus:border-green-500 sm:text-xs" />
+        <span asp-validation-for="NomeProduto" class="text-sm text-red-600"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="Preco" class="control-label"></label>
-        <input asp-for="Preco" class="form-control" type="number" step="0.01"/>
-        <span asp-validation-for="Preco" class="text-danger"></span>
+    <!-- Preço -->
+    <div>
+        <label asp-for="Preco" class="block text-sm font-medium text-gray-700">Preço</label>
+        <input asp-for="Preco"
+               type="number"
+               step="0.01"
+               placeholder="Digite o Preço"
+               class="mt-1 mb-4 block max-w-96 rounded-lg border-green-300 shadow focus:ring-0 focus:border-green-500 sm:text-xs" />
+        <span asp-validation-for="Preco" class="text-sm text-red-600"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="Descricao" class="control-label"></label>
-        <textarea asp-for="Descricao" class="form-control"></textarea>
-        <span asp-validation-for="Descricao" class="text-danger"></span>
+    <!-- Descrição -->
+    <div>
+        <label asp-for="Descricao" class="block text-sm font-medium text-gray-700">Descrição</label>
+        <textarea asp-for="Descricao"
+                  rows="3"
+                  placeholder="Escreva uma Descrição Detalhada do Produto"
+                  class="mt-1 mb-4 block w-full rounded-md border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"></textarea>
+        <span asp-validation-for="Descricao" class="text-sm text-red-600"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="CategoriaId" class="control-label">Categoria</label>
-        <select asp-for="CategoriaId" asp-items="ViewBag.Categorias" class="form-control">
+    <!-- Categoria -->
+    <div>
+        <label asp-for="CategoriaId" class="block text-sm font-medium text-gray-700">Categoria</label>
+        <select asp-for="CategoriaId" asp-items="ViewBag.Categorias"
+                class="mt-1 mb-4 inline-block max-w-96 rounded-md border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
             <option value="">Selecione</option>
         </select>
-        <span asp-validation-for="CategoriaId" class="text-danger"></span>
+        <span asp-validation-for="CategoriaId" class="text-sm text-red-600"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="FornecedorId" class="control-label">Fornecedor</label>
-        <select asp-for="FornecedorId" asp-items="ViewBag.Fornecedores" class="form-control">
+    <!-- Fornecedor -->
+    <div>
+        <label asp-for="FornecedorId" class="block text-sm font-medium text-gray-700">Fornecedor</label>
+        <select asp-for="FornecedorId" asp-items="ViewBag.Fornecedores"
+                class="mt-1 mb-4 inline-block max-w-96 rounded-md border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
             <option value="">Selecione</option>
         </select>
-        <span asp-validation-for="FornecedorId" class="text-danger"></span>
+        <span asp-validation-for="FornecedorId" class="text-sm text-red-600"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="ImgProduto" class="control-label">Imagens</label>
-        <input asp-for="ImgProduto" class="form-control-file" type="file" multiple/>
+    <!-- Imagens -->
+    <div>
+        <label asp-for="ImgProduto" class="block text-sm font-medium text-gray-700">Imagens</label>
+        <input asp-for="ImgProduto"
+               type="file"
+               multiple
+               class="mt-1 mb-4 block w-full text-gray-500 rounded-lg border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" />
     </div>
 
-    <button type="submit" class="btn btn-primary">Salvar</button>
-    <a href="/Home/Index" class="btn btn-secondary">Voltar</a>
+    <!-- Botões -->
+    <div class="flex items-center justify-between">
+        <button type="submit"
+                class="bg-green-600 text-white px-6 py-2 rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+            Salvar
+        </button>
+        <a href="/Home/Index"
+           class="text-green-600 hover:underline">
+            Voltar
+        </a>
+    </div>
 </form>
 
+</body>
 @section Scripts {
 <partial name="_ValidationScriptsPartial"/>
 }
