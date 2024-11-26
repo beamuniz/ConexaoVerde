@@ -5,7 +5,7 @@ using ConexaoVerde.Web.Models;
 
 namespace ConexaoVerde.Web.Controllers;
 
-public class ProdutoController(IProdutoBusiness produtoBusiness) : Controller
+public class ProdutoController(IProdutoBusiness produtoBusiness, ICategoriaBusiness categoriaBusiness, IFornecedorBusiness fornecedorBusiness) : Controller
 {
     [HttpGet]
     public async Task<IActionResult> ListarProduto()
@@ -22,12 +22,12 @@ public class ProdutoController(IProdutoBusiness produtoBusiness) : Controller
 
         return Ok(produto);
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> CriarProduto()
     {
-        // ViewBag.Categorias = await categoriaBusiness.ListarCategorias();
-        // ViewBag.Fornecedores = await fornecedorBusiness.ListarFornecedores();
+        ViewBag.Categorias = await categoriaBusiness.ListarCategorias();
+        ViewBag.Fornecedores = await fornecedorBusiness.ListarFornecedores();
     
         return View(new ProdutoModel());
     }
@@ -46,16 +46,14 @@ public class ProdutoController(IProdutoBusiness produtoBusiness) : Controller
             NomeProduto = produtoModel.NomeProduto,
             Preco = produtoModel.Preco,
             Descricao = produtoModel.Descricao,
-            CategoriaId = produtoModel.CategoriaId,
-            FornecedorId = produtoModel.FornecedorId,
-            ImgProduto = produtoModel.ImgProduto 
+            CategoriaId = produtoModel.Categoria.Id, 
+            FornecedorId = produtoModel.Fornecedor.Id, 
+            ImgProduto = produtoModel.ImgProduto
         };
-        
         await produtoBusiness.CriarProduto(produto);
 
         return RedirectToAction(nameof(ListarProduto));
     }
-
 
     [HttpPut("{id}")]
     public async Task<IActionResult> AtualizarProduto(int id, [FromBody] Produto produto)

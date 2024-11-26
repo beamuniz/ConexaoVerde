@@ -9,5 +9,8 @@ public static class ConexaoVerdeConfigurationExtensions
     {
         services.AddScoped<IUsuarioBusiness, UsuarioBusiness>();
         services.AddScoped<IProdutoBusiness, ProdutoBusiness>();
+        services.AddScoped<ICategoriaBusiness, CategoriaBusiness>();
+        services.AddScoped<IFornecedorBusiness, FornecedorBusiness>();
+
     }
 }

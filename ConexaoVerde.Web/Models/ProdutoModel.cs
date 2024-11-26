@@ -9,14 +9,10 @@ public class ProdutoModel
     public decimal Preco { get; set; }
 
     public string Descricao { get; set; }
-    
-    public int CategoriaId { get; set; }
-
+    public CategoriaModel Categoria { get; set; }
     public string CategoriaNome { get; set; }
 
     public List<byte[]> ImgProduto { get; set; }
-    
-    public int FornecedorId { get; set; }
 
-    public string FornecedorNome { get; set; }
+    public FornecedorModel Fornecedor { get; set; }
 }

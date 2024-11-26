@@ -8,5 +8,4 @@ public class Fornecedor : Usuario
     public string NomeFantasia { get; set; }
     [Required] public string Cnpj { get; set; }
     public Endereco Endereco { get; set; }
-    public List<Produto> Produtos { get; set; }
 }

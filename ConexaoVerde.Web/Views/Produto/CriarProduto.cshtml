@@ -50,22 +50,22 @@ ViewData["Title"] = "Cadastro de Produto";
 
     <!-- Categoria -->
     <div>
-        <label asp-for="CategoriaId" class="block text-sm font-medium text-gray-700">Categoria</label>
-        <select asp-for="CategoriaId" asp-items="ViewBag.Categorias"
+        <label asp-for="Categoria.Id" class="block text-sm font-medium text-gray-700">Categoria</label>
+        <select asp-for="Categoria.Id" asp-items="ViewBag.Categorias"
                 class="mt-1 mb-4 inline-block max-w-96 rounded-md border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
             <option value="">Selecione</option>
         </select>
-        <span asp-validation-for="CategoriaId" class="text-sm text-red-600"></span>
+        <span asp-validation-for="Categoria.Id" class="text-sm text-red-600"></span>
     </div>
 
     <!-- Fornecedor -->
     <div>
-        <label asp-for="FornecedorId" class="block text-sm font-medium text-gray-700">Fornecedor</label>
-        <select asp-for="FornecedorId" asp-items="ViewBag.Fornecedores"
+        <label asp-for="Fornecedor.Id" class="block text-sm font-medium text-gray-700">Fornecedor</label>
+        <select asp-for="Fornecedor.Id" asp-items="ViewBag.Fornecedores"
                 class="mt-1 mb-4 inline-block max-w-96 rounded-md border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
             <option value="">Selecione</option>
         </select>
-        <span asp-validation-for="FornecedorId" class="text-sm text-red-600"></span>
+        <span asp-validation-for="Fornecedor.Id" class="text-sm text-red-600"></span>
     </div>
 
     <!-- Imagens -->
