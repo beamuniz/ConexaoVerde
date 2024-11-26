@@ -57,8 +57,8 @@ public class ProdutoBusiness(DbContextConfig dbContextConfig) : IProdutoBusiness
     public async Task<IEnumerable<Produto>> ListarProdutos()
     {
         return await dbContextConfig.Produtos
-            .Include(p => p.Categoria)
-            .Include(p => p.Fornecedor)
+            .Include(p => p.Categoria)  
+            .Include(p => p.Fornecedor) 
             .ToListAsync();
     }
 }

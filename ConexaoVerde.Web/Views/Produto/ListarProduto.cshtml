@@ -1,40 +1,36 @@
 ﻿@model IEnumerable<ConexaoVerde.AppData.Entities.Produto>
 
 @{
-ViewData["Title"] = "Lista de Produtos";
+    ViewData["Title"] = "Lista de Produtos";
 }
 
 <h1>Lista de Produtos</h1>
 
-<a asp-action="Create" class="btn btn-primary">Novo Produto</a>
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Preço</th>
-        <th>Categoria</th>
-        <th>Fornecedor</th>
-        <th>Descrição</th>
-        <th>Ações</th>
-    </tr>
-    </thead>
-    <tbody>
+<div class="mb-3">
+    <a asp-action="CriarProduto" class="btn btn-primary">Adicionar Produto</a>
+</div>
+
+<div class="row">
     @foreach (var produto in Model)
     {
-    <tr>
-        <td>@produto.Id</td>
-        <td>@produto.NomeProduto</td>
-        <td>@produto.Preco.ToString("C")</td>
-        <td>@produto.Categoria?.NomeCategoria</td>
-        <td>@produto.Fornecedor?.RazaoSocial</td>
-        <td>@produto.Descricao</td>
-        <td>
-            <a asp-action="Edit" asp-route-id="@produto.Id" class="btn btn-sm btn-warning">Editar</a>
-            <a asp-action="Details" asp-route-id="@produto.Id" class="btn btn-sm btn-info">Detalhes</a>
-            <a asp-action="Delete" asp-route-id="@produto.Id" class="btn btn-sm btn-danger">Excluir</a>
-        </td>
-    </tr>
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <!-- Exibição da imagem do produto -->
+                <img src="@produto.ImgProduto" class="card-img-top" alt="@produto.NomeProduto" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">@produto.NomeProduto</h5>
+                    <p class="card-text text-muted">@produto.Categoria?.NomeCategoria</p>
+                    <p class="card-text">@produto.Descricao</p>
+                    <h6 class="text-success">@produto.Preco.ToString("C")</h6>
+
+                    <!-- Botões de ação -->
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Details" asp-route-id="@produto.Id" class="btn btn-sm btn-info">Detalhes</a>
+                        <a asp-action="Edit" asp-route-id="@produto.Id" class="btn btn-sm btn-warning">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@produto.Id" class="btn btn-sm btn-danger">Excluir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     }
-    </tbody>
-</table>
+</div>

@@ -11,7 +11,8 @@ public class ProdutoController(IProdutoBusiness produtoBusiness, ICategoriaBusin
     public async Task<IActionResult> ListarProduto()
     {
         var produtos = await produtoBusiness.ListarProdutos();
-        return Ok(produtos);
+
+        return View(produtos); 
     }
 
     [HttpGet("{id:int}")]
