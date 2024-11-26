@@ -12,4 +12,5 @@ public class UsuarioModel
     public byte[]? FotoPerfil { get; set; }
     public string Perfil { get; set; }
     public ClienteModel ClienteModel { get; set; }
+    public FornecedorModel FornecedorModel { get; set; }
 }
