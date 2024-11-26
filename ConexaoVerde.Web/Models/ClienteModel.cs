@@ -1,5 +1,3 @@
-using ConexaoVerde.AppData.Entities;
-
 namespace ConexaoVerde.Web.Models;
 
 public class ClienteModel
@@ -8,5 +6,4 @@ public class ClienteModel
     public string Nome { get; set; }
     public string Sobrenome { get; set; }
     public string Cpf { get; set; }
-    public Usuario Usuario { get; set; }
 }
