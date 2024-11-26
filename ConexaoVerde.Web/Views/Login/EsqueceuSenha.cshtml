@@ -20,7 +20,9 @@
 
                 @if (ViewBag.Sucess != null)
                 {
-                    <div class="text-green-500 mt-2">@ViewBag.Sucess</div>
+                    <div class="mt-2 text-green-500 bg-green-100 p-2 rounded-md">
+                        @ViewBag.Sucess
+                    </div>
                 }
 
                 <form asp-action="EsqueceuSenha" method="POST" class="grid grid-cols-1 gap-6 mt-8">

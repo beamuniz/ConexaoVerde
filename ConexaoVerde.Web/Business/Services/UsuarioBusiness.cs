@@ -51,7 +51,7 @@ public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
     {
         var senhaHash = BCrypt.Net.BCrypt.HashPassword(usuarioModel.Senha);
 
-        if (!usuarioModel.Perfil)
+        if (usuarioModel.Perfil == "cliente")
         {
             var clienteModel = usuarioModel.ClienteModel;
 

@@ -10,6 +10,6 @@ public class Usuario
     [Required] public string Senha { get; set; }
     public string Telefone { get; set; }
     public byte[]? FotoPerfil { get; set; }
-    [Required] public bool Perfil { get; set; }
+    public string Perfil { get; set; }
     public Cliente? Cliente { get; set; }
 }

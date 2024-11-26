@@ -15,7 +15,7 @@ public class UsuarioController(IUsuarioBusiness usuario) : Controller
     [HttpPost]
     public async Task<IActionResult> Cadastro(UsuarioModel usuarioModel)
     {
-        if (ModelState.IsValid && !usuarioModel.Perfil)
+        if (ModelState.IsValid && usuarioModel.Perfil == "cliente")
         {
             await usuario.RegistrarCliente(usuarioModel);
             return RedirectToAction(nameof(Cadastro));

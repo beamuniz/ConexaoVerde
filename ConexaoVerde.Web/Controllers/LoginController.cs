@@ -60,6 +60,8 @@ public class LoginController(DbContextConfig dbContextConfig) : Controller
         }
 
         ViewBag.Sucess = "E-mail enviado com sucesso.";
+
         return View();
     }
+
 }
