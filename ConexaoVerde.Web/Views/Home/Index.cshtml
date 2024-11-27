@@ -1,13 +1,29 @@
 ﻿@{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Home Page";
 }
+
+<div class="flex justify-center">
+    <!-- Coluna esquerda (anúncios) -->
+    <div class="hidden lg:block w-1/5 bg-gray-100 p-4 space-y-6">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <img src="https://via.placeholder.com/200x300?text=Anuncio+1" alt="Anúncio 1" class="w-full h-auto">
+            <p class="p-4 text-center text-gray-600">Anúncio 1 - Clique aqui!</p>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <img src="https://via.placeholder.com/200x300?text=Anuncio+2" alt="Anúncio 2" class="w-full h-auto">
+            <p class="p-4 text-center text-gray-600">Anúncio 2 - Aproveite!</p>
+        </div>
+    </div>
+
+    <!-- Centralizar o conteúdo principal -->
+    <div class="w-full lg:w-3/5">
 
 <!-- Banner -->
 <section class="relative bg-cover bg-center h-[60vh] flex items-center justify-center text-white" style="background-image: url('https://via.placeholder.com/1600x900');">
     <div class="absolute inset-0 bg-black opacity-40"></div>
     <div class="relative z-10 text-center">
-        <h1 class="text-4xl font-bold mb-4">Bem-vindo à nossa página</h1>
-        <p class="text-lg mb-8">Aqui você encontra tudo o que precisa saber sobre nós.</p>
+        <h1 class="text-4xl font-bold mb-4">"Saúde e sabor em cada mordida!"</h1>
+        <p class="text-lg mb-8">Aqui você encontra tudo o que precisa para sua alimentação saudável"></object></p>
         <a href="#sobre-nos" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full text-xl font-medium transition duration-300">Saiba Mais</a>
     </div>
 </section>
@@ -15,7 +31,7 @@
 <!-- Carrossel -->
 <section class="py-12">
     <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-semibold text-center mb-8">Nossos Projetos</h2>
+        <h2 class="text-3xl font-semibold text-center mb-8"> Produtos Destaques</h2>
 
         <!-- Carrossel de imagens -->
         <div id="carrossel" class="relative">
@@ -47,6 +63,39 @@
     </div>
 </section>
 
+<!-- Grid de Imagens -->
+<section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-semibold text-center mb-8"> Novidade na Área</h2>
+        <div class="grid grid-cols-1 gap-8">
+            <!-- Produto 1 -->
+            <div class="flex items-center gap-4 p-4 rounded-lg shadow-lg border">
+                <img src="https://via.placeholder.com/120x120?text=Produto+1" alt="Produto 1" class="w-30 h-30 object-cover rounded-lg">
+                <div>
+                    <h3 class="text-xl font-medium">Produto 1</h3>
+                    <p class="text-gray-600">Descrição do produto. Aqui ...............................................</p>
+                </div>
+            </div>
+            <!-- Produto 2 -->
+            <div class="flex items-center gap-4 p-4 rounded-lg shadow-lg border">
+                <img src="https://drive.google.com/file/d/1l-1F23Pa7wzny8sDvnaH5mBmmHM19oJ3/view?usp=sharing" alt="Produto 2" class="w-30 h-30 object-cover rounded-lg">
+                <div>
+                    <h3 class="text-xl font-medium">Produto 2</h3>
+                    <p class="text-gray-600">Descrição do produto. Aqui ...............................................</p>
+                </div>
+            </div>
+            <!-- Produto 3 -->
+            <div class="flex items-center gap-4 p-4 rounded-lg shadow-lg border">
+                <img src="https://via.placeholder.com/120x120?text=Produto+3" alt="Produto 3" class="w-30 h-30 object-cover rounded-lg">
+                <div>
+                    <h3 class="text-xl font-medium">Produto 3</h3>
+                    <p class="text-gray-600">Descrição do produto. Aqui ...............................................</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Sobre Nós -->
 <section id="sobre-nos" class="bg-gray-50 py-12">
     <div class="max-w-7xl mx-auto px-4">
@@ -61,6 +110,22 @@
         </div>
     </div>
 </section>
+
+    </div>
+
+    <!-- Coluna direita (anúncios) -->
+    <div class="hidden lg:block w-1/5 bg-gray-100 p-4 space-y-6">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <img src="https://via.placeholder.com/200x300?text=Anuncio+3" alt="Anúncio 3" class="w-full h-auto">
+            <p class="p-4 text-center text-gray-600">Anúncio 3 - Promoção Especial!</p>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <img src="https://via.placeholder.com/200x300?text=Anuncio+4" alt="Anúncio 4" class="w-full h-auto">
+            <p class="p-4 text-center text-gray-600">Anúncio 4 - Não perca!</p>
+        </div>
+    </div>
+</div>
+
 
 <script>
     // Carrossel de imagens
