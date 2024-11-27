@@ -15,12 +15,14 @@ public class UsuarioController(IUsuarioBusiness usuario) : Controller
     [HttpPost]
     public async Task<IActionResult> Cadastro(UsuarioModel usuarioModel)
     {
-        if (ModelState.IsValid && usuarioModel.Perfil == "cliente")
-        {
-            await usuario.RegistrarCliente(usuarioModel);
-            return RedirectToAction(nameof(Cadastro));
-        }
+        if (!ModelState.IsValid)
+            return View(usuarioModel); 
 
-        return View(usuarioModel);
+        if (usuarioModel.Perfil == "Cliente")
+            await usuario.RegistrarCliente(usuarioModel);
+        else
+            await usuario.RegistrarFornecedor(usuarioModel);
+
+        return RedirectToAction(nameof(Cadastro)); 
     }
 }

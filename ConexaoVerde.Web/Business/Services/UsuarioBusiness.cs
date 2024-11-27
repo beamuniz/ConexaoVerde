@@ -72,4 +72,31 @@ public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
 
         await dbContextConfig.SaveChangesAsync();
     }
+
+    public async Task RegistrarFornecedor(UsuarioModel usuarioModel)
+    {
+        var senhaHash = BCrypt.Net.BCrypt.HashPassword(usuarioModel.Senha);
+
+        if (usuarioModel.Perfil == "Fornecedor")
+        {
+            var fornecedorModel = usuarioModel.FornecedorModel;
+
+            var fornecedor = new Fornecedor
+            {
+                RazaoSocial = fornecedorModel.RazaoSocial,
+                Cnpj = fornecedorModel.Cnpj,
+                NomeFantasia = fornecedorModel.NomeFantasia,
+                Endereco = fornecedorModel.Endereco,
+                Id = usuarioModel.Id,
+                Email = usuarioModel.Email,
+                Senha = senhaHash,
+                Telefone = usuarioModel.Telefone,
+                FotoPerfil = usuarioModel.FotoPerfil,
+                Perfil = usuarioModel.Perfil
+            };
+            await dbContextConfig.Fornecedores.AddAsync(fornecedor);
+        }
+
+        await dbContextConfig.SaveChangesAsync();
+    }
 }

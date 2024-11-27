@@ -10,4 +10,5 @@ public interface IUsuarioBusiness
     Task RegistrarCliente(UsuarioModel usuarioModel);
     Task<Usuario> AtualizarUsuario(UsuarioModel usuarioModel);
     List<UsuarioModel> Favoritos(int id);
+    Task RegistrarFornecedor(UsuarioModel usuarioModel);
 }
