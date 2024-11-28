@@ -8,7 +8,7 @@
         margin: auto;
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         overflow: auto;
-        background: linear-gradient(135deg, rgba(102, 204, 85, 1) 0%, rgba(255, 255, 255, 1) 100%); /* Gradiente suave de verde para branco */
+        background: linear-gradient(135deg, #2E7D32 0%, #ffffff 100%); /* Verde mais escuro para maior contraste */
         animation: gradient 15s ease infinite;
         background-size: 400% 400%;
         background-attachment: fixed;

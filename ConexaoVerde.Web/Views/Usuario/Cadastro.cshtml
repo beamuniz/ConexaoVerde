@@ -308,16 +308,28 @@
                             <label asp-for="Senha" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
                                 Senha
                             </label>
-                            <input asp-for="Senha" type="password" placeholder="********"
+                            <input asp-for="Senha" type="password" id="senha" placeholder="********"
                                 class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                             <span asp-validation-for="Senha" class="text-red-500"></span>
+                        </div>
+
+                        <!-- Barra de Força da Senha -->
+                        <div class="mb-4">
+                            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Força da Senha</label>
+                            <div id="password-strength-container" class="w-full bg-gray-200 rounded-full">
+                                <div id="password-strength-bar" class="h-1 rounded-full"
+                                    style="width: 0%; background-color: #e0e0e0;">
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Confirmar Senha -->
                         <div class="mb-4">
                             <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Confirmar Senha</label>
-                            <input type="password" placeholder="********"
+                            <input type="password" id="confirm-senha" placeholder="********"
                                 class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                            <!-- Mensagem de erro caso as senhas não coincidam -->
+                            <span id="senha-error" class="text-red-500 hidden">As senhas não coincidem.</span>
                         </div>
 
                         <div class="lg:col-span-2">
