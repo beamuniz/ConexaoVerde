@@ -6,91 +6,103 @@ ViewData["Title"] = "Cadastro de Produto";
 
 <h1>Cadastro de Produto</h1>
 <body class="bg-gray-100 min-h-screen grid place-items-center">
-
-<div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-3xl">
-    <!-- Exibindo o título com estilo -->
-    <div class="text-center mb-7">
-        <h1 class="text-4xl font-bold text-green-600">
-            @ViewData["Title"]
-        </h1>
-        <p class="text-green-400">Preencha as informações abaixo para cadastrar um novo produto.</p>
+<section class="bg-white dark:bg-gray-900">
+<div class="flex justify-center min-h-screen">
+    <div class="hidden bg-cover lg:block lg:w-2/5"
+         style="background-image: url('https://img.freepik.com/free-photo/natural-cosmetic-product-collection_23-2148574896.jpg?t=st=1730999797~exp=1731003397~hmac=f7bc3c6e2e719e6563099bbc2f92097672da642ac6bb07be523ca64cbd8f6876&w=740')">
     </div>
+    <!-- Exibindo o título com estilo -->
+    <div class="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
+        <div class="w-full">
+            <h1 class="text-2xl font-semibold tracking-wider text-gray-800 capitalize dark:text-white">
+                @ViewData["Title"]
+            </h1>
 
-    <!-- Formulário -->
-    <form asp-action="CriarProduto" method="post" class="space-y-7">
-        <!-- Nome do Produto -->
-        <div>
-            <label asp-for="NomeProduto" class="block text-sm font-medium text-gray-700">Produto</label>
-            <input asp-for="NomeProduto"
-                   type="text"
-                   placeholder="Nome do Produto"
-                   class="mt-1 mb-4 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"/>
-            <span asp-validation-for="NomeProduto" class="text-sm text-red-600"></span>
-        </div>
+            <p class="mt-4 text-gray-500 dark:text-gray-400">
+                Preencha as informações abaixo para cadastrar um novo produto.
+            </p>
+        
 
-        <!-- Preço -->
-        <div>
-            <label asp-for="Preco" class="block text-sm font-medium text-gray-700">Preço</label>
-            <input asp-for="Preco"
-                   type="number"
-                   step="0.01"
-                   placeholder="Digite o Preço"
-                   class="mt-1 mb-4 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"/>
-            <span asp-validation-for="Preco" class="text-sm text-red-600"></span>
-        </div>
+            <!-- Formulário -->
+            <form asp-action="CriarProduto" method="post" enctype="multipart/form-data"
+                  class="grid grid-cols-1 gap-6 mt-8">
+        
+                <!-- Nome do Produto -->
+                <div>
+                    <label asp-for="NomeProduto" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Produto</label>
+                    <input asp-for="NomeProduto"
+                           type="text"
+                           placeholder="Nome do Produto"
+                           class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                    <span asp-validation-for="NomeProduto" class="text-red-500"></span>
+                </div>
+        
+                <!-- Preço -->
+                <div>
+                    <label asp-for="Preco" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Preço</label>
+                    <input asp-for="Preco"
+                           type="number"
+                           step="0.01"
+                           placeholder="Digite o Preço"
+                           class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                    <span asp-validation-for="Preco" class="text-red-500"></span>
+                </div>
 
-        <!-- Descrição -->
-        <div>
-            <label asp-for="Descricao" class="block text-sm font-medium text-gray-700">Descrição</label>
-            <textarea asp-for="Descricao"
+                <!-- Descrição -->
+                <div>
+                    <label asp-for="Descricao" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Descrição</label>
+                    <textarea asp-for="Descricao"
                       rows="3"
                       placeholder="Escreva uma Descrição Detalhada do Produto"
-                      class="mt-1 mb-4 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"></textarea>
-            <span asp-validation-for="Descricao" class="text-sm text-red-600"></span>
-        </div>
+                      class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"></textarea>
+                    <span asp-validation-for="Descricao" class="text-red-500"></span>
+                </div>
 
-        <!-- Categoria -->
-        <div>
-            <label asp-for="Categoria.Id" class="block text-sm font-medium text-gray-700">Categoria</label>
-            <select asp-for="Categoria.Id" asp-items="ViewBag.Categorias"
-                    class="mt-1 mb-4 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                <option value="">Selecione</option>
-            </select>
-            <span asp-validation-for="Categoria.Id" class="text-sm text-red-600"></span>
-        </div>
+                <!-- Categoria -->
+                <div>
+                    <label asp-for="Categoria.Id" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Categoria</label>
+                    <select asp-for="Categoria.Id" asp-items="ViewBag.Categorias"
+                            class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40">
+                        <option value="">Selecione</option>
+                    </select>
+                    <span asp-validation-for="Categoria.Id" class="text-red-500"></span>
+                </div>
 
-        <!-- Fornecedor -->
-        <div>
-            <label asp-for="Fornecedor.Id" class="block text-sm font-medium text-gray-700">Fornecedor</label>
-            <select asp-for="Fornecedor.Id" asp-items="ViewBag.Fornecedores"
-                    class="mt-1 mb-4 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                <option value="">Selecione</option>
-            </select>
-            <span asp-validation-for="Fornecedor.Id" class="text-sm text-red-600"></span>
-        </div>
+                <!-- Fornecedor -->
+                <div>
+                    <label asp-for="Fornecedor.Id" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Fornecedor</label>
+                    <select asp-for="Fornecedor.Id" asp-items="ViewBag.Fornecedores"
+                            class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40">
+                        <option value="">Selecione</option>
+                    </select>
+                    <span asp-validation-for="Fornecedor.Id" class="text-red-500"></span>
+                </div>
 
-        <!-- Imagens -->
-        <div>
-            <label asp-for="ImgProduto" class="block text-sm font-medium text-gray-700">Imagens</label>
-            <input asp-for="ImgProduto"
-                   type="file"
-                   multiple
-                   class="mt-1 mb-4 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"/>
-        </div>
+                <!-- Imagens -->
+                <div>
+                    <label asp-for="ImgProduto" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Imagens</label>
+                    <input asp-for="ImgProduto"
+                           type="file"
+                           multiple
+                           class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                </div>
 
-        <!-- Botões -->
-        <div class="flex items-center justify-between">
-            <button type="submit"
-                    class="bg-green-600 text-white px-6 py-2 rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
-                Salvar
-            </button>
-            <a href="/Home/Index"
-               class="text-green-600 hover:underline">
-                Voltar
-            </a>
+                <!-- Botões -->
+                <div class="flex items-center justify-between">
+                    <button type="submit"
+                            class="bg-green-600 text-white px-6 py-2 rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                        Salvar
+                    </button>
+                    <a href="/Home/Index"
+                       class="bg-green-600 text-white px-6 py-2 rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                        Voltar
+                    </a>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
+</section>
 </body>
 
 @section Scripts {
