@@ -36,13 +36,16 @@ public class FornecedorBusiness(DbContextConfig dbContextConfig) : IFornecedorBu
         await dbContextConfig.SaveChangesAsync();
     }
 
-    public async Task<List<SelectListItem>> ListarFornecedores()
+    public async Task<List<FornecedorModel>> ListarFornecedores()
     {
         var fornecedores = await dbContextConfig.Fornecedores
-            .Select(f => new SelectListItem
+            .Select(f => new FornecedorModel
             {
-                Text = f.RazaoSocial,
-                Value = f.Id.ToString()
+                Id = f.Id,
+                RazaoSocial = f.RazaoSocial,
+                NomeFantasia = f.NomeFantasia,
+                Cnpj = f.Cnpj,
+                Endereco = f.Endereco
             })
             .ToListAsync();
 

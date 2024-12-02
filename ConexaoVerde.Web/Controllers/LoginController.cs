@@ -27,23 +27,29 @@ public class LoginController(DbContextConfig dbContextConfig, IUsuarioBusiness u
         }
 
         var usuario = await usuarioBusiness.Login(usuarioModel);
-        
+
         if (usuario == null)
         {
             ViewBag.ErrorMessage = "E-mail ou senha incorretos.";
             return View("Login");
         }
-        
+
         var claims = new List<Claim>
         {
             new(ClaimTypes.Name, usuario.Email),
-            new("UserId", usuario.Id.ToString()), 
+            new("UserId", usuario.Id.ToString()),
+            new("Perfil", usuario.Perfil) 
         };
 
         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
-         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
+        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
+        
+        if (usuario.Perfil == "Cliente")
+        {
+            return RedirectToAction("ListarFornecedores", "Fornecedor");
+        }
 
         return RedirectToAction("Index", "Home");
     }
