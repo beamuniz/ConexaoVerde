@@ -28,7 +28,7 @@ public class ProdutoController(IProdutoBusiness produtoBusiness, ICategoriaBusin
     public async Task<IActionResult> CriarProduto()
     {
         ViewBag.Categorias = await categoriaBusiness.ListarCategorias();
-        ViewBag.Fornecedores = await fornecedorBusiness.ListarFornecedores();
+        ViewBag.Fornecedores = await fornecedorBusiness.ListaDeFornecedores();
     
         return View(new ProdutoModel());
     }

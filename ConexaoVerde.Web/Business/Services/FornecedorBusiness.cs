@@ -78,6 +78,18 @@ public class FornecedorBusiness(DbContextConfig dbContextConfig) : IFornecedorBu
     //     await dbContextConfig.SaveChangesAsync();
     // }
 
+    public async Task<List<SelectListItem>> ListaDeFornecedores()
+    {
+        var fornecedores = await dbContextConfig.Fornecedores
+            .Select(f => new SelectListItem
+            {
+                Text = f.RazaoSocial,  
+                Value = f.Id.ToString() 
+            })
+            .ToListAsync();
+        return fornecedores;
+    }
+
     public async Task<FornecedorModel> ObterFornecedorPorId(int id)
     {
         var fornecedor = await dbContextConfig.Fornecedores

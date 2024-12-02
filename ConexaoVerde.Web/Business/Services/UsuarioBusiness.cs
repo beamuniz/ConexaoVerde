@@ -33,6 +33,26 @@ public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
         throw new NotImplementedException();
     }
 
+    public async Task<UsuarioModel> ObterUsuariosPorFornecedor(int id)
+    {
+        var usuarioFornecedor = await (from fornecedor in dbContextConfig.Fornecedores
+                join usuario in dbContextConfig.Usuarios
+                    on fornecedor.Id equals usuario.Id
+                where fornecedor.Id == id
+                select usuario)
+            .FirstOrDefaultAsync();
+
+        if (usuarioFornecedor == null)
+            return null;
+
+        return new UsuarioModel
+        {
+            Id = usuarioFornecedor.Id,
+            Telefone = usuarioFornecedor.Telefone,
+            Email = usuarioFornecedor.Email,
+        };
+    }
+
     public async Task<Usuario> Login(UsuarioModel usuarioModel)
     {
         var usuario = await dbContextConfig.Usuarios

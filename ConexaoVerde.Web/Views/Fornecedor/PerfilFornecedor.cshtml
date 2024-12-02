@@ -10,7 +10,11 @@
         <div class="flex flex-wrap justify-center gap-12">
             <!-- Imagem do Fornecedor -->
             <div class="w-full md:w-2/3 lg:w-1/3 xl:w-1/4 mb-8">
-                <img src="https://via.placeholder.com/400x400"
+                <img src="@(
+                Model.Usuario.FotoPerfil != null
+                ? $"data:image/png;base64,{Convert.ToBase64String(Model.Usuario.FotoPerfil)}"
+                : "https://via.placeholder.com/400x400"
+                )"
                      alt="Imagem Fornecedor"
                      class="w-32 h-32 rounded-full shadow-xl border-4 border-blue-500">
             </div>
@@ -34,10 +38,10 @@
                     <h3 class="text-2xl font-semibold text-gray-800 dark:text-white">Entre em Contato</h3>
                     <div class="mt-4">
                         <p class="text-lg text-gray-600 dark:text-gray-300">
-                            <strong>Telefone:</strong>   @*@Model.Fornecedor.Telefone*@
+                            <strong>Telefone:</strong>   @Model.Usuario.Telefone
                         </p>
                         <p class="text-lg text-gray-600 dark:text-gray-300">
-                            <strong>E-mail:</strong>  @*@Model.Fornecedor.Email*@
+                            <strong>E-mail:</strong>  @Model.Usuario.Email
                         </p>
                         <p class="text-lg text-gray-600 dark:text-gray-300">
                             <strong>Endereço:</strong> @Model.Fornecedor.Endereco.Rua

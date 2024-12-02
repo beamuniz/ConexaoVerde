@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ConexaoVerde.Web.Controllers;
 
-public class FornecedorController(IFornecedorBusiness fornecedorBusiness, IProdutoBusiness produtoBusiness) : Controller
+public class FornecedorController(IFornecedorBusiness fornecedorBusiness, IProdutoBusiness produtoBusiness, IUsuarioBusiness usuarioBusiness) : Controller
 {
     [HttpGet]
     public async Task<IActionResult> ListarFornecedor()
@@ -24,11 +24,13 @@ public class FornecedorController(IFornecedorBusiness fornecedorBusiness, IProdu
         }
 
         var produtos = await produtoBusiness.ObterProdutosPorFornecedor(id);
+        var usuarios = await usuarioBusiness.ObterUsuariosPorFornecedor(id);
 
         var viewModel = new FornecedorPerfilModel
         {
             Fornecedor = fornecedor,
-            Produtos = produtos
+            Produtos = produtos,
+            Usuario = usuarios
         };
 
         return View(viewModel);
