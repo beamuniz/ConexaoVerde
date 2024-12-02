@@ -52,39 +52,45 @@ public class FornecedorBusiness(DbContextConfig dbContextConfig) : IFornecedorBu
         return fornecedores;
     }
 
-    public async Task AtualizarFornecedor(FornecedorModel fornecedorModel)
-    {
-        var fornecedorExistente = await ObterIdFornecedor(fornecedorModel.Cnpj);
+    // public async Task AtualizarFornecedor(FornecedorModel fornecedorModel)
+    // {
+    //     var fornecedorExistente = await ObterIdFornecedor(fornecedorModel.Cnpj);
+    //
+    //     if (fornecedorExistente == null)
+    //         throw new KeyNotFoundException("Fornecedor não encontrado.");
+    //
+    //     fornecedorExistente.NomeFantasia = fornecedorModel.NomeFantasia;
+    //     fornecedorExistente.RazaoSocial = fornecedorModel.RazaoSocial;
+    //     fornecedorExistente.Endereco = fornecedorModel.Endereco;
+    //
+    //     dbContextConfig.Fornecedores.Update(fornecedorExistente);
+    //     await dbContextConfig.SaveChangesAsync();
+    // }
 
-        if (fornecedorExistente == null)
-            throw new KeyNotFoundException("Fornecedor não encontrado.");
+    // public async Task ExcluirFornecedor(FornecedorModel fornecedorModel)
+    // {
+    //     var fornecedorExistente = await ObterIdFornecedor(fornecedorModel.Cnpj);
+    //
+    //     if (fornecedorExistente == null)
+    //         throw new KeyNotFoundException("Fornecedor não encontrado.");
+    //
+    //     dbContextConfig.Fornecedores.Remove(fornecedorExistente);
+    //     await dbContextConfig.SaveChangesAsync();
+    // }
 
-        fornecedorExistente.NomeFantasia = fornecedorModel.NomeFantasia;
-        fornecedorExistente.RazaoSocial = fornecedorModel.RazaoSocial;
-        fornecedorExistente.Endereco = fornecedorModel.Endereco;
-
-        dbContextConfig.Fornecedores.Update(fornecedorExistente);
-        await dbContextConfig.SaveChangesAsync();
-    }
-
-    public async Task ExcluirFornecedor(FornecedorModel fornecedorModel)
-    {
-        var fornecedorExistente = await ObterIdFornecedor(fornecedorModel.Cnpj);
-
-        if (fornecedorExistente == null)
-            throw new KeyNotFoundException("Fornecedor não encontrado.");
-
-        dbContextConfig.Fornecedores.Remove(fornecedorExistente);
-        await dbContextConfig.SaveChangesAsync();
-    }
-
-    public async Task<Fornecedor> ObterIdFornecedor(string cnpj)
+    public async Task<FornecedorModel> ObterFornecedorPorId(int id)
     {
         var fornecedor = await dbContextConfig.Fornecedores
-            .FirstOrDefaultAsync(f => f.Cnpj == cnpj);
-
-        if (fornecedor == null)
-            throw new KeyNotFoundException("Fornecedor não encontrado.");
+            .Where(f => f.Id == id)
+            .Select(f => new FornecedorModel
+            {
+                Id = f.Id,
+                RazaoSocial = f.RazaoSocial,
+                NomeFantasia = f.NomeFantasia,
+                Cnpj = f.Cnpj,
+                Endereco = f.Endereco
+            })
+            .FirstOrDefaultAsync();
 
         return fornecedor;
     }

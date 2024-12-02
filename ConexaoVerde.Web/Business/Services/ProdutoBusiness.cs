@@ -2,6 +2,7 @@
 using ConexaoVerde.AppData.Context;
 using ConexaoVerde.AppData.Entities;
 using ConexaoVerde.Web.Business.Interfaces;
+using ConexaoVerde.Web.Models;
 
 namespace ConexaoVerde.Web.Business.Services;
 
@@ -59,6 +60,20 @@ public class ProdutoBusiness(DbContextConfig dbContextConfig) : IProdutoBusiness
         return await dbContextConfig.Produtos
             .Include(p => p.Categoria)  
             .Include(p => p.Fornecedor) 
+            .ToListAsync();
+    }
+
+    public async Task<List<ProdutoModel>> ObterProdutosPorFornecedor(int fornecedorId)
+    {
+        return await dbContextConfig.Produtos
+            .Where(p => p.FornecedorId == fornecedorId)
+            .Select(p => new ProdutoModel
+            {
+                Id = p.Id,
+                NomeProduto = p.NomeProduto,
+                Preco = p.Preco,
+                ImgProduto = p.ImgProduto 
+            })
             .ToListAsync();
     }
 }

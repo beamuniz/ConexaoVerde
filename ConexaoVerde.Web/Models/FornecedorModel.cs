@@ -9,4 +9,5 @@ public class FornecedorModel
     public string NomeFantasia { get; set; }
     public string Cnpj { get; set; }
     public Endereco Endereco { get; set; }
+    public Usuario Usuario { get; set; }
 }
