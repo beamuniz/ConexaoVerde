@@ -11,7 +11,14 @@
             {
             <div class="bg-white dark:bg-green-200 border border-green-100 dark:border-green-100 rounded-lg shadow-lg overflow-hidden">
                 <a href="/Fornecedor/PerfilFornecedor/@fornecedor.Id">
+                    @if (fornecedor.FotoPerfil != null)
+                    {
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(fornecedor.FotoPerfil)" alt="Foto de Perfil do Fornecedor" class="w-full h-48 object-cover">
+                    }
+                    else
+                    {
                     <img src="https://via.placeholder.com/300" alt="Logo do Fornecedor" class="w-full h-48 object-cover">
+                    }
                 </a>
                 <div class="p-6">
                     <h3 class="text-xl font-semibold text-gray-800 dark:text-white">@fornecedor.NomeFantasia</h3>

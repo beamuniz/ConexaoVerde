@@ -39,14 +39,18 @@ public class FornecedorBusiness(DbContextConfig dbContextConfig) : IFornecedorBu
     public async Task<List<FornecedorModel>> ListarFornecedores()
     {
         var fornecedores = await dbContextConfig.Fornecedores
-            .Select(f => new FornecedorModel
-            {
-                Id = f.Id,
-                RazaoSocial = f.RazaoSocial,
-                NomeFantasia = f.NomeFantasia,
-                Cnpj = f.Cnpj,
-                Endereco = f.Endereco
-            })
+            .Join(dbContextConfig.Usuarios, 
+                f => f.Id,  
+                u => u.Id,  // Chave primária do Usuário
+                (f, u) => new FornecedorModel
+                {
+                    Id = f.Id,
+                    RazaoSocial = f.RazaoSocial,
+                    NomeFantasia = f.NomeFantasia,
+                    Cnpj = f.Cnpj,
+                    Endereco = f.Endereco,
+                    FotoPerfil = u.FotoPerfil  // Foto do Usuário associado
+                })
             .ToListAsync();
 
         return fornecedores;
