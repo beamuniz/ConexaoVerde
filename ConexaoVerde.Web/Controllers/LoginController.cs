@@ -1,7 +1,9 @@
-﻿using ConexaoVerde.AppData.Context;
+﻿using System.Security.Claims;
+using ConexaoVerde.AppData.Context;
 using ConexaoVerde.Web.Business.Interfaces;
-using ConexaoVerde.Web.Business.Services;
 using ConexaoVerde.Web.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +33,17 @@ public class LoginController(DbContextConfig dbContextConfig, IUsuarioBusiness u
             ViewBag.ErrorMessage = "E-mail ou senha incorretos.";
             return View("Login");
         }
+        
+        var claims = new List<Claim>
+        {
+            new(ClaimTypes.Name, usuario.Email),
+            new("UserId", usuario.Id.ToString()), 
+        };
+
+        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
 
         return RedirectToAction("Index", "Home");
     }
