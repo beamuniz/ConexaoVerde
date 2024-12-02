@@ -8,48 +8,52 @@
     <div class="flex justify-center min-h-screen">
         <div class="hidden bg-cover lg:block lg:w-2/5" style="background-image: url('https://img.freepik.com/free-photo/natural-cosmetic-product-collection_23-2148574896.jpg?t=st=1730999797~exp=1731003397~hmac=f7bc3c6e2e719e6563099bbc2f92097672da642ac6bb07be523ca64cbd8f6876&w=740');">
         </div>
+        <!-- Formulário -->
         <div class="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
             <div class="w-full">
-                <h1 class="text-2xl font-semibold tracking-wider text-gray-800 capitalize dark:text-white">
-                    Login
-                </h1>
-                <p class="mt-4 text-gray-500 dark:text-gray-400">
-                    Faça login para acessar sua conta.
-                </p>
+                <h1 class="text-2xl font-semibold tracking-wider text-gray-800 capitalize dark:text-white">Login</h1>
+                <p class="mt-4 text-gray-500 dark:text-gray-400">Faça login para acessar sua conta.</p>
 
                 @if (ViewBag.ErrorMessage != null)
                 {
                     <div class="text-red-500 mt-2">@ViewBag.ErrorMessage</div>
                 }
 
-                <form asp-action="Login" asp-controller="Login" method="POST" class="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2">
-                    <div>
-                        <label for="Email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">E-mail</label>
-                        <input asp-for="Email" class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                <form asp-action="Login" asp-controller="Login" method="POST" class="space-y-6 mt-8">
+                    <!-- Campo Login -->
+                    <div class="relative">
+                        <label for="Email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email</label>
+                        <input asp-for="Email" type="text" id="Email" name="Email" class="block w-full px-5 py-3 pl-10 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Email" required data-val="true" data-val-required="O campo Email é obrigatório">
                         <span asp-validation-for="Email" class="text-red-500 text-sm"></span>
                     </div>
 
-                    <div>
+                    <!-- Campo Senha -->
+                    <div class="relative">
                         <label for="Senha" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Senha</label>
-                        <input asp-for="Senha" type="password" class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                        <input asp-for="Senha" type="password" id="Senha" name="Senha" class="block w-full px-5 py-3 pl-10 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Senha" required data-val="true" data-val-required="O campo Senha é obrigatório">
                         <span asp-validation-for="Senha" class="text-red-500 text-sm"></span>
                     </div>
 
-                    <button type="submit" class="mt-3 w-full px-6 py-3 text-white bg-blue-500 rounded-md focus:outline-none hover:bg-blue-600">
+                    <!-- Lembrar-me e Esqueci minha senha -->
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-2">
+                            <input type="checkbox" id="RememberMe" name="RememberMe" class="form-checkbox text-blue-500">
+                            <label for="RememberMe" class="text-sm text-gray-600 dark:text-gray-200">Lembrar-me</label>
+                        </div>
+                        <a href="EsqueceuSenha" class="text-sm text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300">Esqueceu a senha?</a>
+                    </div>
+
+                    <!-- Botão de Login -->
+                    <button type="submit" class="w-full py-3 mt-4 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none">
                         Entrar
                     </button>
+
                 </form>
 
-                <div class="mt-4 text-center">
-                    <a href="EsqueceuSenha" class="text-sm text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300">
-                        Esqueceu sua senha?
-                    </a>
-                </div>
+                <!-- Registro -->
                 <div class="mt-4 text-center">
                     <span class="text-sm text-gray-500 dark:text-gray-400">Não tem uma conta?</span>
-                    <a href="/Usuario/Cadastro" class="text-sm text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300">
-                        Crie uma conta
-                    </a>
+                    <a href="/Usuario/Cadastro" class="text-sm text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300">Crie uma conta</a>
                 </div>
             </div>
         </div>
