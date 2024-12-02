@@ -50,6 +50,7 @@ public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
             Id = usuarioFornecedor.Id,
             Telefone = usuarioFornecedor.Telefone,
             Email = usuarioFornecedor.Email,
+            FotoPerfil = usuarioFornecedor.FotoPerfil
         };
     }
 

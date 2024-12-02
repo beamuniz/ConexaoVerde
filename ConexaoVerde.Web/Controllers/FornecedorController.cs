@@ -18,10 +18,9 @@ public class FornecedorController(IFornecedorBusiness fornecedorBusiness, IProdu
     public async Task<IActionResult> PerfilFornecedor(int id)
     {
         var fornecedor = await fornecedorBusiness.ObterFornecedorPorId(id);
+       
         if (fornecedor == null)
-        {
             return NotFound();
-        }
 
         var produtos = await produtoBusiness.ObterProdutosPorFornecedor(id);
         var usuarios = await usuarioBusiness.ObterUsuariosPorFornecedor(id);
