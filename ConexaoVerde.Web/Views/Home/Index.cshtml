@@ -151,23 +151,35 @@
 
 <script>
     // Carrossel de imagens
-    const prevButton = document.getElementById('prev');
-    const nextButton = document.getElementById('next');
-    const carouselItems = document.querySelector('.carousel-items');
+    document.addEventListener("DOMContentLoaded", () => {
+    const carrossel = document.querySelector(".carousel-items");
+    const prevButton = document.getElementById("prev");
+    const nextButton = document.getElementById("next");
+    const items = document.querySelectorAll(".carousel-items > div");
+    const totalItems = items.length;
+
     let currentIndex = 0;
 
     function updateCarousel() {
-        carouselItems.children.length;
-        carouselItems.style.transform = `translateX(-${currentIndex * 100}%)`;
+        const offset = -currentIndex * 100; // Ajusta a posição com base no índice atual
+        carrossel.style.transform = `translateX(${offset}%)`;
     }
 
-    prevButton.addEventListener('click', () => {
-        currentIndex = (currentIndex === 0) ? carouselItems.children.length - 1 : currentIndex - 1;
+    nextButton.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % totalItems; // Vai para o próximo item
         updateCarousel();
     });
 
-    nextButton.addEventListener('click', () => {
-        currentIndex = (currentIndex === carouselItems.children.length - 1) ? 0 : currentIndex + 1;
+    prevButton.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + totalItems) % totalItems; // Volta para o item anterior
         updateCarousel();
     });
+
+    // (Opcional) Auto-play do carrossel
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % totalItems;
+        updateCarousel();
+    }, 5000); // Alterne para o próximo a cada 5 segundos
+});
+
 </script>
