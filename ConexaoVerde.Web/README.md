@@ -17,6 +17,14 @@ Para instalar dependências Front
 
 - npm install
 
+- npm install -g npm
+
+- npm install postcss-cli --save-dev
+
+- npm install tailwindcss postcss autoprefixer --save-dev
+
+- 
+
 Para validar se tem algum erro no projeto back 
 - Acessar o diretório "ConexaoVerdeMVC"
 - dotnet build
