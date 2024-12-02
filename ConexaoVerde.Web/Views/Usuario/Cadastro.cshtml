@@ -54,11 +54,9 @@
                 </div>
 
                 <!-- Campos do Cliente (Ocultos inicialmente) -->
-                <form asp-action="Cadastro" method="post" enctype="multipart/form-data"
-                    class="grid grid-cols-1 gap-6 mt-8">
-
+                <form asp-action="Cadastro" method="post" enctype="multipart/form-data" class="grid grid-cols-1 gap-6 mt-8">
                     <input asp-action="Perfil" type="hidden" id="perfilInput" name="perfilInput" value="false" />
-                    <input type="hidden" asp-for="Perfil" value='Cliente' />
+                    <input type="hidden" asp-for="Perfil" value="Cliente" />
                     <!-- Campos do Cliente (Ocultos inicialmente) -->
                     <div id="clienteFields" style="display:none;" class="lg:col-span-1">
                         <!-- Foto de Perfil -->
@@ -80,7 +78,7 @@
                                     class="cursor-pointer w-full py-3 px-6 bg-blue-500 text-white rounded-md hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-sm text-center z-10">
                                     Clique ou Arraste para selecionar uma imagem
                                 </label>
-                                <input id="fotoPerfilInput" type="file" accept="image/*" class="hidden" />
+                                <input id="fotoPerfilInput" type="file" accept="image/*" class="hidden" name="FotoPerfil" />
                                 <span asp-validation-for="FotoPerfil" class="text-red-500"></span>
                             </div>
                         </div>
