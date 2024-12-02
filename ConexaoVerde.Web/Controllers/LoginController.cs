@@ -48,7 +48,7 @@ public class LoginController(DbContextConfig dbContextConfig, IUsuarioBusiness u
         
         if (usuario.Perfil == "Cliente")
         {
-            return RedirectToAction("ListarFornecedores", "Fornecedor");
+            return RedirectToAction("ListarFornecedor", "Fornecedor");
         }
 
         return RedirectToAction("Index", "Home");
