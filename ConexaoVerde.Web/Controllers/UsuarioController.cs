@@ -23,6 +23,6 @@ public class UsuarioController(IFornecedorBusiness fornecedor, IClienteBusiness 
         else
             await fornecedor.RegistrarFornecedor(usuarioModel);
 
-        return RedirectToAction(nameof(Cadastro)); 
+        return RedirectToAction("Login", "Login");
     }
 }

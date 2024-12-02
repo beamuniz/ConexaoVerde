@@ -6,13 +6,13 @@
     <!-- Coluna esquerda (anúncios) -->
     <div class="hidden lg:block w-1/5 bg-gray-100 p-4 space-y-6">
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img src="https://i.imgur.com/GO9IFWt.jpeg" alt="Anúncio 1" class="rounded-lg object-cover" 
-    style="width: 200px; height: 300px;">
+            <img src="https://i.imgur.com/GO9IFWt.jpeg" alt="Anúncio 1" class="rounded-lg object-cover"
+                 style="width: 200px; height: 300px;">
             <p class="p-4 text-center text-gray-600">Escolha suas frutas, legumes, pães e outros produtos orgânicos online</p>
         </div>
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img src="https://i.imgur.com/LLXQmTF.jpeg" alt="Anúncio 2" class="rounded-lg object-cover" 
-    style="width: 200px; height: 300px;">
+            <img src="https://i.imgur.com/LLXQmTF.jpeg" alt="Anúncio 2" class="rounded-lg object-cover"
+                 style="width: 200px; height: 300px;">
             <p class="p-4 text-center text-gray-600">Receba no conforto da sua casa</p>
         </div>
     </div>
@@ -20,124 +20,130 @@
     <!-- Centralizar o conteúdo principal -->
     <div class="w-full lg:w-3/5">
 
-<!-- Banner -->
-<section class="relative bg-cover bg-center h-[60vh] flex items-center justify-center text-white" style="background-image: url('https://i.imgur.com/QnrjOTS.png');">
-    <div class="absolute inset-0 bg-black opacity-40"></div>
-    <div class="relative z-10 text-center">
-        <h1 class="text-4xl font-bold mb-4">"Saúde e sabor em cada mordida!"</h1>
-        <p class="text-lg mb-8">Aqui você encontra tudo o que precisa para sua alimentação saudável"></p>
-        <a href="#sobre-nos" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full text-xl font-medium transition duration-300">Saiba Mais</a>
-    </div>
-</section>
+        <!-- Banner -->
+        <section class="relative bg-cover bg-center h-[60vh] flex items-center justify-center text-white" style="background-image: url('https://i.imgur.com/QnrjOTS.png');">
+            <div class="absolute inset-0 bg-black opacity-40"></div>
+            <div class="relative z-10 text-center">
+                <h1 class="text-4xl font-bold mb-4">"Saúde e sabor em cada mordida!"</h1>
+                <p class="text-lg mb-8">Aqui você encontra tudo o que precisa para sua alimentação saudável"></p>
+                <a href="#sobre-nos" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full text-xl font-medium transition duration-300">Saiba Mais</a>
+            </div>
+        </section>
 
-<!-- Carrossel -->
-<section class="py-12">
-    <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-semibold text-center mb-8"> Produtos Destaques</h2>
+        <!-- Carrossel -->
+        <section class="py-12">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-semibold text-center mb-8"> Produtos Destaques</h2>
 
-        <!-- Carrossel de imagens -->
-        <div id="carrossel" class="relative">
-            <div class="carousel w-full h-72 overflow-hidden rounded-lg">
-                <div class="carousel-items flex transition-transform duration-700">
-                    <div class="w-full flex-shrink-0">
-                        <img src="https://i.imgur.com/dcld56S.jpeg" alt="Imagem 1" class="w-full h-full object-cover rounded-lg">
+                <!-- Carrossel de imagens -->
+                <div id="carrossel" class="relative">
+                    <div class="carousel w-full h-72 overflow-hidden rounded-lg">
+                        <div class="carousel-items flex transition-transform duration-700">
+                            <div class="w-full flex-shrink-0">
+                                <img src="https://i.imgur.com/dcld56S.jpeg" alt="Imagem 1" class="w-full h-full object-cover rounded-lg">
+                            </div>
+                            <div class="w-full flex-shrink-0">
+                                <img src="https://i.imgur.com/YZHjGlb.jpeg" alt="Imagem 2" class="w-full h-full object-cover rounded-lg">
+                            </div>
+                            <div class="w-full flex-shrink-0">
+                                <img src="https://i.imgur.com/MB1JRZ7.jpeg" alt="Imagem 3" class="w-full h-full object-cover rounded-lg">
+                            </div>
+                        </div>
                     </div>
-                    <div class="w-full flex-shrink-0">
-                        <img src="https://i.imgur.com/YZHjGlb.jpeg" alt="Imagem 2" class="w-full h-full object-cover rounded-lg">
+                    <!-- Botões de navegação -->
+                    <button id="prev" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg">
+                        <svg class="w-6 h-6 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <button id="next" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg">
+                        <svg class="w-6 h-6 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grid de Imagens -->
+        <section class="py-12 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-semibold text-center mb-8"> Novidade na Área</h2>
+                <div class="grid grid-cols-1 gap-8">
+                    <!-- Produto 1 -->
+                    <div class="flex items-center gap-4 p-4 rounded-lg shadow-lg border">
+                        <img src="https://i.imgur.com/nI88qjl.jpeg" alt="Produto 1" class="rounded-lg object-cover" style="width: 120px; height: 120px;">
+                        <div>
+                            <h3 class="text-xl font-medium">Mel Orgânico Bisnaga 250g Minamel</h3>
+                            <p class="text-gray-600">
+                                Conservar em local seco e arejado. Após aberto, consumir em 6 meses.
+                                Este produto não deve ser consumido por crianças menores de 1 ano.
+                                O mel poderá cristalizar-se, o que é um processo natural. Se preferir em forma líquida, colocar em banho-maria à temperatura de 45°C.
+
+                                Não contém glúten.
+                            </p>
+
+                        </div>
                     </div>
-                    <div class="w-full flex-shrink-0">
-                        <img src="https://i.imgur.com/MB1JRZ7.jpeg" alt="Imagem 3" class="w-full h-full object-cover rounded-lg">
+                    <!-- Produto 2 -->
+                    <div class="flex items-center gap-4 p-4 rounded-lg shadow-lg border">
+                        <img src="https://i.imgur.com/RMrjE2T.jpeg" alt="Produto 1" class="rounded-lg object-cover" style="width: 120px; height: 120px;">
+                        <div>
+                            <h3 class="text-xl font-medium">Açúcar Mascavo</h3>
+                            <p class="text-gray-600">
+                                500g
+
+                                Ingredientes: Caldo de cana.
+                                Armazenamento: Armazenar em local seco e ventilado, ao abrigo do sol e umidade, na embalagem original, fechada e protegida do contato direto com o solo.
+                                Validade: 24 meses a partir da data de fabricação.
+                            </p>
+
+                        </div>
+                    </div>
+                    <!-- Produto 3 -->
+                    <div class="flex items-center gap-4 p-4 rounded-lg shadow-lg border">
+                        <img src="https://i.imgur.com/9rxxGhT.jpeg" alt="Produto 1" class="rounded-lg object-cover" style="width: 120px; height: 120px;">
+                        <div>
+                            <h3 class="text-xl font-medium">Óleo de Coco Orgânico Extra Virgem 500ml - QualiCoco</h3>
+                            <p class="text-gray-600">
+                                O Óleo de Coco Extra Virgem Orgânico Qualicoco é um produto natural, sem adição de conservantes que reduz os níveis de colesterol, além de auxiliar no processo de emagrecimento por ser um antioxidante natural que protege o corpo da ação de radicais livres.
+                                Produto prensado a frio, que mantém os fitoquímicos naturais, preservando seu aroma e sabor. Livre de agrotóxicos e aditivos
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Botões de navegação -->
-            <button id="prev" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg">
-                <svg class="w-6 h-6 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                </svg>
-            </button>
-            <button id="next" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg">
-                <svg class="w-6 h-6 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-            </button>
-        </div>
-    </div>
-</section>
+        </section>
 
-<!-- Grid de Imagens -->
-<section class="py-12 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-semibold text-center mb-8"> Novidade na Área</h2>
-        <div class="grid grid-cols-1 gap-8">
-            <!-- Produto 1 -->
-            <div class="flex items-center gap-4 p-4 rounded-lg shadow-lg border">
-                <img src="https://i.imgur.com/nI88qjl.jpeg" alt="Produto 1" class="rounded-lg object-cover" style="width: 120px; height: 120px;">
+        <!-- Sobre Nós -->
+        <section id="sobre-nos" class="bg-gray-50 py-12">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-semibold text-center mb-8">Sobre Nós</h2>
+                <div class="grid md:grid-cols-2 gap-12">
                     <div>
-                        <h3 class="text-xl font-medium">Mel Orgânico Bisnaga 250g Minamel</h3>
-                        <p class="text-gray-600">Conservar em local seco e arejado. Após aberto, consumir em 6 meses.
-Este produto não deve ser consumido por crianças menores de 1 ano.
-O mel poderá cristalizar-se, o que é um processo natural. Se preferir em forma líquida, colocar em banho-maria à temperatura de 45°C.
-
-Não contém glúten.</p>
-
+                        <p class="text-lg text-gray-700">Somos uma empresa comprometida em oferecer produtos orgânicos e naturais de alta qualidade, provenientes tanto de pequenos quanto de grandes fornecedores. Nosso objetivo é fornecer soluções que atendam às necessidades de nossos clientes, sempre com inovação, responsabilidade social e ambiental. </p>
+                    </div>
+                    <div>
+                        <p class="text-lg text-gray-700">Trabalhamos com uma equipe apaixonada e especializada, focada em transformar ideias em soluções sustentáveis. Junte-se a nós e experimente a diferença de um futuro mais saudável e consciente!</p>
                     </div>
                 </div>
-            <!-- Produto 2 -->
-           <div class="flex items-center gap-4 p-4 rounded-lg shadow-lg border">
-                <img src="https://i.imgur.com/RMrjE2T.jpeg" alt="Produto 1" class="rounded-lg object-cover" style="width: 120px; height: 120px;">
-            <div>
-                 <h3 class="text-xl font-medium">Açúcar Mascavo</h3>
-                 <p class="text-gray-600">500g
-
-Ingredientes: Caldo de cana.
-Armazenamento: Armazenar em local seco e ventilado, ao abrigo do sol e umidade, na embalagem original, fechada e protegida do contato direto com o solo.
-Validade: 24 meses a partir da data de fabricação.</p>
-
             </div>
-        </div>
-            <!-- Produto 3 -->
-            <div class="flex items-center gap-4 p-4 rounded-lg shadow-lg border">
-                <img src="https://i.imgur.com/9rxxGhT.jpeg" alt="Produto 1" class="rounded-lg object-cover" style="width: 120px; height: 120px;">
-            <div>
-                 <h3 class="text-xl font-medium">Óleo de Coco Orgânico Extra Virgem 500ml - QualiCoco</h3>
-                 <p class="text-gray-600">O Óleo de Coco Extra Virgem Orgânico Qualicoco é um produto natural, sem adição de conservantes que reduz os níveis de colesterol, além de auxiliar no processo de emagrecimento por ser um antioxidante natural que protege o corpo da ação de radicais livres.
-Produto prensado a frio, que mantém os fitoquímicos naturais, preservando seu aroma e sabor. Livre de agrotóxicos e aditivos</p>
-            </div>
-        </div>
-        </div>
-    </div>
-</section>
-
-<!-- Sobre Nós -->
-<section id="sobre-nos" class="bg-gray-50 py-12">
-    <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-semibold text-center mb-8">Sobre Nós</h2>
-        <div class="grid md:grid-cols-2 gap-12">
-            <div>
-                <p class="text-lg text-gray-700">Somos uma empresa comprometida em oferecer produtos orgânicos e naturais de alta qualidade, provenientes tanto de pequenos quanto de grandes fornecedores. Nosso objetivo é fornecer soluções que atendam às necessidades de nossos clientes, sempre com inovação, responsabilidade social e ambiental. </p>
-            </div>
-            <div>
-                <p class="text-lg text-gray-700">Trabalhamos com uma equipe apaixonada e especializada, focada em transformar ideias em soluções sustentáveis. Junte-se a nós e experimente a diferença de um futuro mais saudável e consciente!</p>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
 
     </div>
 
     <!-- Coluna direita (anúncios) -->
     <div class="hidden lg:block w-1/5 bg-gray-100 p-4 space-y-6">
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img src="https://i.imgur.com/LR0xG7V.jpeg" alt="Anúncio 3" class="rounded-lg object-cover" 
-    style="width: 200px; height: 300px;">
+            <img src="https://i.imgur.com/LR0xG7V.jpeg" alt="Anúncio 3" class="rounded-lg object-cover"
+                 style="width: 200px; height: 300px;">
             <p class="p-4 text-center text-gray-600">Suas verduras são colhidas no dia, para chegar fresquinho até você</p>
         </div>
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img src="https://i.imgur.com/FF535W1.jpeg" alt="Anúncio 4" class="rounded-lg object-cover" 
-    style="width: 200px; height: 300px;">
+            <img src="https://i.imgur.com/FF535W1.jpeg" alt="Anúncio 4" class="rounded-lg object-cover"
+                 style="width: 200px; height: 300px;">
             <p class="p-4 text-center text-gray-600">Você incentiva o pequeno produtor, respeita a natureza e não prejudica sua saúde</p>
-            
+
         </div>
     </div>
 </div>
@@ -151,9 +157,8 @@ Produto prensado a frio, que mantém os fitoquímicos naturais, preservando seu 
     let currentIndex = 0;
 
     function updateCarousel() {
-        const totalItems = carouselItems.children.length;
-        const newTransform = `translateX(-${currentIndex * 100}%)`;
-        carouselItems.style.transform = newTransform;
+        carouselItems.children.length;
+        carouselItems.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
 
     prevButton.addEventListener('click', () => {
@@ -166,4 +171,3 @@ Produto prensado a frio, que mantém os fitoquímicos naturais, preservando seu 
         updateCarousel();
     });
 </script>
-
