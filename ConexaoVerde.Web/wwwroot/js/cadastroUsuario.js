@@ -82,7 +82,7 @@ senhaInput.addEventListener('input', () => {
     }
 });
 
-// Função para formatar o CPF enquanto o usuário digita
+// Função para formatar o CPF
 function formatarCpf(input) {
     // Remove qualquer coisa que não seja número
     let cpf = input.value.replace(/\D/g, '');
@@ -97,8 +97,8 @@ function formatarCpf(input) {
     // Atualiza o campo de input com o CPF formatado
     input.value = cpf;
 
-    // Chama a função de validação
-    validarCpf(cpf);
+    // Chama a função de validação sem os caracteres especiais
+    validarCpf(cpf.replace(/\D/g, ''));
 }
 
 // Função para validar o CPF
@@ -139,7 +139,7 @@ function validarCpf(cpf) {
     if (digito2 === 10 || digito2 === 11) digito2 = 0;
 
     // Verifica se os dígitos calculados coincidem com os fornecidos
-    if (cpf[9] === digito1 && cpf[10] === digito2) {
+    if (cpf[9] == digito1 && cpf[10] == digito2) {
         document.getElementById("cpfError").classList.add("hidden");
         return true;
     } else {
@@ -147,6 +147,7 @@ function validarCpf(cpf) {
         return false;
     }
 }
+
 
 
 // Função para visualização da imagem selecionada
