@@ -4,7 +4,7 @@ using ConexaoVerde.Web.Models;
 
 namespace ConexaoVerde.Web.Controllers;
 
-public class UsuarioController(IUsuarioBusiness usuario) : Controller
+public class UsuarioController(IFornecedorBusiness fornecedor, IClienteBusiness cliente) : Controller
 {
     [HttpGet]
     public IActionResult Cadastro()
@@ -19,9 +19,9 @@ public class UsuarioController(IUsuarioBusiness usuario) : Controller
             return View(usuarioModel); 
 
         if (usuarioModel.Perfil == "Cliente")
-            await usuario.RegistrarCliente(usuarioModel);
+            await cliente.RegistrarCliente(usuarioModel);
         else
-            await usuario.RegistrarFornecedor(usuarioModel);
+            await fornecedor.RegistrarFornecedor(usuarioModel);
 
         return RedirectToAction(nameof(Cadastro)); 
     }

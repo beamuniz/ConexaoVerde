@@ -1,11 +1,13 @@
 ﻿using ConexaoVerde.AppData.Context;
+using ConexaoVerde.Web.Business.Interfaces;
+using ConexaoVerde.Web.Business.Services;
 using ConexaoVerde.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConexaoVerde.Web.Controllers;
 
-public class LoginController(DbContextConfig dbContextConfig) : Controller
+public class LoginController(DbContextConfig dbContextConfig, IUsuarioBusiness usuarioBusiness) : Controller
 {
     [HttpGet]
     public IActionResult Login()
@@ -22,10 +24,8 @@ public class LoginController(DbContextConfig dbContextConfig) : Controller
             return View("Login");
         }
 
-        var usuario = await dbContextConfig.Usuarios
-            .Where(u => u.Email == usuarioModel.Email && u.Senha == usuarioModel.Senha)
-            .FirstOrDefaultAsync();
-
+        var usuario = await usuarioBusiness.Login(usuarioModel);
+        
         if (usuario == null)
         {
             ViewBag.ErrorMessage = "E-mail ou senha incorretos.";
@@ -63,5 +63,4 @@ public class LoginController(DbContextConfig dbContextConfig) : Controller
 
         return View();
     }
-
 }

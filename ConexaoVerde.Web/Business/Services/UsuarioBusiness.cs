@@ -36,67 +36,18 @@ public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
     public async Task<Usuario> Login(UsuarioModel usuarioModel)
     {
         var usuario = await dbContextConfig.Usuarios
-            .Where(a => a.Email == usuarioModel.Email && a.Senha == usuarioModel.Senha)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(u => u.Email == usuarioModel.Email);
 
-        return usuario;
+        if (usuario != null && BCrypt.Net.BCrypt.Verify(usuarioModel.Senha, usuario.Senha))
+        {
+            return usuario;
+        }
+
+        return null;
     }
 
     public UsuarioModel Logout(string email, string senha)
     {
         throw new NotImplementedException();
-    }
-
-    public async Task RegistrarCliente(UsuarioModel usuarioModel)
-    {
-        var senhaHash = BCrypt.Net.BCrypt.HashPassword(usuarioModel.Senha);
-
-        if (usuarioModel.Perfil == "cliente")
-        {
-            var clienteModel = usuarioModel.ClienteModel;
-
-            var cliente = new Cliente
-            {
-                Nome = clienteModel.Nome,
-                Sobrenome = clienteModel.Sobrenome,
-                Cpf = clienteModel.Cpf,
-                Id = usuarioModel.Id,
-                Email = usuarioModel.Email,
-                Senha = senhaHash,
-                Telefone = usuarioModel.Telefone,
-                FotoPerfil = usuarioModel.FotoPerfil,
-                Perfil = usuarioModel.Perfil
-            };
-            await dbContextConfig.Clientes.AddAsync(cliente);
-        }
-
-        await dbContextConfig.SaveChangesAsync();
-    }
-
-    public async Task RegistrarFornecedor(UsuarioModel usuarioModel)
-    {
-        var senhaHash = BCrypt.Net.BCrypt.HashPassword(usuarioModel.Senha);
-
-        if (usuarioModel.Perfil == "Fornecedor")
-        {
-            var fornecedorModel = usuarioModel.FornecedorModel;
-
-            var fornecedor = new Fornecedor
-            {
-                RazaoSocial = fornecedorModel.RazaoSocial,
-                Cnpj = fornecedorModel.Cnpj,
-                NomeFantasia = fornecedorModel.NomeFantasia,
-                Endereco = fornecedorModel.Endereco,
-                Id = usuarioModel.Id,
-                Email = usuarioModel.Email,
-                Senha = senhaHash,
-                Telefone = usuarioModel.Telefone,
-                FotoPerfil = usuarioModel.FotoPerfil,
-                Perfil = usuarioModel.Perfil
-            };
-            await dbContextConfig.Fornecedores.AddAsync(fornecedor);
-        }
-
-        await dbContextConfig.SaveChangesAsync();
     }
 }

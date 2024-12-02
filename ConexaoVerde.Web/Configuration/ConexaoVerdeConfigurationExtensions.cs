@@ -11,6 +11,6 @@ public static class ConexaoVerdeConfigurationExtensions
         services.AddScoped<IProdutoBusiness, ProdutoBusiness>();
         services.AddScoped<ICategoriaBusiness, CategoriaBusiness>();
         services.AddScoped<IFornecedorBusiness, FornecedorBusiness>();
-
+        services.AddScoped<IClienteBusiness, ClienteBusiness>();
     }
 }
