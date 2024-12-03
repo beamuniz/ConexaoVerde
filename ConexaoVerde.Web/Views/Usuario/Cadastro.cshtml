@@ -6,10 +6,12 @@
 
 <!-- component -->
 <section class="bg-white dark:bg-gray-900">
-    <div class="flex justify-center min-h-screen">
-        <div class="hidden bg-cover lg:block lg:w-2/5"
-            style="background-image: url('https://img.freepik.com/free-photo/natural-cosmetic-product-collection_23-2148574896.jpg?t=st=1730999797~exp=1731003397~hmac=f7bc3c6e2e719e6563099bbc2f92097672da642ac6bb07be523ca64cbd8f6876&w=740')">
-        </div>
+    <div class="flex justify-center ">
+        <div class="hidden bg-cover lg:block lg:w-2/5 lg:min-h-screen"
+    style="background-image: url('https://img.freepik.com/free-photo/natural-cosmetic-product-collection_23-2148574896.jpg?t=st=1730999797~exp=1731003397~hmac=f7bc3c6e2e719e6563099bbc2f92097672da642ac6bb07be523ca64cbd8f6876&w=740');
+    background-size: cover; background-position: center; background-repeat: no-repeat;">
+</div>
+
 
         <div class="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
             <div class="w-full">
@@ -54,7 +56,8 @@
                 </div>
 
                 <!-- Campos do Cliente (Ocultos inicialmente) -->
-                <form asp-action="Cadastro" method="post" enctype="multipart/form-data" class="grid grid-cols-1 gap-6 mt-8">
+                <form asp-action="Cadastro" method="post" enctype="multipart/form-data"
+                    class="grid grid-cols-1 gap-6 mt-8">
                     <input asp-action="Perfil" type="hidden" id="perfilInput" name="perfilInput" value="false" />
                     <input type="hidden" asp-for="Perfil" value="Cliente" />
                     <!-- Campos do Cliente (Ocultos inicialmente) -->
@@ -78,7 +81,8 @@
                                     class="cursor-pointer w-full py-3 px-6 bg-blue-500 text-white rounded-md hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-sm text-center z-10">
                                     Clique ou Arraste para selecionar uma imagem
                                 </label>
-                                <input id="fotoPerfilInput" type="file" accept="image/*" class="hidden" name="FotoPerfil" />
+                                <input id="fotoPerfilInput" type="file" accept="image/*" class="hidden"
+                                    name="FotoPerfil" />
                                 <span asp-validation-for="FotoPerfil" class="text-red-500"></span>
                             </div>
                         </div>
@@ -186,6 +190,31 @@
                     <input asp-action="Perfil" type="hidden" id="perfilInput" name="perfilInput" value="false" />
                     <input type="hidden" asp-for="Perfil" value='Fornecedor' />
                     <div id="fornecedorFields" style="display:none;" class="lg:col-span-1">
+
+                         <!-- Foto de Perfil -->
+                        <div class="mb-4">
+                            <label asp-for="FotoPerfil" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                                Foto
+                                de Perfil
+                            </label>
+                            <div
+                                class="relative border-2 border-dashed border-gray-300 rounded-md p-6 flex flex-col items-center justify-center text-center w-full">
+                                <div
+                                    class="absolute inset-0 flex items-center justify-center bg-gray-100 border-4 border-dashed border-blue-300 rounded-md z-0 p-4">
+                                    <span class="text-gray-500 text-sm mb-2 font-semibold">
+                                        Arraste e solte uma imagem
+                                        aqui ou
+                                    </span>
+                                </div>
+                                <label for="fotoPerfilInput"
+                                    class="cursor-pointer w-full py-3 px-6 bg-blue-500 text-white rounded-md hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-sm text-center z-10">
+                                    Clique ou Arraste para selecionar uma imagem
+                                </label>
+                                <input id="fotoPerfilInput" type="file" accept="image/*" class="hidden"
+                                    name="FotoPerfil" />
+                                <span asp-validation-for="FotoPerfil" class="text-red-500"></span>
+                            </div>
+                        </div>
                         <!-- Razão Social -->
                         <div class="mb-4">
                             <label asp-for="FornecedorModel.RazaoSocial"
@@ -211,16 +240,6 @@
                             <input asp-for="FornecedorModel.Cnpj" type="text" placeholder="00.000.000/0000-00"
                                 class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                             <span asp-validation-for="FornecedorModel.Cnpj" class="text-red-500"></span>
-                        </div>
-
-                        <!-- Foto de Perfil -->
-                        <div class="mb-4">
-                            <label asp-for="FotoPerfil" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
-                                Foto de Perfil
-                            </label>
-                            <input asp-for="FotoPerfil" type="file" accept="image/*"
-                                class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                            <span asp-validation-for="FotoPerfil" class="text-red-500"></span>
                         </div>
 
                         <!-- Foto dos Produtos -->
