@@ -15,7 +15,7 @@ public class Produto
     [Required] public int CategoriaId { get; set; }
     public Categoria Categoria { get; set; }
 
-    public List<byte[]> ImgProduto { get; set; }
+    public byte[] ImgProduto { get; set; }
 
     [Required] public int FornecedorId { get; set; }
     public Fornecedor Fornecedor { get; set; }

@@ -55,11 +55,18 @@ public class ProdutoBusiness(DbContextConfig dbContextConfig) : IProdutoBusiness
             .FirstOrDefaultAsync(p => p.Id == id);
     }
 
-    public async Task<IEnumerable<Produto>> ListarProdutos()
+    public async Task<List<ProdutoModel>> ListarProdutos()
     {
         return await dbContextConfig.Produtos
             .Include(p => p.Categoria)  
-            .Include(p => p.Fornecedor) 
+            .Include(p => p.Fornecedor)
+            .Select(p => new ProdutoModel
+            {
+                Id = p.Id,
+                NomeProduto = p.NomeProduto,
+                Preco = p.Preco,
+                ImgProduto = p.ImgProduto 
+            })
             .ToListAsync();
     }
 

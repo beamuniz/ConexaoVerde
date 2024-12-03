@@ -12,7 +12,8 @@ public class ProdutoModel
     public CategoriaModel Categoria { get; set; }
     public string CategoriaNome { get; set; }
 
-    public List<byte[]> ImgProduto { get; set; }
+    public byte[] ImgProduto { get; set; }
+    public string ImgProdutoBase64 { get; set; }
 
     public FornecedorModel Fornecedor { get; set; }
 }

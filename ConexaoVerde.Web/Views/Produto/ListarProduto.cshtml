@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ConexaoVerde.AppData.Entities.Produto>
+﻿@model List<ProdutoModel>
 
 @{
     ViewData["Title"] = "Lista de Produtos";
@@ -31,7 +31,7 @@
             {
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
                     <!-- Imagem do Produto -->
-                    <img src="@produto.ImgProduto" alt="@produto.NomeProduto" class="w-full h-48 object-cover">
+                    <img src="data:image/jpeg;base64,@produto.ImgProdutoBase64" alt="@produto.NomeProduto" class="w-full h-48 object-cover" >
                     
                     <!-- Corpo do Card -->
                     <div class="p-4">

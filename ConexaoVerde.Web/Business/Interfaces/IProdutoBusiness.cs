@@ -9,6 +9,6 @@ public interface IProdutoBusiness
     Task<Produto> AtualizarProduto(int id, Produto produto);
     Task<bool> DeletarProduto(int id);
     Task<Produto> ObterProdutoPorId(int id);
-    Task<IEnumerable<Produto>> ListarProdutos();
+    Task<List<ProdutoModel>> ListarProdutos();
     Task<List<ProdutoModel>> ObterProdutosPorFornecedor(int id);
 }

@@ -11,6 +11,11 @@ public class ProdutoController(IProdutoBusiness produtoBusiness, ICategoriaBusin
     public async Task<IActionResult> ListarProduto()
     {
         var produtos = await produtoBusiness.ListarProdutos();
+        
+        foreach (var produto in produtos.Where(produto => produto.ImgProduto != null))
+        {
+            produto.ImgProdutoBase64 = Convert.ToBase64String(produto.ImgProduto);
+        }
 
         return View(produtos); 
     }
@@ -35,11 +40,18 @@ public class ProdutoController(IProdutoBusiness produtoBusiness, ICategoriaBusin
 
 
     [HttpPost]
-    public async Task<IActionResult> CriarProduto(ProdutoModel produtoModel)
+    public async Task<IActionResult> CriarProduto(ProdutoModel produtoModel, IFormFile fotoProduto)
     {
         if (!ModelState.IsValid)
         {
             return View(produtoModel);
+        }
+        
+        if (fotoProduto is { Length: > 0 })
+        {
+            using var memoryStream = new MemoryStream();
+            await fotoProduto.CopyToAsync(memoryStream);
+            produtoModel.ImgProduto = memoryStream.ToArray();
         }
 
         var produto = new Produto
