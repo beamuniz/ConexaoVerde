@@ -9,6 +9,13 @@
 <head>
     <!-- Adicionar o link do FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <style>
+        /* Estilo para a área de mensagens com rolagem */
+        #chatMessages {
+            max-height: 300px; /* Tamanho máximo do chat */
+            overflow-y: auto;  /* Ativa a rolagem vertical */
+        }
+    </style>
 </head>
 
 <section class="bg-white dark:bg-gray-900 py-16">
@@ -132,6 +139,7 @@
         const chatContainer = document.getElementById('chatContainer');
         const chatMessages = document.getElementById('chatMessages');
         const userMessageInput = document.getElementById('userMessage');
+        const sendButton = document.getElementById('sendButton');
 
         // Mensagem automática inicial
         const initialMessage = "Olá! Esta é uma mensagem automática. Como posso ajudar?";
@@ -157,11 +165,19 @@
                 chatToggleButton.innerHTML = `<i class="fas fa-comment-alt"></i>`;
             } else {
                 chatToggleButton.innerHTML = `<i class="fas fa-times"></i>`;
+
+                // Quando o chat for aberto, focar no campo de mensagem
+                userMessageInput.focus();
             }
         });
 
-        // Enviar mensagem
-        document.getElementById('sendButton').addEventListener('click', function () {
+        // Função para rolar para a última mensagem
+        function scrollToBottom() {
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Função para enviar a mensagem
+        function sendMessage() {
             var userMessage = userMessageInput.value;
 
             if (userMessage.trim() !== "") {
@@ -198,7 +214,26 @@
                         chatMessages.appendChild(botResponseElement);
                     }
                 });
+
+                // Rolar para a última mensagem
+                scrollToBottom();
+            }
+        }
+
+        // Evento para enviar mensagem ao pressionar Enter
+        userMessageInput.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Evita que o formulário seja enviado ao pressionar Enter
+                sendMessage();
             }
         });
+
+        // Evento de clique no botão de envio
+        sendButton.addEventListener('click', function () {
+            sendMessage();
+        });
+
+        // Rolar para a última mensagem quando o chat é aberto pela primeira vez
+        scrollToBottom();
     });
 </script>
