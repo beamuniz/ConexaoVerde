@@ -49,7 +49,6 @@ public class FornecedorController(
         var produtos = await produtoBusiness.ObterProdutosPorFornecedor(id);
         var usuarios = await usuarioBusiness.ObterUsuariosPorFornecedor(id);
 
-        // Cria o modelo de visão
         var viewModel = new FornecedorPerfilModel
         {
             Fornecedor = fornecedor,
