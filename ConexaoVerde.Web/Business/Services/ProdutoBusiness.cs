@@ -79,7 +79,7 @@ public class ProdutoBusiness(DbContextConfig dbContextConfig) : IProdutoBusiness
                 Id = p.Id,
                 NomeProduto = p.NomeProduto,
                 Preco = p.Preco,
-                ImgProduto = p.ImgProduto 
+                ImgProdutoBase64 = p.ImgProduto != null ? Convert.ToBase64String(p.ImgProduto) : null
             })
             .ToListAsync();
     }

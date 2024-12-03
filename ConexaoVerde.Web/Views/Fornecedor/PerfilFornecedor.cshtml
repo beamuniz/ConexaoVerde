@@ -83,7 +83,7 @@
                 @foreach (var produto in Model.Produtos)
                 {
                     <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg overflow-hidden">
-                        <img src="@produto.ImgProduto" alt="@produto.NomeProduto" class="w-full h-48 object-cover">
+                        <img src="data:image/jpeg;base64,@produto.ImgProdutoBase64" alt="@produto.NomeProduto" class="w-full h-48 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-semibold text-gray-800 dark:text-white">@produto.NomeProduto</h3>
                             <p class="text-sm text-gray-600 dark:text-gray-300 mt-2">R$ @produto.Preco.ToString("F2")</p>
