@@ -47,7 +47,7 @@
                             <strong>E-mail:</strong> @Model.Usuario.Email
                         </p>
                         <p class="text-lg text-gray-600 dark:text-gray-300">
-                            <strong>Endereço:</strong> @Model.Fornecedor.Endereco.Rua
+                            <strong>Endereço:</strong> @enderecoCompleto
                         </p>
                     </div>
                 </div>
@@ -65,9 +65,9 @@
 
                 <!-- Botão de Contato via WhatsApp -->
                 <div class="mt-6 flex justify-center">
-                    <a href="https://wa.me/ @*@Model.Fornecedor.WhatsApp*@" target="_blank"
+                    <a href="@Url.Action("ChatFornecedor", "Fornecedor", new { id = Model.Fornecedor.Id })"
                        class="text-white bg-blue-500 hover:bg-blue-600 rounded-md py-3 px-6 text-lg focus:outline-none">
-                        Entrar em Contato pelo WhatsApp
+                        Iniciar Chat
                     </a>
                 </div>
             </div>

@@ -1,0 +1,154 @@
+﻿@model FornecedorPerfilModel
+
+@{
+    ViewData["Title"] = "Perfil do Fornecedor";
+    var endereco = Model.Fornecedor.Endereco;
+    var enderecoCompleto = $"{endereco.Rua}, {endereco.Numero}, {endereco.Cidade} - {endereco.Estado}, {endereco.CEP}";
+}
+
+<section class="bg-white dark:bg-gray-900 custom-padding">
+    <div class="container mx-auto px-6">
+        <h1 class="text-4xl font-semibold text-gray-800 dark:text-white text-center mb-12">
+            Chat com o Fornecedor - <span class="text-blue-500">@Model.Fornecedor.NomeFantasia</span>
+        </h1>
+
+        <div class="flex flex-wrap justify-center gap-12">
+            <!-- Imagem do Fornecedor -->
+            <div class="w-full md:w-2/3 lg:w-1/3 xl:w-1/4 mb-8">
+                <img src="@(Model.Usuario.FotoPerfil != null ? $"data:image/png;base64,{Convert.ToBase64String(Model.Usuario.FotoPerfil)}" : "https://via.placeholder.com/400x400")"
+                     alt="Imagem Fornecedor"
+                     class="w-56 h-56 rounded-full shadow-xl border-4 border-blue-500">
+            </div>
+
+            <!-- Chatbox -->
+            <div class="w-full md:w-2/3 lg:w-2/3 xl:w-2/3">
+                <div class="chat-box mt-8 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <div id="chatContainer" class="space-y-6">
+                        <!-- Mensagem inicial do fornecedor -->
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full border-4 border-blue-500">
+                                <img src="@(Model.Usuario.FotoPerfil != null ? $"data:image/png;base64,{Convert.ToBase64String(Model.Usuario.FotoPerfil)}" : "https://via.placeholder.com/400x400")" alt="Imagem do Fornecedor" class="w-full h-full rounded-full">
+                            </div>
+                            <div class="ml-4">
+                                <p class="font-semibold text-blue-500">@Model.Fornecedor.NomeFantasia</p>
+                                <p class="text-gray-600 dark:text-gray-300">Olá! Esta é uma mensagem automática. Irei te responder assim que possível!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Caixa de entrada de mensagem -->
+                    <div class="mt-8 flex items-center space-x-4">
+                        <input id="userMessage" type="text" placeholder="Escreva algo..." class="w-full px-4 py-2 text-lg border rounded-lg">
+                        <button id="sendButton" class="w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.getElementById('sendButton').addEventListener('click', function() {
+        var userMessage = document.getElementById('userMessage').value;
+        var chatContainer = document.getElementById('chatContainer');
+
+        if (userMessage.trim() !== "") {
+            var userMessageElement = document.createElement('div');
+            userMessageElement.classList.add('flex', 'flex-row-reverse', 'justify-end'); 
+            userMessageElement.innerHTML = `
+            <div class="flex justify-end">
+                <p class="bg-blue-500 text-white px-4 py-2 rounded-lg max-w-xs">${userMessage}</p>
+            </div>
+        `;
+            chatContainer.appendChild(userMessageElement);
+            document.getElementById('userMessage').value = "";
+
+            // Faz a requisição AJAX para o backend
+            var fornecedorId = @Model.Fornecedor.Id;  
+
+            fetch('/Fornecedor/ChatResposta', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    fornecedorId: fornecedorId,
+                    mensagem: userMessage
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Exibe a resposta do chatbot à esquerda
+                    var botResponseElement = document.createElement('div');
+                    botResponseElement.classList.add('flex', 'items-start');
+                    botResponseElement.innerHTML = `
+                    <div class="w-12 h-12 rounded-full border-4 border-blue-500">
+                        <img src="@(Model.Usuario.FotoPerfil != null ? $"data:image/png;base64,{Convert.ToBase64String(Model.Usuario.FotoPerfil)}" : "https://via.placeholder.com/400x400")" alt="Imagem do Fornecedor" class="w-full h-full rounded-full">
+                    </div>
+                    <div class="ml-4">
+                        <p class="font-semibold text-blue-500">@Model.Fornecedor.NomeFantasia</p>
+                        <p class="text-gray-600 dark:text-gray-300">${data.resposta}</p>
+                    </div>
+                `;
+                    chatContainer.appendChild(botResponseElement);
+                })
+                .catch(error => {
+                    console.error('Erro ao enviar a mensagem:', error);
+                });
+        }
+    });
+
+</script>
+
+<!-- Estilo do Chat -->
+<style>
+    /* Estilo para as mensagens do usuário */
+    .user-message p {
+        background-color: #007bff;
+        color: white;
+        display: inline-block;
+        padding: 8px 12px;
+        border-radius: 12px;
+    }
+
+    /* Estilo para as mensagens do fornecedor */
+    .bot-response p {
+        background-color: #e2e2e2;
+        color: black;
+        display: inline-block;
+        padding: 8px 12px;
+        border-radius: 12px;
+    }
+    
+    /* Para a caixa de texto */
+    #userMessage {
+        width: calc(100% - 50px); /* Aumentar o espaço para o campo de mensagem */
+        padding: 12px;
+        font-size: 1rem;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    /* Para o botão de envio */
+    #sendButton {
+        width: 50px;  /* Ajusta a largura do botão */
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 12px;
+    }
+
+    .custom-padding {
+        padding-top: 80px !important;
+        padding-bottom: 80px !important;
+    }
+
+</style>

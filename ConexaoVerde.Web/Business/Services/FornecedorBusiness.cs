@@ -41,7 +41,7 @@ public class FornecedorBusiness(DbContextConfig dbContextConfig) : IFornecedorBu
         var fornecedores = await dbContextConfig.Fornecedores
             .Join(dbContextConfig.Usuarios, 
                 f => f.Id,  
-                u => u.Id,  // Chave primária do Usuário
+                u => u.Id,  
                 (f, u) => new FornecedorModel
                 {
                     Id = f.Id,
@@ -49,7 +49,7 @@ public class FornecedorBusiness(DbContextConfig dbContextConfig) : IFornecedorBu
                     NomeFantasia = f.NomeFantasia,
                     Cnpj = f.Cnpj,
                     Endereco = f.Endereco,
-                    FotoPerfil = u.FotoPerfil  // Foto do Usuário associado
+                    FotoPerfil = u.FotoPerfil  
                 })
             .ToListAsync();
 
