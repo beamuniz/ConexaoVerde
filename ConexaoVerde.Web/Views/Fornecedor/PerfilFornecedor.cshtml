@@ -97,50 +97,32 @@
             </div>
         </div>
 
-        <!-- Botão Flutuante de Chat -->
-        <button id="chatToggleButton" class="fixed bottom-6 right-6 p-3 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300">
-            <i class="fas fa-comment-dots text-xl"></i>
+        <!-- Botão de Chat -->
+        <button id="chatToggleButton" class="p-3 bg-blue-500 text-white rounded-full fixed bottom-6 right-6 shadow-lg">
+            <i class="fas fa-comment-alt"></i>
         </button>
 
         <!-- Caixa de Chat -->
-        <div id="chatContainer" class="hidden fixed bottom-20 right-6 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg w-80 max-w-xs">
-            <div id="chatHeader" class="flex items-center">
+        <div id="chatContainer" class="hidden fixed bottom-24 right-6 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg w-80 max-w-xs">
+            <div id="chatHeader" class="flex items-center mb-4">
                 <img src="@(Model.Usuario.FotoPerfil != null ? $"data:image/png;base64,{Convert.ToBase64String(Model.Usuario.FotoPerfil)}" : "https://via.placeholder.com/400x400")"
                      alt="Foto Fornecedor" class="w-12 h-12 rounded-full border-2 border-blue-500">
                 <span class="ml-4 text-lg font-semibold text-gray-800 dark:text-black">@Model.Fornecedor.RazaoSocial</span>
             </div>
 
             <!-- Área de mensagens -->
-            <div id="chatMessages" class="flex-1 overflow-y-auto mt-4">
-                <!-- Mensagens aparecem aqui -->
+            <div id="chatMessages" class="flex-1 overflow-y-auto mb-4">
+                <!-- Mensagens aparecerão aqui -->
             </div>
 
             <!-- Caixa de input de mensagens -->
-            <div class="flex items-center space-x-2 mt-4">
+            <div class="flex items-center space-x-2">
                 <input id="userMessage" type="text" placeholder="Escreva uma mensagem" class="w-full px-4 py-2 text-lg border rounded-lg">
                 <button id="sendButton" class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
+                    <i class="fas fa-paper-plane"></i>
                 </button>
             </div>
         </div>
-
-        <!-- Popover -->
-        <button data-popover-target="popover-default" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-8">
-            Mostrar Detalhes
-        </button>
-
-        <div id="popover-default" data-popover role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
-            <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
-                <h3 class="font-semibold text-gray-900 dark:text-white">Detalhes do Fornecedor</h3>
-            </div>
-            <div class="px-3 py-2">
-                <p>Veja mais sobre o fornecedor e os produtos que ele oferece. Entre em contato diretamente para mais informações!</p>
-            </div>
-            <div data-popper-arrow></div>
-        </div>
-
     </div>
 </section>
 
@@ -149,38 +131,73 @@
         const chatToggleButton = document.getElementById('chatToggleButton');
         const chatContainer = document.getElementById('chatContainer');
         const chatMessages = document.getElementById('chatMessages');
-        const sendButton = document.getElementById('sendButton');
-        const userMessage = document.getElementById('userMessage');
-        
-        // Toggle Chat visibility
-        chatToggleButton.addEventListener('click', function () {
-            chatContainer.classList.toggle('hidden');
-        });
+        const userMessageInput = document.getElementById('userMessage');
 
-        // Send message in chat
-        sendButton.addEventListener('click', function () {
-            if (userMessage.value.trim()) {
-                const message = document.createElement('div');
-                message.classList.add('bg-blue-100', 'p-2', 'rounded', 'mb-2');
-                message.innerText = userMessage.value;
-                chatMessages.appendChild(message);
-                userMessage.value = '';
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+        // Mensagem automática inicial
+        const initialMessage = "Olá! Esta é uma mensagem automática. Como posso ajudar?";
+        const botMessageElement = document.createElement('div');
+        botMessageElement.classList.add('flex', 'justify-start', 'mb-4');
+        botMessageElement.innerHTML = `
+        <div class="bg-gray-300 text-black px-4 py-2 rounded-lg max-w-xs">
+            ${initialMessage}
+        </div>
+    `;
+        chatMessages.appendChild(botMessageElement);
+
+        // Certifique-se de que o chat comece escondido
+        chatContainer.classList.add('hidden');
+
+        // Alterna a visibilidade do chat e ajusta o botão
+        chatToggleButton.addEventListener('click', function () {
+            // Alterna a classe 'hidden' para mostrar ou esconder o chat
+            chatContainer.classList.toggle('hidden');
+
+            // Alterando o conteúdo do botão conforme a visibilidade do chat
+            if (chatContainer.classList.contains('hidden')) {
+                chatToggleButton.innerHTML = `<i class="fas fa-comment-alt"></i>`;
+            } else {
+                chatToggleButton.innerHTML = `<i class="fas fa-times"></i>`;
             }
         });
 
-        // Popover functionality
-        const popoverButton = document.querySelector('[data-popover-target]');
-        const popover = document.getElementById(popoverButton.getAttribute('data-popover-target'));
-        
-        popoverButton.addEventListener('click', function () {
-            const isVisible = popover.classList.contains('opacity-100');
-            if (isVisible) {
-                popover.classList.remove('opacity-100', 'visible');
-                popover.classList.add('opacity-0', 'invisible');
-            } else {
-                popover.classList.remove('opacity-0', 'invisible');
-                popover.classList.add('opacity-100', 'visible');
+        // Enviar mensagem
+        document.getElementById('sendButton').addEventListener('click', function () {
+            var userMessage = userMessageInput.value;
+
+            if (userMessage.trim() !== "") {
+                var userMessageElement = document.createElement('div');
+                userMessageElement.classList.add('flex', 'justify-end', 'mb-4');
+                userMessageElement.innerHTML = `
+                <div class="bg-blue-500 text-white px-4 py-2 rounded-lg max-w-xs">
+                    ${userMessage}
+                </div>
+            `;
+                chatMessages.appendChild(userMessageElement);
+                userMessageInput.value = ""; // Limpar o campo de entrada
+
+                // Enviar a mensagem para o backend
+                var fornecedorId = @Model.Fornecedor.Id;
+                fetch('/Fornecedor/EnviarMensagem', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        fornecedorId: fornecedorId,
+                        mensagem: userMessage
+                    })
+                }).then(response => response.json()).then(data => {
+                    if (data.success) {
+                        var botResponseElement = document.createElement('div');
+                        botResponseElement.classList.add('flex', 'justify-start', 'mb-4');
+                        botResponseElement.innerHTML = `
+                        <div class="bg-gray-300 text-black px-4 py-2 rounded-lg max-w-xs">
+                            ${data.responseMessage}
+                        </div>
+                    `;
+                        chatMessages.appendChild(botResponseElement);
+                    }
+                });
             }
         });
     });
