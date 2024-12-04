@@ -68,4 +68,20 @@ public class ClienteBusiness (DbContextConfig dbContextConfig) : IClienteBusines
         dbContextConfig.Clientes.Remove(clienteExistente);
         await dbContextConfig.SaveChangesAsync();
     }
+
+    public async Task<ClienteModel> ObterClientePorId(int id)
+    {
+        var cliente = await dbContextConfig.Clientes
+            .Where(c => c.Id == id)
+            .Select(c => new ClienteModel
+            {
+                Id = c.Id,
+                Nome = c.Nome,
+                Sobrenome = c.Sobrenome,
+                Cpf = c.Cpf,
+            })
+            .FirstOrDefaultAsync();
+
+        return cliente;
+    }
 }

@@ -8,20 +8,17 @@
     <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
     <link rel="icon" type="image/x-icon" href="~/favicon.ico">
 </head>
-<body class="bg-background">
+<body class="bg-background min-h-screen flex flex-col">
 
 <header>
     <nav class="sticky top-0 bg-[#2d7c2f] text-white z-20 shadow-md h-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
             <div class="flex items-center justify-between">
-                <!-- Logo -->
                 <div class="flex items-center">
                     <a href="/" class="flex items-center">
                         <img src="~/images/logo.png" alt="Logo Home" class="h-16 w-auto">
                     </a>
                 </div>
-
-                <!-- Ícone do menu (hamburguer) -->
                 <div class="lg:hidden">
                     <button id="menuButton" class="text-white focus:outline-none">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-8 h-8">
@@ -29,39 +26,33 @@
                         </svg>
                     </button>
                 </div>
-
-                <!-- Menu de navegação -->
                 <div id="navMenu" class="hidden lg:flex items-center space-x-4">
                     @if (User.Identity!.IsAuthenticated)
                     {
-                        <!-- Botões para usuários logados -->
-                        <span class="text-sm font-semibold">Olá, @User.Identity.Name</span>
-                        <a href="/Usuario/Perfil" class="text-sm font-semibold text-white border border-white rounded-md px-4 py-2 hover:bg-white hover:text-[#2d7c2f] transition">Meu Perfil</a>
-                        <form method="post" asp-controller="Login" asp-action="Logout" class="inline">
-                            <button type="submit" class="text-sm font-semibold text-white border border-white rounded-md px-4 py-2 hover:bg-white hover:text-[#2d7c2f] transition">Sair</button>
-                        </form>
+                    <span class="text-sm font-semibold">Olá, @User.Identity.Name</span>
+                    <a href="/Usuario/Perfil" class="text-sm font-semibold text-white border border-white rounded-md px-4 py-2 hover:bg-white hover:text-[#2d7c2f] transition">Meu Perfil</a>
+                    <form method="post" asp-controller="Login" asp-action="Logout" class="inline">
+                        <button type="submit" class="text-sm font-semibold text-white border border-white rounded-md px-4 py-2 hover:bg-white hover:text-[#2d7c2f] transition">Sair</button>
+                    </form>
                     }
                     else
                     {
-                        <!-- Botões para visitantes -->
-                        <a href="/Login/Login" class="text-sm font-semibold text-white border border-white rounded-md px-4 py-2 hover:bg-white hover:text-[#2d7c2f] transition">Login</a>
-                        <a href="/Usuario/Cadastro" class="text-sm font-semibold text-white border border-white rounded-md px-4 py-2 hover:bg-white hover:text-[#2d7c2f] transition">Cadastrar-se</a>
+                    <a href="/Login/Login" class="text-sm font-semibold text-white border border-white rounded-md px-4 py-2 hover:bg-white hover:text-[#2d7c2f] transition">Login</a>
+                    <a href="/Usuario/Cadastro" class="text-sm font-semibold text-white border border-white rounded-md px-4 py-2 hover:bg-white hover:text-[#2d7c2f] transition">Cadastrar-se</a>
                     }
                 </div>
-
-                <!-- Menu colapsado para dispositivos móveis -->
                 <div id="mobileMenu" class="lg:hidden hidden absolute top-16 right-0 bg-[#2d7c2f] w-64 p-4 transition-all duration-300 ease-in-out transform -translate-y-4 rounded-l-lg">
                     @if (User.Identity!.IsAuthenticated)
                     {
-                        <a href="/Usuario/Perfil" class="block text-sm font-semibold text-white border border-white rounded-md px-4 py-2 text-center hover:bg-white hover:text-[#2d7c2f] transition">Meu Perfil</a>
-                        <form method="post" asp-controller="Login" asp-action="Logout" class="text-center mt-2">
-                            <button type="submit" class="block text-sm font-semibold text-white border border-white rounded-md px-4 py-2 hover:bg-white hover:text-[#2d7c2f] transition">Sair</button>
-                        </form>
+                    <a href="/Usuario/Perfil" class="block text-sm font-semibold text-white border border-white rounded-md px-4 py-2 text-center hover:bg-white hover:text-[#2d7c2f] transition">Meu Perfil</a>
+                    <form method="post" asp-controller="Login" asp-action="Logout" class="text-center mt-2">
+                        <button type="submit" class="block text-sm font-semibold text-white border border-white rounded-md px-4 py-2 hover:bg-white hover:text-[#2d7c2f] transition">Sair</button>
+                    </form>
                     }
                     else
                     {
-                        <a href="/Login/Login" class="block text-sm font-semibold text-white border border-white rounded-md px-4 py-2 text-center hover:bg-white hover:text-[#2d7c2f] transition">Login</a>
-                        <a href="/Usuario/Cadastro" class="block text-sm font-semibold text-white border border-white rounded-md px-4 py-2 mt-2 text-center hover:bg-white hover:text-[#2d7c2f] transition">Cadastrar-se</a>
+                    <a href="/Login/Login" class="block text-sm font-semibold text-white border border-white rounded-md px-4 py-2 text-center hover:bg-white hover:text-[#2d7c2f] transition">Login</a>
+                    <a href="/Usuario/Cadastro" class="block text-sm font-semibold text-white border border-white rounded-md px-4 py-2 mt-2 text-center hover:bg-white hover:text-[#2d7c2f] transition">Cadastrar-se</a>
                     }
                 </div>
             </div>
@@ -69,16 +60,13 @@
     </nav>
 </header>
 
-<!-- Main content -->
 <div class="container mx-auto px-4 py-6">
-    <main role="main" class="pb-6">
+    <main role="main" class="flex-1 pb-6">
         @RenderBody()
     </main>
 </div>
 
-<!-- Footer -->
-<footer class="bottom-0 left-0 w-full text-white relative">
-    <!-- Waves Background -->
+<footer class="w-full text-white mt-auto">
     <div>
         <div class="wave"></div>
         <div class="wave"></div>
@@ -91,7 +79,6 @@
     </div>
 </footer>
 
-<!-- Scripts -->
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
@@ -99,9 +86,8 @@
 <script>
     const menuButton = document.getElementById('menuButton');
     const mobileMenu = document.getElementById('mobileMenu');
-    
+
     menuButton.addEventListener('click', () => {
-        // Toggle da visibilidade do menu móvel
         mobileMenu.classList.toggle('hidden');
         mobileMenu.classList.toggle('translate-y-0');
     });

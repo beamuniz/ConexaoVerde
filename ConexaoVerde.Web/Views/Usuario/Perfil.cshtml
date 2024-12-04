@@ -1,0 +1,100 @@
+﻿@model ConexaoVerde.Web.Models.UsuarioModel
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-indigo-800 to-blue-900 min-h-screen flex items-center justify-center p-0">
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full h-full p-32 transition-all duration-300 animate-fade-in">
+    <div class="flex flex-col md:flex-row h-full">
+        <div class="md:w-2/5 text-center mb-8 md:mb-0 flex flex-col items-center justify-center">
+            <img src="@(Model.FotoPerfil != null ? $"data:image/jpeg;base64,{Convert.ToBase64String(Model.FotoPerfil)}" : "/images/default-icon.jpg")"
+                 alt="Profile Picture"
+                 class="rounded-full w-48 h-48 mb-4">
+            @if (Model.Perfil == "Cliente")
+            {
+            <h1 class="text-2xl font-bold text-indigo-800 dark:text-white mb-2">@Model.ClienteModel.Nome</h1>
+            }
+            else
+            {
+            <h1 class="text-2xl font-bold text-indigo-800 dark:text-white mb-2">@Model.FornecedorModel.RazaoSocial</h1>
+            }
+            @if (Model.Perfil == "Cliente")
+            {
+            <p class="text-gray-600 dark:text-gray-300">Cliente</p>
+            }
+            else
+            {
+            <p class="text-gray-600 dark:text-gray-300">Fornecedor</p>
+            }
+            <button class="mt-4 bg-indigo-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition-colors duration-300">Edit Profile</button>
+        </div>
+        <div class="md:w-2/5 md:pl-8 flex flex-col justify-center">
+            <h2 class="text-xl font-semibold text-indigo-800 dark:text-white mb-4">About Me</h2>
+            <p class="text-gray-700 dark:text-gray-300 mb-6">
+                Passionate software developer with 5 years of experience in web technologies.
+                I love creating user-friendly applications and solving complex problems.
+            </p>
+            <h2 class="text-xl font-semibold text-indigo-800 dark:text-white mb-4">Skills</h2>
+            <div class="flex flex-wrap gap-2 mb-6">
+                <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">JavaScript</span>
+                <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">React</span>
+                <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">Node.js</span>
+                <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">Python</span>
+                <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">SQL</span>
+            </div>
+            <h2 class="text-xl font-semibold text-indigo-800 dark:text-white mb-4">Contact Information</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-800 dark:text-blue-900" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                    </svg>
+                    @Model.Email
+                </li>
+                <li class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-800 dark:text-blue-900" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                    </svg>
+                    @Model.Telefone
+                </li>
+                @if (Model.Perfil == "Fornecedor")
+                {
+                <li class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-800 dark:text-blue-900" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                    </svg>
+                    @Model.FornecedorModel.Endereco.Rua
+                </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+    .animate-fade-in {
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+</style>
+
+<script>
+    const skillTags = document.querySelectorAll('.bg-indigo-100');
+    skillTags.forEach(tag => {
+        tag.addEventListener('mouseover', () => {
+            tag.classList.remove('bg-indigo-100', 'text-indigo-800');
+            tag.classList.add('bg-blue-900', 'text-white');
+        });
+        tag.addEventListener('mouseout', () => {
+            tag.classList.remove('bg-blue-900', 'text-white');
+            tag.classList.add('bg-indigo-100', 'text-indigo-800');
+        });
+    });
+</script>
+</body>
+
+</html>

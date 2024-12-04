@@ -9,4 +9,5 @@ public interface IClienteBusiness
     Task<Cliente> ObterIdCliente(string cpf);
     Task AtualizarCliente(ClienteModel clienteModel);
     Task ExcluirCliente(ClienteModel clienteModel);
+    Task<ClienteModel> ObterClientePorId(int id);
 }

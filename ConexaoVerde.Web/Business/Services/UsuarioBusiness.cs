@@ -66,4 +66,21 @@ public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
 
         return null;
     }
+
+    public async Task<UsuarioModel> ObterIdUsuario(int id)
+    {
+        var usuario = await dbContextConfig.Usuarios
+            .Where(u => u.Id == id)
+            .Select(u => new UsuarioModel
+            {
+                Id = u.Id,
+                Email = u.Email,
+                Telefone = u.Telefone,
+                FotoPerfil = u.FotoPerfil,
+                Perfil = u.Perfil
+            })
+            .FirstOrDefaultAsync();
+
+        return usuario;
+    }
 }
