@@ -32,10 +32,10 @@
 
                 <!-- Menu de navegação -->
                 <div id="navMenu" class="hidden lg:flex items-center space-x-4">
-                    @if (ViewData["IsLoggedIn"] as bool? == true)
+                    @if (User.Identity!.IsAuthenticated)
                     {
                         <!-- Botões para usuários logados -->
-                        <span class="text-sm font-semibold">Olá, @ViewData["UserName"]</span>
+                        <span class="text-sm font-semibold">Olá, @User.Identity.Name</span>
                         <a href="/Usuario/Perfil" class="text-sm font-semibold text-white border border-white rounded-md px-4 py-2 hover:bg-white hover:text-[#2d7c2f] transition">Meu Perfil</a>
                         <form method="post" asp-controller="Login" asp-action="Logout" class="inline">
                             <button type="submit" class="text-sm font-semibold text-white border border-white rounded-md px-4 py-2 hover:bg-white hover:text-[#2d7c2f] transition">Sair</button>
@@ -51,7 +51,7 @@
 
                 <!-- Menu colapsado para dispositivos móveis -->
                 <div id="mobileMenu" class="lg:hidden hidden absolute top-16 right-0 bg-[#2d7c2f] w-64 p-4 transition-all duration-300 ease-in-out transform -translate-y-4 rounded-l-lg">
-                    @if (ViewData["IsLoggedIn"] != null && (bool)ViewData["IsLoggedIn"])
+                    @if (User.Identity!.IsAuthenticated)
                     {
                         <a href="/Usuario/Perfil" class="block text-sm font-semibold text-white border border-white rounded-md px-4 py-2 text-center hover:bg-white hover:text-[#2d7c2f] transition">Meu Perfil</a>
                         <form method="post" asp-controller="Login" asp-action="Logout" class="text-center mt-2">
