@@ -66,9 +66,4 @@ public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
 
         return null;
     }
-
-    public UsuarioModel Logout(string email, string senha)
-    {
-        throw new NotImplementedException();
-    }
 }

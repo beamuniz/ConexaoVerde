@@ -6,7 +6,6 @@ namespace ConexaoVerde.Web.Business.Interfaces;
 public interface IUsuarioBusiness
 {
     Task<Usuario> Login(UsuarioModel usuarioModel);
-    UsuarioModel Logout(string email, string senha);
     Task<Usuario> AtualizarUsuario(UsuarioModel usuarioModel);
     List<UsuarioModel> Favoritos(int id);
     Task<UsuarioModel> ObterUsuariosPorFornecedor(int id);
