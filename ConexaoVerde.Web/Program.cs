@@ -15,8 +15,8 @@ builder.Services.AddConexaoVerdeServices();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Usuario/Login"; 
-        options.LogoutPath = "/Usuario/Logout"; 
+        options.LoginPath = "/Login/Login"; 
+        options.LogoutPath = "/Login/Logout"; 
         options.ExpireTimeSpan = TimeSpan.FromMinutes(30); 
     });
 
@@ -34,6 +34,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

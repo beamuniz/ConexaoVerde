@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using ConexaoVerde.AppData.Context;
+using ConexaoVerde.AppData.Entities;
 using ConexaoVerde.Web.Business.Interfaces;
 using ConexaoVerde.Web.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -34,22 +35,10 @@ public class LoginController(DbContextConfig dbContextConfig, IUsuarioBusiness u
             return View("Login");
         }
 
-        var claims = new List<Claim>
-        {
-            new(ClaimTypes.Name, usuario.Email),
-            new("UserId", usuario.Id.ToString()),
-            new("Perfil", usuario.Perfil) 
-        };
+        await AuthenticateUser(usuario);
 
-        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-        var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-
-        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
-        
         if (usuario.Perfil == "Cliente")
-        {
             return RedirectToAction("ListarFornecedor", "Fornecedor");
-        }
 
         return RedirectToAction("Index", "Home");
     }
@@ -79,7 +68,28 @@ public class LoginController(DbContextConfig dbContextConfig, IUsuarioBusiness u
         }
 
         ViewBag.Sucess = "E-mail enviado com sucesso.";
-
         return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        return RedirectToAction("Index", "Home"); 
+    }
+
+    private async Task AuthenticateUser(Usuario usuario)
+    {
+        var claims = new List<Claim>
+        {
+            new(ClaimTypes.Name, usuario.Email),
+            new("UserId", usuario.Id.ToString()),
+            new("Perfil", usuario.Perfil)
+        };
+
+        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
     }
 }

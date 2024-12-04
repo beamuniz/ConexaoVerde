@@ -37,7 +37,7 @@
                         <!-- Botões para usuários logados -->
                         <span class="text-sm font-semibold">Olá, @ViewData["UserName"]</span>
                         <a href="/Usuario/Perfil" class="text-sm font-semibold text-white border border-white rounded-md px-4 py-2 hover:bg-white hover:text-[#2d7c2f] transition">Meu Perfil</a>
-                        <form method="post" asp-controller="Account" asp-action="Logout" class="inline">
+                        <form method="post" asp-controller="Login" asp-action="Logout" class="inline">
                             <button type="submit" class="text-sm font-semibold text-white border border-white rounded-md px-4 py-2 hover:bg-white hover:text-[#2d7c2f] transition">Sair</button>
                         </form>
                     }
@@ -54,7 +54,7 @@
                     @if (ViewData["IsLoggedIn"] != null && (bool)ViewData["IsLoggedIn"])
                     {
                         <a href="/Usuario/Perfil" class="block text-sm font-semibold text-white border border-white rounded-md px-4 py-2 text-center hover:bg-white hover:text-[#2d7c2f] transition">Meu Perfil</a>
-                        <form method="post" asp-controller="Account" asp-action="Logout" class="text-center mt-2">
+                        <form method="post" asp-controller="Login" asp-action="Logout" class="text-center mt-2">
                             <button type="submit" class="block text-sm font-semibold text-white border border-white rounded-md px-4 py-2 hover:bg-white hover:text-[#2d7c2f] transition">Sair</button>
                         </form>
                     }
@@ -86,7 +86,7 @@
     </div>
     <div class="container mx-auto px-4 py-6 relative z-10">
         <div class="text-center">
-            <p>&copy; 2024 - Conexão Verde - <a href="/Home/Privacy" class="text-white">Política de Privacidade</a></p>
+            <p>&copy; 2024 - Conexão Verde </p>
         </div>
     </div>
 </footer>
