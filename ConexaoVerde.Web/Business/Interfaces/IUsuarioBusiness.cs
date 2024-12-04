@@ -10,4 +10,5 @@ public interface IUsuarioBusiness
     List<UsuarioModel> Favoritos(int id);
     Task<UsuarioModel> ObterUsuariosPorFornecedor(int id);
     Task<UsuarioModel> ObterIdUsuario(int id);
+    Task<UsuarioModel> ObterPorEmail(string email);
 }

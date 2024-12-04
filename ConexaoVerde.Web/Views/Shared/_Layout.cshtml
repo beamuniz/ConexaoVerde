@@ -40,32 +40,40 @@
 
         @if (User.Identity!.IsAuthenticated)
         {
-            <div class="relative inline-block">
-                <!-- Ícone de Perfil -->
-                <a href="javascript:void(0);" class="flex items-center" id="profileIcon">
-                    <img src="~/images/profile_pic.png" alt="Profile" class="w-16 h-16 rounded-full"/>
-                </a>
+        <div class="relative inline-block">
+            <a href="javascript:void(0);" class="flex items-center" id="profileIcon">
+                @if (Context.Items["FotoPerfil"] is byte[] fotoPerfil)
+                {
+                var base64Image = Convert.ToBase64String(fotoPerfil);
+                <img src="data:image/png;base64,@base64Image" alt="Profile" class="w-16 h-16 rounded-full"/>
+                }
+                else
+                {
+                <img src="~/images/profile_pic.png" alt="Profile" class="w-16 h-16 rounded-full"/>
+                }
+            </a>
 
-                <!-- Menu Suspenso (Dropdown) -->
-                <div id="dropdownMenu" class="absolute hidden right-0 mt-2 bg-gray-700 text-white p-4 rounded shadow-lg w-48 z-20">
-                    <a href="/Usuario/Perfil" class="block px-4 py-2 text-sm">Meu Perfil</a>
-                    <hr class="my-2 border-t border-gray-600"/>
-                    <form method="post" asp-controller="Login" asp-action="Logout" class="text-center mt-2">
-                        <button type="submit"  class="block px-4 py-2 text-sm">Logout</button>
-                    </form>
-                </div>
+            <!-- Menu Suspenso -->
+            <div id="dropdownMenu" class="absolute hidden right-0 mt-2 bg-gray-700 text-white p-4 rounded shadow-lg w-48 z-20">
+                <a href="/Usuario/Perfil" class="block px-4 py-2 text-sm">Meu Perfil</a>
+                <hr class="my-2 border-t border-gray-600"/>
+                <form method="post" asp-controller="Login" asp-action="Logout" class="text-center mt-2">
+                    <button type="submit" class="block px-4 py-2 text-sm">Logout</button>
+                </form>
             </div>
+        </div>
         }
         else
         {
-            <div class="toggle w-full text-end hidden md:flex md:w-auto px-2 py-2 md:rounded">
-                <a href="/Login/Login">
-                    <div class="flex justify-end items-center h-10 w-auto rounded-md bg-gray-800 text-white font-medium p-2 space-x-2">
-                        <i class="fa-solid fa-right-to-bracket text-xl"></i>
-                        <span>Entrar</span>
-                    </div>
-                </a>
-            </div>
+        <!-- Caso o usuário não esteja autenticado -->
+        <div class="toggle w-full text-end hidden md:flex md:w-auto px-2 py-2 md:rounded">
+            <a href="/Login/Login">
+                <div class="flex justify-end items-center h-10 w-auto rounded-md bg-gray-800 text-white font-medium p-2 space-x-2">
+                    <i class="fa-solid fa-right-to-bracket text-xl"></i>
+                    <span>Entrar</span>
+                </div>
+            </a>
+        </div>
         }
     </nav>
 </header>

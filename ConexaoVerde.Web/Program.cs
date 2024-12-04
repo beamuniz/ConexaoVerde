@@ -5,7 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<ActionFilter>(); 
+});
 
 builder.Services.AddDbContext<DbContextConfig>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
