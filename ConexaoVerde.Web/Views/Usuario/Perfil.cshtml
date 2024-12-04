@@ -9,10 +9,33 @@
                 <form id="profileForm">
                     <!-- Cover Image -->
                     <div class="w-full rounded-sm bg-[url('https://i.imgur.com/GO9IFWt.jpeg')] bg-cover bg-center bg-no-repeat items-center">
-                        <div class="mx-auto flex justify-center w-[141px] h-[141px] bg-blue-300/20 rounded-full bg-[url('https://i.imgur.com/GO9IFWt.jpeg')] bg-cover bg-center bg-no-repeat"></div>
+                        <!-- Verifica se Fotoperfil não está vazio e exibe a imagem -->
+                        <div class="mx-auto flex justify-center items-center w-[120px] h-[120px] bg-blue-300/20 rounded-full" id="profileImage">
+                            @if (Model.FotoPerfil is { Length: > 0 })
+                            {
+                                var base64Image = Convert.ToBase64String(Model.FotoPerfil);
+                                <img src="data:image/png;base64,@base64Image" alt="Profile Picture" class="w-full h-full max-w-[120px] max-h-[120px] object-cover rounded-full">
+                            }
+                            else
+                            {
+                                <img src="~/images/profile_pic.png" alt="Default Profile Picture" class="w-full h-full max-w-[120px] max-h-[120px] object-cover rounded-full">
+                            }
+                        </div>
                     </div>
+                    @if (Model.Perfil == "Cliente")
+                    {
+                        <h2 class="text-center mt-1 font-semibold">@Model.ClienteModel.Nome @Model.ClienteModel.Sobrenome</h2>
+                    }
+                    else
+                    {
+                        <h2 class="text-center mt-1 font-semibold">@Model.FornecedorModel.RazaoSocial</h2>
+                    }
 
-                    <h2 class="text-center mt-1 font-semibold">Upload Profile and Cover Image</h2>
+                    <!-- Campo de Upload de Imagem -->
+                    <div class="w-full mt-4">
+                        <label for="imageUpload" class="block mb-2">Alterar Foto de Perfil</label>
+                        <input type="file" id="imageUpload" name="Fotoperfil" class="mt-2 p-4 w-full border-2 rounded-lg" accept="image/*">
+                    </div>
 
                     <!-- Campos do Perfil -->
                     <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
@@ -52,7 +75,9 @@
                     <!-- Botão para Editar -->
                     <div class="w-full mt-4">
                         <button type="button" id="editProfileBtn"
-                                class="w-full p-4 text-lg font-semibold bg-gray-600 text-white">Editar Perfil</button>
+                                class="w-full p-4 text-lg font-semibold bg-gray-600 text-white">
+                            Editar Perfil
+                        </button>
                     </div>
 
                     <!-- Botão para Salvar (aparece depois de editar) -->
@@ -66,6 +91,19 @@
 </section>
 
 <script>
+    document.getElementById('imageUpload').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Atualiza a imagem de perfil com a nova imagem selecionada
+                document.getElementById('profileImage').style.backgroundImage = `url(${e.target.result})`;
+            };
+            reader.readAsDataURL(file); // Lê a imagem selecionada
+        }
+    });
+
+    // Função para editar o perfil
     document.getElementById('editProfileBtn').addEventListener('click', function() {
         // Tornar os campos editáveis
         document.getElementById('firstName').readOnly = false;
@@ -79,4 +117,16 @@
         // Esconder o botão de editar
         document.getElementById('editProfileBtn').style.display = 'none';
     });
+</script>
+
+<script>
+    window.onload = function() {
+        const profileImage = document.querySelector("#profileImage img");
+
+        if (profileImage) {
+            profileImage.style.maxWidth = "120px";
+            profileImage.style.maxHeight = "120px";
+            profileImage.style.objectFit = "cover";
+        }
+    };
 </script>
