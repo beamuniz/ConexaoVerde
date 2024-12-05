@@ -19,7 +19,7 @@ public class LoginController(DbContextConfig dbContextConfig, IUsuarioBusiness u
     }
 
     [HttpPost]
-    public async Task<IActionResult> Login(UsuarioModel usuarioModel)
+    public async Task<IActionResult> Login(UsuarioModel usuarioModel, string? returnUrl = null)
     {
         if (!ModelState.IsValid)
         {
@@ -37,10 +37,14 @@ public class LoginController(DbContextConfig dbContextConfig, IUsuarioBusiness u
 
         await AuthenticateUser(usuario);
 
-        if (usuario.Perfil == "Cliente")
-            return RedirectToAction("ListarFornecedor", "Fornecedor");
+        if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+            return Redirect(returnUrl);
 
-        return RedirectToAction("Index", "Home");
+        return usuario.Perfil switch
+        {
+            "Cliente" => RedirectToAction("ListarFornecedor", "Fornecedor"),
+            _ => RedirectToAction("Index", "Home")
+        };
     }
 
     [HttpGet]

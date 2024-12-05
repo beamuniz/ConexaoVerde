@@ -1,3 +1,11 @@
+@{
+    var isFornecedor = false;
+    if (User.Identity!.IsAuthenticated)
+    {
+        var perfilClaim = User.Claims.FirstOrDefault(c => c.Type == "Perfil")?.Value;
+        isFornecedor = perfilClaim == "Fornecedor";
+    }
+}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -10,7 +18,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-[#2C2F33] text-white">
+<body class="bg-[#ffffff] text-white">
 
 <!-- Header -->
 <header>
@@ -31,49 +39,70 @@
         </div>
 
         <!-- Links de navegação (centralizados na versão desktop) -->
+        @if (User.Identity!.IsAuthenticated && isFornecedor)
+        {
         <div class="toggle hidden md:flex justify-center flex-grow text-bold mt-5 md:mt-0 md:border-none">
             <a href="/" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Home</a>
-            <a href="#services" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Services</a>
-            <a href="#aboutus" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">About us</a>
-            <a href="#contactUs" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Visit Us</a>
+            <a href="/Produto/ListarProduto" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Meus Produtos</a>
+            <a href="/Produto/CriarProduto" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Criar Produto</a>
+            <a href="#contactUs" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Visite Nós</a>
         </div>
-
-        @if (User.Identity!.IsAuthenticated)
+        }
+        else if (!User.Identity!.IsAuthenticated)
         {
-        <div class="relative inline-block">
-            <a href="javascript:void(0);" class="flex items-center" id="profileIcon">
-                @if (Context.Items["FotoPerfil"] is byte[] fotoPerfil)
-                {
-                var base64Image = Convert.ToBase64String(fotoPerfil);
-                <img src="data:image/png;base64,@base64Image" alt="Profile" class="w-16 h-16 rounded-full"/>
-                }
-                else
-                {
-                <img src="~/images/profile_pic.png" alt="Profile" class="w-16 h-16 rounded-full"/>
-                }
-            </a>
-
-            <!-- Menu Suspenso -->
-            <div id="dropdownMenu" class="absolute hidden right-0 mt-2 bg-[#2C2F33] text-white p-4 rounded shadow-lg w-48 z-20">
-                <a href="/Usuario/Perfil" class="block px-4 py-2 text-sm">Meu Perfil</a>
-                <hr class="my-2 border-t border-[#98FF98]"/>
-                <form method="post" asp-controller="Login" asp-action="Logout" class="text-center mt-2">
-                    <button type="submit" class="block px-4 py-2 text-sm hover:text-[#98FF98]">Logout</button>
-                </form>
+            <div class="toggle hidden md:flex justify-center flex-grow text-bold mt-5 md:mt-0 md:border-none">
+                <a href="/" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Home</a>
+                <a href="#services" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Serviços</a>
+                <a href="#aboutus" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Sobre Nós</a>
+                <a href="#contactUs" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Visite Nós</a>
             </div>
-        </div>
         }
         else
         {
-        <!-- Caso o usuário não esteja autenticado -->
-        <div class="toggle w-full text-end hidden md:flex md:w-auto px-2 py-2 md:rounded">
-            <a href="/Login/Login">
-                <div class="flex justify-end items-center h-10 w-auto rounded-md bg-[#98FF98] text-[#2C2F33] font-medium p-2 space-x-2">
-                    <i class="fa-solid fa-right-to-bracket text-xl"></i>
-                    <span>Entrar</span>
+            <div class="toggle hidden md:flex justify-center flex-grow text-bold mt-5 md:mt-0 md:border-none">
+                <a href="/" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Home</a>
+                <a href="/Fornecedor/ListarFornecedor" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Fornecedores</a>
+                <a href="#aboutus" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">About us</a>
+                <a href="#contactUs" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Visit Us</a>
+            </div>
+        }
+        
+        @if (User.Identity!.IsAuthenticated)
+        {
+            <div class="relative inline-block">
+                <a href="javascript:void(0);" class="flex items-center" id="profileIcon">
+                    @if (Context.Items["FotoPerfil"] is byte[] fotoPerfil)
+                    {
+                        var base64Image = Convert.ToBase64String(fotoPerfil);
+                        <img src="data:image/png;base64,@base64Image" alt="Profile" class="w-16 h-16 rounded-full"/>
+                    }
+                    else
+                    {
+                        <img src="~/images/profile_pic.png" alt="Profile" class="w-16 h-16 rounded-full"/>
+                    }
+                </a>
+
+                <!-- Menu Suspenso -->
+                <div id="dropdownMenu" class="absolute hidden right-0 mt-2 bg-[#2C2F33] text-white p-4 rounded shadow-lg w-48 z-20">
+                    <a href="/Usuario/Perfil" class="block px-4 py-2 text-sm">Meu Perfil</a>
+                    <hr class="my-2 border-t border-[#98FF98]"/>
+                    <form method="post" asp-controller="Login" asp-action="Logout" class="text-center mt-2">
+                        <button type="submit" class="block px-4 py-2 text-sm hover:text-[#98FF98]">Logout</button>
+                    </form>
                 </div>
-            </a>
-        </div>
+            </div>
+        }
+        else
+        {
+            <!-- Caso o usuário não esteja autenticado -->
+            <div class="toggle w-full text-end hidden md:flex md:w-auto px-2 py-2 md:rounded">
+                <a href="/Login/Login">
+                    <div class="flex justify-end items-center h-10 w-auto rounded-md bg-[#98FF98] text-[#2C2F33] font-medium p-2 space-x-2">
+                        <i class="fa-solid fa-right-to-bracket text-xl"></i>
+                        <span>Entrar</span>
+                    </div>
+                </a>
+            </div>
         }
     </nav>
 </header>
