@@ -23,28 +23,28 @@
                     <!-- Campo Login -->
                     <div class="relative">
                         <label for="Email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email</label>
-                        <input asp-for="Email" type="text" id="Email" name="Email" class="block w-full px-5 py-3 pl-10 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Email" required data-val="true" data-val-required="O campo Email é obrigatório">
+                        <input asp-for="Email" type="text" id="Email" name="Email" class="block w-full px-5 py-3 pl-10 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Email" required data-val="true" data-val-required="O campo Email é obrigatório">
                         <span asp-validation-for="Email" class="text-red-500 text-sm"></span>
                     </div>
 
                     <!-- Campo Senha -->
                     <div class="relative">
                         <label for="Senha" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Senha</label>
-                        <input asp-for="Senha" type="password" id="Senha" name="Senha" class="block w-full px-5 py-3 pl-10 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Senha" required data-val="true" data-val-required="O campo Senha é obrigatório">
+                        <input asp-for="Senha" type="password" id="Senha" name="Senha" class="block w-full px-5 py-3 pl-10 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Senha" required data-val="true" data-val-required="O campo Senha é obrigatório">
                         <span asp-validation-for="Senha" class="text-red-500 text-sm"></span>
                     </div>
 
                     <!-- Lembrar-me e Esqueci minha senha -->
                     <div class="flex justify-between items-center">
                         <div class="flex items-center space-x-2">
-                            <input type="checkbox" id="RememberMe" name="RememberMe" class="form-checkbox text-blue-500">
+                            <input type="checkbox" id="RememberMe" name="RememberMe" class="form-checkbox text-green-800">
                             <label for="RememberMe" class="text-sm text-gray-600 dark:text-gray-200">Lembrar-me</label>
                         </div>
-                        <a href="EsqueceuSenha" class="text-sm text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300">Esqueceu a senha?</a>
+                        <a href="EsqueceuSenha" class="text-sm text-green-500 hover:text-green-600 dark:text-green-800 dark:hover:text-green-300">Esqueceu a senha?</a>
                     </div>
 
                     <!-- Botão de Login -->
-                    <button type="submit" class="w-full py-3 mt-4 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none">
+                    <button type="submit" class="w-full py-3 mt-4 text-white bg-gray-500 rounded-md hover:bg-gray-600 focus:outline-none">
                         Entrar
                     </button>
 
@@ -53,7 +53,7 @@
                 <!-- Registro -->
                 <div class="mt-4 text-center">
                     <span class="text-sm text-gray-500 dark:text-gray-400">Não tem uma conta?</span>
-                    <a href="/Usuario/Cadastro" class="text-sm text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300">Crie uma conta</a>
+                    <a href="/Usuario/Cadastro" class="text-sm text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-300">Crie uma conta</a>
                 </div>
             </div>
         </div>

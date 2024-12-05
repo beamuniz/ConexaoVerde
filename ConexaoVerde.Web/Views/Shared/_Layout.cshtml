@@ -31,10 +31,10 @@
 
         <!-- Links de navegação (centralizados na versão desktop) -->
         <div class="toggle hidden md:flex justify-center flex-grow text-bold mt-5 md:mt-0 md:border-none text-white">
-            <a href="/" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Home</a>
-            <a href="#services" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Services</a>
-            <a href="#aboutus" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">About us</a>
-            <a href="#contactUs" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Visit Us</a>
+            <a href="/" class="block md:inline-block hover:text-gray-500 px-3 py-3 md:border-none">Home</a>
+            <a href="#services" class="block md:inline-block hover:text-gray-500 px-3 py-3 md:border-none">Services</a>
+            <a href="#aboutus" class="block md:inline-block hover:text-gray-500 px-3 py-3 md:border-none">About us</a>
+            <a href="#contactUs" class="block md:inline-block hover:text-gray-500 px-3 py-3 md:border-none">Visit Us</a>
         </div>
 
         @if (User.Identity!.IsAuthenticated)
@@ -53,7 +53,7 @@
             </a>
 
             <!-- Menu Suspenso -->
-            <div id="dropdownMenu" class="absolute hidden right-0 mt-2 bg-gray-700 text-white p-4 rounded shadow-lg w-48 z-20">
+            <div id="dropdownMenu" class="absolute hidden right-0 mt-2 bg-gray-500 text-white p-4 rounded shadow-lg w-48 z-20">
                 <a href="/Usuario/Perfil" class="block px-4 py-2 text-sm">Meu Perfil</a>
                 <hr class="my-2 border-t border-gray-600"/>
                 <form method="post" asp-controller="Login" asp-action="Logout" class="text-center mt-2">
@@ -67,7 +67,7 @@
         <!-- Caso o usuário não esteja autenticado -->
         <div class="toggle w-full text-end hidden md:flex md:w-auto px-2 py-2 md:rounded">
             <a href="/Login/Login">
-                <div class="flex justify-end items-center h-10 w-auto rounded-md bg-gray-800 text-white font-medium p-2 space-x-2">
+                <div class="flex justify-end items-center h-10 w-auto rounded-md bg-gray-500 text-white font-medium p-2 space-x-2">
                     <i class="fa-solid fa-right-to-bracket text-xl"></i>
                     <span>Entrar</span>
                 </div>
