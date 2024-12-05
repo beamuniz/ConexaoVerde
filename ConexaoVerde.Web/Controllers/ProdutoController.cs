@@ -1,23 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ConexaoVerde.AppData.Entities;
 using ConexaoVerde.Web.Business.Interfaces;
+using ConexaoVerde.Web.Extensions;
 using ConexaoVerde.Web.Models;
 
 namespace ConexaoVerde.Web.Controllers;
 
-public class ProdutoController(IProdutoBusiness produtoBusiness, ICategoriaBusiness categoriaBusiness, IFornecedorBusiness fornecedorBusiness) : Controller
+public class ProdutoController(
+    IProdutoBusiness produtoBusiness,
+    ICategoriaBusiness categoriaBusiness,
+    IFornecedorBusiness fornecedorBusiness) : Controller
 {
     [HttpGet]
     public async Task<IActionResult> ListarProduto()
     {
         var produtos = await produtoBusiness.ListarProdutos();
-        
+
         foreach (var produto in produtos.Where(produto => produto.ImgProduto != null))
         {
             produto.ImgProdutoBase64 = Convert.ToBase64String(produto.ImgProduto);
         }
 
-        return View(produtos); 
+        return View(produtos);
     }
 
     [HttpGet("{id:int}")]
@@ -34,35 +38,33 @@ public class ProdutoController(IProdutoBusiness produtoBusiness, ICategoriaBusin
     {
         ViewBag.Categorias = await categoriaBusiness.ListarCategorias();
         ViewBag.Fornecedores = await fornecedorBusiness.ListaDeFornecedores();
-    
+
         return View(new ProdutoModel());
     }
 
 
-    [HttpPost]
+    [HttpPost] 
     public async Task<IActionResult> CriarProduto(ProdutoModel produtoModel, IFormFile fotoProduto)
     {
         if (!ModelState.IsValid)
-        {
             return View(produtoModel);
-        }
+
+        var fornecedorId = User.FindFirst("UserId")?.Value;
         
-        if (fotoProduto is { Length: > 0 })
-        {
-            using var memoryStream = new MemoryStream();
-            await fotoProduto.CopyToAsync(memoryStream);
-            produtoModel.ImgProduto = memoryStream.ToArray();
-        }
+        var imgProduto = fotoProduto is { Length: > 0 }
+            ? await fotoProduto.OpenReadStream().ReadToEndAsync()
+            : null;
 
         var produto = new Produto
         {
             NomeProduto = produtoModel.NomeProduto,
             Preco = produtoModel.Preco,
             Descricao = produtoModel.Descricao,
-            CategoriaId = produtoModel.Categoria.Id, 
-            FornecedorId = produtoModel.Fornecedor.Id, 
-            ImgProduto = produtoModel.ImgProduto
+            CategoriaId = produtoModel.Categoria.Id,
+            FornecedorId = int.Parse(fornecedorId!),
+            ImgProduto = imgProduto
         };
+
         await produtoBusiness.CriarProduto(produto);
 
         return RedirectToAction(nameof(ListarProduto));

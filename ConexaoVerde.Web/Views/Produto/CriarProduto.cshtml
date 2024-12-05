@@ -67,16 +67,6 @@ ViewData["Title"] = "Cadastro de Produto";
                     <span asp-validation-for="Categoria.Id" class="text-red-500"></span>
                 </div>
 
-                <!-- Fornecedor -->
-                <div>
-                    <label asp-for="Fornecedor.Id" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Fornecedor</label>
-                    <select asp-for="Fornecedor.Id" asp-items="ViewBag.Fornecedores"
-                            class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40">
-                        <option value="">Selecione</option>
-                    </select>
-                    <span asp-validation-for="Fornecedor.Id" class="text-red-500"></span>
-                </div>
-
                 <!-- Imagens -->
                 <div>
                     <label asp-for="ImgProduto" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Imagens</label>
