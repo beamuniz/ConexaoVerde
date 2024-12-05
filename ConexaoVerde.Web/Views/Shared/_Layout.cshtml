@@ -10,10 +10,11 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-[#2C2F33] text-white">
+
 <!-- Header -->
 <header>
-    <nav class="flex items-center justify-between p-3 bg-green-800">
+    <nav class="flex items-center justify-between p-3 bg-[#2C2F33]">
         <!-- Logo -->
         <div class="flex justify-center">
             <a href="/" class="flex items-center">
@@ -30,11 +31,11 @@
         </div>
 
         <!-- Links de navegação (centralizados na versão desktop) -->
-        <div class="toggle hidden md:flex justify-center flex-grow text-bold mt-5 md:mt-0 md:border-none text-white">
-            <a href="/" class="block md:inline-block hover:text-gray-500 px-3 py-3 md:border-none">Home</a>
-            <a href="#services" class="block md:inline-block hover:text-gray-500 px-3 py-3 md:border-none">Services</a>
-            <a href="#aboutus" class="block md:inline-block hover:text-gray-500 px-3 py-3 md:border-none">About us</a>
-            <a href="#contactUs" class="block md:inline-block hover:text-gray-500 px-3 py-3 md:border-none">Visit Us</a>
+        <div class="toggle hidden md:flex justify-center flex-grow text-bold mt-5 md:mt-0 md:border-none">
+            <a href="/" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Home</a>
+            <a href="#services" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Services</a>
+            <a href="#aboutus" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">About us</a>
+            <a href="#contactUs" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Visit Us</a>
         </div>
 
         @if (User.Identity!.IsAuthenticated)
@@ -53,11 +54,11 @@
             </a>
 
             <!-- Menu Suspenso -->
-            <div id="dropdownMenu" class="absolute hidden right-0 mt-2 bg-gray-500 text-white p-4 rounded shadow-lg w-48 z-20">
+            <div id="dropdownMenu" class="absolute hidden right-0 mt-2 bg-[#2C2F33] text-white p-4 rounded shadow-lg w-48 z-20">
                 <a href="/Usuario/Perfil" class="block px-4 py-2 text-sm">Meu Perfil</a>
-                <hr class="my-2 border-t border-gray-600"/>
+                <hr class="my-2 border-t border-[#98FF98]"/>
                 <form method="post" asp-controller="Login" asp-action="Logout" class="text-center mt-2">
-                    <button type="submit" class="block px-4 py-2 text-sm">Logout</button>
+                    <button type="submit" class="block px-4 py-2 text-sm hover:text-[#98FF98]">Logout</button>
                 </form>
             </div>
         </div>
@@ -67,7 +68,7 @@
         <!-- Caso o usuário não esteja autenticado -->
         <div class="toggle w-full text-end hidden md:flex md:w-auto px-2 py-2 md:rounded">
             <a href="/Login/Login">
-                <div class="flex justify-end items-center h-10 w-auto rounded-md bg-gray-500 text-white font-medium p-2 space-x-2">
+                <div class="flex justify-end items-center h-10 w-auto rounded-md bg-[#98FF98] text-[#2C2F33] font-medium p-2 space-x-2">
                     <i class="fa-solid fa-right-to-bracket text-xl"></i>
                     <span>Entrar</span>
                 </div>
@@ -83,14 +84,16 @@
 </main>
 
 <!-- Footer -->
-<footer class="bg-green-800 text-white py-6">
+<footer class="bg-[#2C2F33] text-white py-6">
     <div class="container mx-auto text-center">
         <p>&copy; 2024 Conexão Verde. Todos os Direitos Reservados.</p>
     </div>
 </footer>
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
+
 <script>
     const hamburgerButton = document.getElementById('hamburger');
     const menuItems = document.querySelector('.toggle.hidden');
@@ -99,6 +102,7 @@
         menuItems.classList.toggle('hidden');
     });
 </script>
+
 <script>
     // Função para alternar a visibilidade do menu
     document.getElementById('profileIcon').addEventListener('click', function(event) {
