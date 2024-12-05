@@ -198,7 +198,7 @@
 
                 // Enviar a mensagem para o backend
                 var fornecedorId = @Model.Fornecedor.Id;
-                fetch('/Fornecedor/EnviarMensagem', {
+                fetch('/Fornecedor/ChatResposta', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
