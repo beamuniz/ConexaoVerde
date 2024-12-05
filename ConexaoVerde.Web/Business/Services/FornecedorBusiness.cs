@@ -104,7 +104,8 @@ public class FornecedorBusiness(DbContextConfig dbContextConfig) : IFornecedorBu
                 RazaoSocial = f.RazaoSocial,
                 NomeFantasia = f.NomeFantasia,
                 Cnpj = f.Cnpj,
-                Endereco = f.Endereco
+                Endereco = f.Endereco,
+                Descricao = f.Descricao
             })
             .FirstOrDefaultAsync();
 

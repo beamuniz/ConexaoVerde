@@ -13,8 +13,7 @@
                 <h2 class="text-gray-500 text-base mb-6">Gerencie suas informações de perfil</h2>
             </div>
 
-            <form id="profileForm" class="space-y-6">
-                <!-- Imagem de Capa e Foto de Perfil -->
+            <form id="profileForm" action="@Url.Action("AtualizarPerfil", "Usuario")" method="post" enctype="multipart/form-data" class="space-y-6">
                 <div class="relative">
                     <!-- Capa -->
                     <div class="w-full h-48 bg-gradient-to-r from-green-500 via-gray-500 to-green-500 rounded-lg"></div>
@@ -50,7 +49,7 @@
                 <!-- Campo de Upload de Imagem -->
                 <div>
                     <label for="imageUpload" class="block text-sm font-medium text-gray-700">Alterar Foto de Perfil</label>
-                    <input type="file" id="imageUpload" name="Fotoperfil" class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" accept="image/*">
+                    <input type="file" id="imageUpload" name="Fotoperfil" class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800" accept="image/*">
                 </div>
 
                 <!-- Campos do Perfil -->
@@ -60,13 +59,13 @@
                         <div>
                             <label for="firstName" class="block text-sm font-medium text-gray-700">Primeiro Nome</label>
                             <input type="text" id="firstName" name="FirstName" value="@Model.ClienteModel.Nome"
-                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
                                    placeholder="Primeiro Nome" readonly>
                         </div>
                         <div>
                             <label for="lastName" class="block text-sm font-medium text-gray-700">Sobrenome</label>
                             <input type="text" id="lastName" name="LastName" value="@Model.ClienteModel.Sobrenome"
-                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
                                    placeholder="Sobrenome" readonly>
                         </div>
                     }
@@ -75,13 +74,13 @@
                         <div>
                             <label for="razaosocial" class="block text-sm font-medium text-gray-700">Razão Social</label>
                             <input type="text" id="razaosocial" name="RazaoSocial" value="@Model.FornecedorModel.RazaoSocial"
-                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
                                    placeholder="Razão Social" readonly>
                         </div>
                         <div>
                             <label for="nomefantasia" class="block text-sm font-medium text-gray-700">Nome Fantasia</label>
                             <input type="text" id="nomefantasia" name="NomeFantasia" value="@Model.FornecedorModel.NomeFantasia"
-                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
                                    placeholder="Nome Fantasia" readonly>
                         </div>
                     }
@@ -89,7 +88,7 @@
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                         <input type="text" id="email" name="Email" value="@Model.Email"
-                               class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                               class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
                                placeholder="Email" readonly>
                     </div>
                     @if (Model.Perfil == "Cliente")
@@ -97,7 +96,7 @@
                         <div>
                             <label for="cpf" class="block text-sm font-medium text-gray-700">CPF</label>
                             <input type="text" id="cpf" name="Cpf" value="@Model.ClienteModel.Cpf"
-                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
                                    placeholder="CPF" readonly>
                         </div>
                     }
@@ -106,18 +105,28 @@
                         <div>
                             <label for="cnpj" class="block text-sm font-medium text-gray-700">CNPJ</label>
                             <input type="text" id="cnpj" name="CNPJ" value="@Model.FornecedorModel.Cnpj"
-                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
                                    placeholder="CNPJ" readonly>
                         </div>
                     }
                 </div>
 
+                @if (Model.Perfil == "Fornecedor")
+                {
+                    <div class="w-full">
+                        <label class="block text-sm font-medium text-gray-700">Descrição</label>
+                        <textarea id="descricao" name="Descrição" rows="4"
+                              class="mt-2 p-2 w-full block border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
+                              placeholder="Descrição" readonly>@Model.FornecedorModel.Descricao</textarea>
+                    </div>
+                }
+
                 <!-- Botões de Ação -->
                 <div class="flex justify-between gap-4">
-                    <button type="button" id="editProfileBtn" class="flex-1 p-3 bg-gray-600 text-white rounded-lg shadow hover:bg-gray-700">
+                    <button type="button" id="editProfileBtn" class="flex-1 p-3 bg-gray-600 text-white rounded-lg shadow hover:bg-[#2C2F33]">
                         Editar Perfil
                     </button>
-                    <button type="submit" id="saveButton" class="flex-1 p-3 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 hidden">
+                    <button type="submit" id="saveButton" class="flex-1 p-3 bg-green-500 text-white rounded-lg shadow hover:bg-[#98FF98] hidden">
                         Salvar Mudanças
                     </button>
                 </div>
@@ -141,7 +150,7 @@
 
     document.getElementById('editProfileBtn').addEventListener('click', function () {
         const clientFields = ['firstName', 'lastName', 'email', 'cpf'];
-        const supplierFields = ['razaosocial', 'nomefantasia', 'email', 'cnpj'];
+        const supplierFields = ['razaosocial', 'nomefantasia', 'email', 'cnpj', 'descricao'];
 
         const fields = [...clientFields, ...supplierFields].filter(id => document.getElementById(id));
 
@@ -162,6 +171,11 @@
             editButton.style.display = 'none';
         }
     });
+
+    document.getElementById('saveButton').addEventListener('click', function () {
+        document.getElementById('profileForm').submit();  
+    });
+    
 </script>
 
 <script>
