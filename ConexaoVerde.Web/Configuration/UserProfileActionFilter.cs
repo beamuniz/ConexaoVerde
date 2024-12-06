@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace ConexaoVerde.Web.Configuration;
 
-    public class ActionFilter(IUsuarioBusiness userService) : IActionFilter
+    public class UserProfileActionFilter(IUsuarioBusiness userService) : IActionFilter
     {
         public void OnActionExecuting(ActionExecutingContext context)
         {

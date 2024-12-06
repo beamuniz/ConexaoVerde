@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews(options =>
 {
-    options.Filters.Add<ActionFilter>(); 
+    options.Filters.Add<UserProfileActionFilter>(); 
 });
 
 builder.Services.AddDbContext<DbContextConfig>(options =>
