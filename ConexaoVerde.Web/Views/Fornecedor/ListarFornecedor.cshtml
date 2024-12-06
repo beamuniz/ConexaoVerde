@@ -4,48 +4,58 @@
     ViewData["Title"] = "Lista de Fornecedores";
 }
 
-<section class="bg-green-50 divide-green-50:bg-gray-100 py-16">
+<section class="bg-gray-100 py-16">
     <div class="container mx-auto px-6">
-        <h1 class="text-4xl font-semibold text-gray-800 dark:text-green-700 text-center mb-12">
+        <h1 class="text-5xl font-semibold text-gray-800 text-center mb-12">
             Catálogo de Fornecedores
         </h1>
 
-        <div class="overflow-x-auto bg-white shadow-lg rounded-lg">
-            <table class="min-w-full table-auto text-left">
-                <thead class="bg-green-500 text-white">
-                    <tr>
-                        <th class="px-6 py-3">Foto</th>
-                        <th class="px-6 py-3">Nome Fantasia</th>
-                        <th class="px-6 py-3">CNPJ</th>
-                        <th class="px-6 py-3">Endereço</th>
-                        <th class="px-6 py-3">Ação</th>
-                    </tr>
+        <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+            <table class="min-w-full table-auto">
+                <thead>
+                <tr class="bg-[#2C2F33] text-white">
+                    <th class="px-6 py-5 text-left text-base font-semibold uppercase">Foto</th>
+                    <th class="px-6 py-5 text-left text-base font-semibold uppercase">Nome Fantasia</th>
+                    <th class="px-6 py-5 text-left text-base font-semibold uppercase">CNPJ</th>
+                    <th class="px-6 py-5 text-left text-base font-semibold uppercase">Endereço</th>
+                    <th class="px-6 py-5 text-left text-base font-semibold uppercase">Ação</th>
+                </tr>
                 </thead>
-                <tbody>
-                    @foreach (var fornecedor in Model)
-                    {
-                        <tr class="border-t">
-                            <td class="px-6 py-3">
-                                @if (fornecedor.FotoPerfil != null)
-                                {
-                                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(fornecedor.FotoPerfil)" alt="Foto de Perfil do Fornecedor" class="w-20 h-20 object-cover rounded-full">
-                                }
-                                else
-                                {
-                                    <img src="https://via.placeholder.com/150" alt="Logo do Fornecedor" class="w-20 h-20 object-cover rounded-full">
-                                }
-                            </td>
-                            <td class="px-6 py-3">@fornecedor.NomeFantasia</td>
-                            <td class="px-6 py-3">@fornecedor.Cnpj</td>
-                            <td class="px-6 py-3">@fornecedor.Endereco.Rua</td>
-                            <td class="px-6 py-3">
-                                <a href="@Url.Action("PerfilFornecedor", "Fornecedor", new { id = fornecedor.Id })"
-                                   class="text-blue-500 hover:text-blue-700">
-                                    Ver Perfil
-                                </a>
-                            </td>
-                        </tr>
-                    }
+                <tbody class="divide-y divide-gray-200">
+                @foreach (var fornecedor in Model)
+                {
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-5">
+                            @if (fornecedor.FotoPerfil != null)
+                            {
+                                <img src="data:image/jpeg;base64,@Convert.ToBase64String(fornecedor.FotoPerfil)"
+                                     alt="Foto de Perfil do Fornecedor"
+                                     class="w-16 h-16 object-cover rounded-full border border-gray-300">
+                            }
+                            else
+                            {
+                                <img src="https://via.placeholder.com/150"
+                                     alt="Logo do Fornecedor"
+                                     class="w-16 h-16 object-cover rounded-full border border-gray-300">
+                            }
+                        </td>
+                        <td class="px-6 py-5 text-lg font-medium text-gray-700">
+                            @fornecedor.NomeFantasia
+                        </td>
+                        <td class="px-6 py-5 text-lg text-gray-600">
+                            @fornecedor.Cnpj
+                        </td>
+                        <td class="px-6 py-5 text-lg text-gray-600">
+                            @fornecedor.Endereco.Rua
+                        </td>
+                        <td class="px-6 py-5">
+                            <a href="@Url.Action("PerfilFornecedor", "Fornecedor", new { id = fornecedor.Id })"
+                               class="text-green-400 hover:text-green-400 font-semibold text-lg">
+                                Ver Perfil
+                            </a>
+                        </td>
+                    </tr>
+                }
                 </tbody>
             </table>
         </div>
