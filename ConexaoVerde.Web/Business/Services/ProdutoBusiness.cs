@@ -65,7 +65,8 @@ public class ProdutoBusiness(DbContextConfig dbContextConfig) : IProdutoBusiness
                 Id = p.Id,
                 NomeProduto = p.NomeProduto,
                 Preco = p.Preco,
-                ImgProduto = p.ImgProduto 
+                ImgProduto = p.ImgProduto,
+                Descricao = p.Descricao
             })
             .ToListAsync();
     }
