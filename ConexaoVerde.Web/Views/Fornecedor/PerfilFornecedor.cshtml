@@ -19,6 +19,7 @@
     </style>
 
 <section class="bg-white dark:bg-gray-900 py-16">
+    
     <div class="container mx-auto px-6">
         <!-- Seta de Voltar -->
         <div class="mb-8">
@@ -31,50 +32,83 @@
 
         <!-- Título -->
         <h1 class="text-4xl font-semibold text-gray-800 dark:text-white text-center mb-12">
-            Perfil do Fornecedor - <span class="text-blue-500">@Model.Fornecedor.NomeFantasia</span>
+            <span class="text-3xl font-bold text-black mb-8 text-center">@Model.Fornecedor.NomeFantasia</span>
         </h1>
 
         <div class="flex flex-wrap justify-center gap-12">
             <!-- Imagem do Fornecedor -->
-            <div class="w-full md:w-2/3 lg:w-1/3 xl:w-1/4 mb-8">
+            <div class="w-full md:w-2/3 lg:w-1/3 xl:w-1/4 mb-8 flex flex-col items-center">
+                <!-- Imagem de Perfil -->
                 <img src="@(Model.Usuario.FotoPerfil != null ? $"data:image/png;base64,{Convert.ToBase64String(Model.Usuario.FotoPerfil)}" : "https://via.placeholder.com/400x400")"
-                    alt="Imagem Fornecedor" class="w-56 h-56 rounded-full shadow-xl border-4 border-blue-500">
+                     alt="Imagem Fornecedor"
+                     class="w-56 h-56 rounded-full shadow-xl border-4 border-blue-500 mb-6">
+
+                <!-- Botão Editar Perfil -->
+                <a href="/Usuario/Perfil" class="px-6 py-3 bg-[#98FF98] text-white font-medium rounded-full hover:bg-[#76e76b] transition duration-200">
+                    Editar Perfil
+                </a>
             </div>
 
+
             <!-- Informações do Fornecedor -->
-            <div class="w-full md:w-2/3 lg:w-2/3 xl:w-2/3">
+            <div class="md:w-2/3 md:pl-8">
                 <div class="mb-6">
-                    <h2 class="text-3xl font-semibold text-gray-800 dark:text-white">@Model.Fornecedor.RazaoSocial</h2>
+                    <!-- Razão Social -->
+                    <h2 class="text-xl font-semibold text-gray-800 dark:text-white">@Model.Fornecedor.RazaoSocial</h2>
+
+                    <!-- Informações Adicionais -->
                     <div class="mt-4 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-                        <p class="text-lg text-gray-600 dark:text-gray-300 mt-2">
-                            CNPJ:
-                            <span class="font-semibold">@Model.Fornecedor.Cnpj</span>
+                        <!-- CNPJ -->
+                        <p class="text-lg text-gray-600 dark:text-gray-300">
+                            <strong>CNPJ:</strong>
+                            <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">@Model.Fornecedor.Cnpj</span>
                         </p>
-                        <p class="text-lg text-gray-600 dark:text-gray-300 mt-4">
-                            <strong>Sobre:</strong> @*@Model.Fornecedor.Descricao*@
+
+                        <!-- Descrição -->
+                        <p class="text-gray-700 dark:text-gray-300 mt-4">
+                            <strong>Sobre:</strong> @Model.Fornecedor.Descricao
                         </p>
                     </div>
-                </div>
+            </div>
 
                 <!-- Informações de Contato -->
-                <div class="mt-8">
-                    <h3 class="text-2xl font-semibold text-gray-800 dark:text-white">Entre em Contato</h3>
-                    <div class="mt-4">
-                        <p class="text-lg text-gray-600 dark:text-gray-300">
-                            <strong>Telefone:</strong> @Model.Usuario.Telefone
-                        </p>
-                        <p class="text-lg text-gray-600 dark:text-gray-300">
-                            <strong>E-mail:</strong> @Model.Usuario.Email
-                        </p>
-                        <p class="text-lg text-gray-600 dark:text-gray-300">
-                            <strong>Endereço:</strong> @enderecoCompleto
-                        </p>
-                    </div>
+                <div class="flex flex-col items-center text-center text-indigo-800 dark:text-white">
+                    <h2 class="text-3xl font-bold text-black mb-8 text-center">Contatos</h2>
+                    <ul class="space-y-4 text-gray-700 dark:text-gray-300">
+                        <!-- Telefone -->
+                        <li class="flex items-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-800 dark:text-blue-900" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                            </svg>
+                            <p class="text-lg">
+                                <strong>Telefone:</strong> @Model.Usuario.Telefone
+                            </p>
+                        </li>
+                        <!-- E-mail -->
+                        <li class="flex items-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-800 dark:text-blue-900" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                            </svg>
+                            <p class="text-lg">
+                                <strong>E-mail:</strong> @Model.Usuario.Email
+                            </p>
+                        </li>
+                        <!-- Endereço -->
+                        <li class="flex items-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-800 dark:text-blue-900" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                            </svg>
+                            <p class="text-lg">
+                                <strong>Endereço:</strong> @enderecoCompleto
+                            </p>
+                        </li>
+                    </ul>
                 </div>
 
                 <!-- Mapa do Endereço -->
                 <div class="mt-16">
-                    <div class="w-full" style="height: 500px;">
+                    <div class="w-full" style="height: 300px;">
                         <iframe src="https://www.google.com/maps?q=@enderecoCompleto&output=embed" width="100%"
                             height="100%" style="border:0;">
                         </iframe>
@@ -84,26 +118,32 @@
         </div>
 
         <!-- Galeria de Produtos -->
-        <div class="mt-16">
-            <h2 class="text-3xl font-semibold text-gray-800 dark:text-white text-center mb-8">
-                Produtos de @Model.Fornecedor.NomeFantasia
-            </h2>
+        <section class="flex flex-col lg:h-screen justify-center items-center overflow-scroll">
+            <div class="prose text-gray-500 prose-sm prose-headings:font-normal prose-headings:text-xl">
+                <h2 class="text-3xl font-bold text-black mb-8 text-center">
+                    Produtos de @Model.Fornecedor.NomeFantasia
+                </h2>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                @foreach (var produto in Model.Produtos)
-                {
-                    <div
-                        class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg overflow-hidden">
-                        <img src="data:image/jpeg;base64,@produto.ImgProdutoBase64" alt="@produto.NomeProduto"
-                            class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-gray-800 dark:text-white">@produto.NomeProduto</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-300 mt-2">R$ @produto.Preco.ToString("F2")</p>
+                <div class="flex flex-wrap justify-center md:justify-start mt-6 gap-8">
+                    @foreach (var produto in Model.Produtos)
+                    {
+                        <div class="relative flex flex-col items-center w-full md:w-64 bg-white dark:bg-gray-800 rounded-3xl shadow-lg transition-transform transform hover:scale-105">
+                            <!-- Imagem do Produto -->
+                            <img src="data:image/jpeg;base64,@produto.ImgProdutoBase64"
+                                 alt="@produto.NomeProduto"
+                                 class="w-full h-64 object-cover rounded-t-3xl">
+
+                            <!-- Informações do Produto -->
+                            <div class="p-6">
+                                <h3 class="text-lg font-semibold text-gray-800 dark:text-white">@produto.NomeProduto</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mt-2">R$ @produto.Preco.ToString("F2")</p>
+                            </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
-        </div>
+        </section>
+
 
         <!-- Botão de Chat -->
         <button id="chatToggleButton" class="p-6 bg-blue-500 text-white rounded-full fixed bottom-6 right-6 shadow-lg">
