@@ -45,19 +45,6 @@ public class ClienteBusiness (DbContextConfig dbContextConfig) : IClienteBusines
         return cliente;
     }
 
-    public async Task AtualizarCliente(ClienteModel clienteModel)
-    {
-        var clienteExistente = await ObterIdCliente(clienteModel.Cpf);
-
-        if (clienteExistente == null)
-            throw new KeyNotFoundException("Cliente não encontrado.");
-
-        clienteExistente.Nome = clienteModel.Nome;
-
-        dbContextConfig.Clientes.Update(clienteExistente);
-        await dbContextConfig.SaveChangesAsync();
-    }
-
     public async Task ExcluirCliente(ClienteModel clienteModel)
     {
         var clienteExistente = await ObterIdCliente(clienteModel.Cpf);
@@ -83,5 +70,18 @@ public class ClienteBusiness (DbContextConfig dbContextConfig) : IClienteBusines
             .FirstOrDefaultAsync();
 
         return cliente;
+    }
+
+    public async Task AtualizarCliente(ClienteModel clienteModel)
+    {
+        var clienteExistente = await ObterIdCliente(clienteModel.Cpf);
+
+        if (clienteExistente == null)
+            throw new KeyNotFoundException("Cliente não encontrado.");
+
+        clienteExistente.Nome = clienteModel.Nome;
+
+        dbContextConfig.Clientes.Update(clienteExistente);
+        await dbContextConfig.SaveChangesAsync();
     }
 }

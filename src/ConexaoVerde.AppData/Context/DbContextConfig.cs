@@ -6,6 +6,14 @@ namespace ConexaoVerde.AppData.Context;
 
 public class DbContextConfig(DbContextOptions<DbContextConfig> options) : DbContext(options)
 {
+    public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Cliente> Clientes { get; set; }
+    public DbSet<Fornecedor> Fornecedores { get; set; }
+    public DbSet<Produto> Produtos { get; set; }
+    public DbSet<Categoria> Categorias { get; set; }
+    public DbSet<Endereco> Enderecos { get; set; }
+    public DbSet<Avaliacao> Avaliacoes { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
@@ -19,14 +27,6 @@ public class DbContextConfig(DbContextOptions<DbContextConfig> options) : DbCont
             optionsBuilder.UseSqlServer(connectionString);
         }
     }
-
-    public DbSet<Usuario> Usuarios { get; set; }
-    public DbSet<Cliente> Clientes { get; set; }
-    public DbSet<Fornecedor> Fornecedores { get; set; }
-    public DbSet<Produto> Produtos { get; set; }
-    public DbSet<Categoria> Categorias { get; set; }
-    public DbSet<Endereco> Enderecos { get; set; }
-    public DbSet<Avaliacao> Avaliacoes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
