@@ -86,11 +86,10 @@ public class UsuarioController(
         return RedirectToAction("Perfil");
     }
 
-
     [HttpGet]
     public IActionResult AlterarSenha()
     {
-        return View(); // Retorna a view com o formulário de alteração de senha.
+        return View(); 
     }
 
     [HttpPost]

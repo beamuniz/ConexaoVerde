@@ -6,8 +6,7 @@
 
 <section class="bg-white dark:bg-gray-900">
     <div class="flex justify-center min-h-screen">
-        <div class="hidden bg-cover lg:block lg:w-2/5" style="background-image: url('https://img.freepik.com/free-photo/natural-cosmetic-product-collection_23-2148574896.jpg?t=st=1730999797~exp=1731003397~hmac=f7bc3c6e2e719e6563099bbc2f92097672da642ac6bb07be523ca64cbd8f6876&w=740');">
-        </div>
+        <div class="hidden bg-cover lg:block lg:w-2/5" style="background-image: url('@Url.Content("~/images/login.png")');"></div>
         <!-- Formulário -->
         <div class="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
             <div class="w-full">
@@ -23,14 +22,14 @@
                     <!-- Campo Login -->
                     <div class="relative">
                         <label for="Email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email</label>
-                        <input asp-for="Email" type="text" id="Email" name="Email" class="block w-full px-5 py-3 pl-10 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Email" required data-val="true" data-val-required="O campo Email é obrigatório">
+                        <input asp-for="Email" type="text" id="Email" name="Email" class="block w-full px-5 py-3 pl-5 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Email" required data-val="true" data-val-required="O campo Email é obrigatório">
                         <span asp-validation-for="Email" class="text-red-500 text-sm"></span>
                     </div>
 
                     <!-- Campo Senha -->
                     <div class="relative">
                         <label for="Senha" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Senha</label>
-                        <input asp-for="Senha" type="password" id="Senha" name="Senha" class="block w-full px-5 py-3 pl-10 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Senha" required data-val="true" data-val-required="O campo Senha é obrigatório">
+                        <input asp-for="Senha" type="password" id="Senha" name="Senha" class="block w-full px-5 py-3 pl-5 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Senha" required data-val="true" data-val-required="O campo Senha é obrigatório">
                         <span asp-validation-for="Senha" class="text-red-500 text-sm"></span>
                     </div>
 
