@@ -1,7 +1,7 @@
 ﻿using ConexaoVerde.Web.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace ConexaoVerde.Web.Configuration;
+namespace ConexaoVerde.Web.Filters;
 
     public class UserProfileActionFilter(IUsuarioBusiness userService) : IActionFilter
     {

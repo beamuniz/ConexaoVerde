@@ -1,5 +1,6 @@
 using ConexaoVerde.AppData.Context;
 using ConexaoVerde.Web.Configuration;
+using ConexaoVerde.Web.Filters;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
