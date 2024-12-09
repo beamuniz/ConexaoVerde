@@ -15,10 +15,23 @@ public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
         if (usuarioExistente != null)
         {
             usuarioExistente.Email = usuarioModel.Email;
-            var senhaHash = BCrypt.Net.BCrypt.HashPassword(usuarioModel.Senha);
-            usuarioExistente.Senha = senhaHash;
             usuarioExistente.Telefone = usuarioModel.Telefone;
             usuarioExistente.FotoPerfil = usuarioModel.FotoPerfil;
+
+            if (usuarioExistente.Cliente != null)
+            {
+                usuarioExistente.Cliente.Cpf = usuarioModel.ClienteModel.Cpf;
+                usuarioExistente.Cliente.Nome = usuarioModel.ClienteModel.Nome;
+                usuarioExistente.Cliente.Sobrenome = usuarioModel.ClienteModel.Sobrenome;
+            }
+
+            if (usuarioExistente is Fornecedor fornecedor)
+            {
+                fornecedor.Cnpj = usuarioModel.FornecedorModel.Cnpj;
+                fornecedor.RazaoSocial = usuarioModel.FornecedorModel.RazaoSocial;
+                fornecedor.NomeFantasia = usuarioModel.FornecedorModel.NomeFantasia;
+                fornecedor.Descricao = usuarioModel.FornecedorModel.Descricao;
+            }
 
             dbContextConfig.Usuarios.Update(usuarioExistente);
 

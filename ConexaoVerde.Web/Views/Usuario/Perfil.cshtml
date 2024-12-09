@@ -49,7 +49,7 @@
                 <!-- Campo de Upload de Imagem -->
                 <div>
                     <label for="imageUpload" class="block text-sm font-medium text-gray-700">Alterar Foto de Perfil</label>
-                    <input type="file" id="imageUpload" name="Fotoperfil" class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800" accept="image/*">
+                    <input type="file" id="imageUpload" name="FotoPerfil" class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800" accept="image/*" disabled>
                 </div>
 
                 <!-- Campos do Perfil -->
@@ -57,29 +57,29 @@
                     @if (Model.Perfil == "Cliente")
                     {
                         <div>
-                            <label for="firstName" class="block text-sm font-medium text-gray-700">Primeiro Nome</label>
-                            <input type="text" id="firstName" name="FirstName" value="@Model.ClienteModel.Nome"
+                            <label for="nome" class="block text-sm font-medium text-gray-700">Primeiro Nome</label>
+                            <input type="text" id="nome" name="ClienteModel.Nome" value="@Model.ClienteModel.Nome"
                                    class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
-                                   placeholder="Primeiro Nome" readonly>
+                                   placeholder="Primeiro Nome">
                         </div>
                         <div>
-                            <label for="lastName" class="block text-sm font-medium text-gray-700">Sobrenome</label>
-                            <input type="text" id="lastName" name="LastName" value="@Model.ClienteModel.Sobrenome"
+                            <label for="sobrenome" class="block text-sm font-medium text-gray-700">Sobrenome</label>
+                            <input type="text" id="sobrenome" name="ClienteModel.Sobrenome" value="@Model.ClienteModel.Sobrenome"
                                    class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
-                                   placeholder="Sobrenome" readonly>
+                                   placeholder="Sobrenome">
                         </div>
                     }
                     else
                     {
                         <div>
                             <label for="razaosocial" class="block text-sm font-medium text-gray-700">Razão Social</label>
-                            <input type="text" id="razaosocial" name="RazaoSocial" value="@Model.FornecedorModel.RazaoSocial"
+                            <input type="text" id="razaosocial" name="FornecedorModel.RazaoSocial" value="@Model.FornecedorModel.RazaoSocial"
                                    class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
                                    placeholder="Razão Social" readonly>
                         </div>
                         <div>
                             <label for="nomefantasia" class="block text-sm font-medium text-gray-700">Nome Fantasia</label>
-                            <input type="text" id="nomefantasia" name="NomeFantasia" value="@Model.FornecedorModel.NomeFantasia"
+                            <input type="text" id="nomefantasia" name="FornecedorModel.NomeFantasia" value="@Model.FornecedorModel.NomeFantasia"
                                    class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
                                    placeholder="Nome Fantasia" readonly>
                         </div>
@@ -95,7 +95,7 @@
                     {
                         <div>
                             <label for="cpf" class="block text-sm font-medium text-gray-700">CPF</label>
-                            <input type="text" id="cpf" name="Cpf" value="@Model.ClienteModel.Cpf"
+                            <input type="text" id="cpf" name="ClienteModel.Cpf" value="@Model.ClienteModel.Cpf"
                                    class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
                                    placeholder="CPF" readonly>
                         </div>
@@ -104,7 +104,7 @@
                     {
                         <div>
                             <label for="cnpj" class="block text-sm font-medium text-gray-700">CNPJ</label>
-                            <input type="text" id="cnpj" name="CNPJ" value="@Model.FornecedorModel.Cnpj"
+                            <input type="text" id="cnpj" name="FornecedorModel.Cnpj" value="@Model.FornecedorModel.Cnpj"
                                    class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
                                    placeholder="CNPJ" readonly>
                         </div>
@@ -115,7 +115,7 @@
                 {
                     <div class="w-full">
                         <label class="block text-sm font-medium text-gray-700">Descrição</label>
-                        <textarea id="descricao" name="Descrição" rows="4"
+                        <textarea id="descricao" name="FornecedorModel.Descricao" rows="4"
                               class="mt-2 p-2 w-full block border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
                               placeholder="Descrição" readonly>@Model.FornecedorModel.Descricao</textarea>
                     </div>
@@ -149,33 +149,24 @@
     });
 
     document.getElementById('editProfileBtn').addEventListener('click', function () {
-        const clientFields = ['firstName', 'lastName', 'email', 'cpf'];
-        const supplierFields = ['razaosocial', 'nomefantasia', 'email', 'cnpj', 'descricao'];
+        const formFields = document.querySelectorAll('#profileForm input, #profileForm textarea');
 
-        const fields = [...clientFields, ...supplierFields].filter(id => document.getElementById(id));
-
-        fields.forEach(id => {
-            const field = document.getElementById(id);
-            if (field) {
-                field.readOnly = false;
+        formFields.forEach(field => {
+            if (field.type !== 'button' && field.type !== 'submit') {
+                field.readOnly = false; 
+                if (field.type === 'file') {
+                    field.disabled = false; 
+                }
             }
         });
-
-        const saveButton = document.getElementById('saveButton');
-        if (saveButton) {
-            saveButton.style.display = 'block';
-        }
-
-        const editButton = document.getElementById('editProfileBtn');
-        if (editButton) {
-            editButton.style.display = 'none';
-        }
+        document.getElementById('saveButton').classList.remove('hidden');
+        document.getElementById('editProfileBtn').classList.add('hidden');
     });
 
     document.getElementById('saveButton').addEventListener('click', function () {
-        document.getElementById('profileForm').submit();  
+        document.getElementById('profileForm').submit();
     });
-    
+
 </script>
 
 <script>

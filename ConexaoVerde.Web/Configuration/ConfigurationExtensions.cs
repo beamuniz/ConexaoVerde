@@ -1,5 +1,6 @@
 ﻿using ConexaoVerde.Web.Business.Interfaces;
 using ConexaoVerde.Web.Business.Services;
+using ConexaoVerde.Web.Services;
 
 namespace ConexaoVerde.Web.Configuration;
 
@@ -12,5 +13,6 @@ public static class ConfigurationExtensions
         services.AddScoped<ICategoriaBusiness, CategoriaBusiness>();
         services.AddScoped<IFornecedorBusiness, FornecedorBusiness>();
         services.AddScoped<IClienteBusiness, ClienteBusiness>();
+        services.AddScoped<UsuarioService>();
     }
 }

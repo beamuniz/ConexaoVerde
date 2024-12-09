@@ -3,13 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 using ConexaoVerde.Web.Business.Interfaces;
 using ConexaoVerde.Web.Extensions;
 using ConexaoVerde.Web.Models;
+using ConexaoVerde.Web.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace ConexaoVerde.Web.Controllers;
 
-public class UsuarioController(IFornecedorBusiness fornecedor, IClienteBusiness cliente, IUsuarioBusiness usuario)
-    : Controller
+public class UsuarioController(
+    IFornecedorBusiness fornecedor,
+    IClienteBusiness cliente,
+    IUsuarioBusiness usuario,
+    UsuarioService usuarioService) : Controller
 {
     [HttpGet]
     public IActionResult Cadastro()
@@ -57,17 +61,27 @@ public class UsuarioController(IFornecedorBusiness fornecedor, IClienteBusiness 
     }
 
     [HttpPost]
-    public async Task<IActionResult> AtualizarPerfil(UsuarioModel usuarioModel, IFormFile fotoPerfil)
+    public async Task<IActionResult> AtualizarPerfil(UsuarioModel usuarioModel, IFormFile? fotoPerfil)
     {
-        if (!ModelState.IsValid)
-            return View("Perfil", usuarioModel);
+        var usuarioExistente = await GetUsuarioLogado();
 
-        if (fotoPerfil is { Length: > 0 })
-            usuarioModel.FotoPerfil = await fotoPerfil.OpenReadStream().ReadToEndAsync();
-        
-        await usuario.AtualizarUsuario(usuarioModel);
+        if (usuarioExistente == null)
+            return NotFound();
 
-        await AtualizarClaims(usuarioModel);
+        await usuarioService.VerificarAtualizarUsuario(usuarioModel, fotoPerfil, usuarioExistente);
+
+        switch (usuarioExistente.Perfil)
+        {
+            case "Cliente":
+                usuarioService.VerificarAtualizarCliente(usuarioModel, usuarioExistente);
+                break;
+            case "Fornecedor":
+                usuarioService.VerificarAtualizarFornecedor(usuarioModel, usuarioExistente);
+                break;
+        }
+
+        await usuario.AtualizarUsuario(usuarioExistente);
+        await AtualizarClaims(usuarioExistente);
 
         return RedirectToAction("Perfil");
     }

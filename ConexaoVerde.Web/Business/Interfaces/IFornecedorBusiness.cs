@@ -11,7 +11,6 @@ public interface IFornecedorBusiness
     Task<List<FornecedorModel>> ListarFornecedores();
     Task<List<SelectListItem>> ListaDeFornecedores();
 
-    // Task AtualizarFornecedor(FornecedorModel fornecedorModel);
     // Task ExcluirFornecedor(FornecedorModel fornecedorModel);
     Task<FornecedorModel> ObterFornecedorPorId(int id);
 }
