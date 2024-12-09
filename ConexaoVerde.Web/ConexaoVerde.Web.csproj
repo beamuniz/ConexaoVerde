@@ -18,10 +18,6 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\ExibicaoFornecedores\ExibicaoFornecedor.cshtml" />
-  </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>disable</Nullable>
