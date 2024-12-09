@@ -90,7 +90,8 @@ public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
                 Email = u.Email,
                 Telefone = u.Telefone,
                 FotoPerfil = u.FotoPerfil,
-                Perfil = u.Perfil
+                Perfil = u.Perfil,
+                Senha = u.Senha
             })
             .FirstOrDefaultAsync();
 
@@ -112,5 +113,21 @@ public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
             .FirstOrDefaultAsync();
 
         return usuario;
+    }
+
+    public async Task<bool> AtualizarSenha(UsuarioModel usuario, string novaSenha)
+    {
+        var usuarioExistente = await dbContextConfig.Usuarios.FindAsync(usuario.Id);
+        
+        if (usuarioExistente == null)
+            return false;
+
+        // Criptografa a nova senha
+        usuarioExistente.Senha = BCrypt.Net.BCrypt.HashPassword(novaSenha);
+
+        dbContextConfig.Usuarios.Update(usuarioExistente);
+        await dbContextConfig.SaveChangesAsync();
+
+        return true;
     }
 }

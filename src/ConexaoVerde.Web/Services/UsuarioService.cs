@@ -47,4 +47,9 @@ public class UsuarioService
         if (!string.IsNullOrEmpty(usuarioModel.FornecedorModel.Descricao))
             usuarioExistente.FornecedorModel.Descricao = usuarioModel.FornecedorModel.Descricao;
     }
+
+    public bool VerificarSenhaAtual(UsuarioModel usuario, string senhaAtual)
+    {
+        return BCrypt.Net.BCrypt.Verify(senhaAtual, usuario.Senha);
+    }
 }

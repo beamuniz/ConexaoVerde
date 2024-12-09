@@ -11,4 +11,5 @@ public interface IUsuarioBusiness
     Task<UsuarioModel> ObterUsuariosPorFornecedor(int id);
     Task<UsuarioModel> ObterIdUsuario(int id);
     Task<UsuarioModel> ObterPorEmail(string email);
+    Task<bool> AtualizarSenha(UsuarioModel usuario, string novaSenha);
 }
