@@ -36,12 +36,12 @@ public class FornecedorBusiness(DbContextConfig dbContextConfig) : IFornecedorBu
         await dbContextConfig.SaveChangesAsync();
     }
 
-    public async Task<List<FornecedorModel>> ListarFornecedores()
+    public async Task<List<FornecedorModel>> ListarFornecedores(string searchTerm = null)
     {
-        var fornecedores = await dbContextConfig.Fornecedores
-            .Join(dbContextConfig.Usuarios, 
-                f => f.Id,  
-                u => u.Id,  
+        var query = dbContextConfig.Fornecedores
+            .Join(dbContextConfig.Usuarios,
+                f => f.Id,
+                u => u.Id,
                 (f, u) => new FornecedorModel
                 {
                     Id = f.Id,
@@ -49,12 +49,18 @@ public class FornecedorBusiness(DbContextConfig dbContextConfig) : IFornecedorBu
                     NomeFantasia = f.NomeFantasia,
                     Cnpj = f.Cnpj,
                     Endereco = f.Endereco,
-                    FotoPerfil = u.FotoPerfil  
-                })
-            .ToListAsync();
+                    FotoPerfil = u.FotoPerfil
+                });
 
-        return fornecedores;
+        // Filtro de pesquisa no banco
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+            query = query.Where(f => f.NomeFantasia.Contains(searchTerm));
+        }
+
+        return await query.ToListAsync();
     }
+
 
     // public async Task AtualizarFornecedor(FornecedorModel fornecedorModel)
     // {
