@@ -40,12 +40,6 @@ public class DbContextConfig(DbContextOptions<DbContextConfig> options) : DbCont
             .WithOne(u => u.Cliente)
             .HasForeignKey<Cliente>(c => c.Id)
             .OnDelete(DeleteBehavior.Cascade);
-        
-        modelBuilder.Entity<AvaliacaoFornecedor>()
-            .HasOne(a => a.Cliente)
-            .WithMany()
-            .HasForeignKey(a => a.ClienteId)
-            .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<AvaliacaoFornecedor>()
             .HasOne(a => a.Fornecedor)

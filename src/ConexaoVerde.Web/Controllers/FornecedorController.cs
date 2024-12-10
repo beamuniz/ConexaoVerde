@@ -112,13 +112,13 @@ public class FornecedorController(
 
         var avaliacoes = await fornecedorBusiness.ObterAvaliacoesFornecedor(fornecedorId);
 
-        var viewModel = new AvaliacaoFornecedorViewModel
-        {
-            Fornecedor = fornecedor,
-            Avaliacoes = avaliacoes
-        };
+        //var viewModel = new AvaliacaoFornecedorViewModel
+       // {
+         //   Fornecedor = fornecedor,
+        //    Avaliacoes = avaliacoes
+      //  };
 
-        return View(viewModel);
+      return null; //View(viewModel);
     }
 
     // Método para registrar uma nova avaliação
