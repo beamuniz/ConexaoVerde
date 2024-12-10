@@ -100,4 +100,37 @@ public class FornecedorController(
 
         return "Desculpe, não entendi sua mensagem. Tente novamente!";
     }
+    
+    [HttpGet]
+    public async Task<IActionResult> AvaliarFornecedor(int fornecedorId)
+    {
+        var fornecedor = await fornecedorBusiness.ObterFornecedorPorId(fornecedorId);
+        if (fornecedor == null)
+        {
+            return NotFound();
+        }
+
+        var avaliacoes = await fornecedorBusiness.ObterAvaliacoesFornecedor(fornecedorId);
+
+        var viewModel = new AvaliacaoFornecedorViewModel
+        {
+            Fornecedor = fornecedor,
+            Avaliacoes = avaliacoes
+        };
+
+        return View(viewModel);
+    }
+
+    // Método para registrar uma nova avaliação
+    [HttpPost]
+    public async Task<IActionResult> AvaliarFornecedor(AvaliacaoFornecedorModel avaliacaoFornecedorModel)
+    {
+        if (ModelState.IsValid)
+        {
+            await fornecedorBusiness.RegistrarAvaliacaoFornecedor(avaliacaoFornecedorModel);
+            return RedirectToAction("AvaliarFornecedor", new { fornecedorId = avaliacaoFornecedorModel.FornecedorId });
+        }
+
+        return View(avaliacaoFornecedorModel);
+    }
 }

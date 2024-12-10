@@ -117,4 +117,40 @@ public class FornecedorBusiness(DbContextConfig dbContextConfig) : IFornecedorBu
 
         return fornecedor;
     }
+
+    public async Task RegistrarAvaliacaoFornecedor(AvaliacaoFornecedorModel avaliacaoFornecedorModel)
+    {
+        if (avaliacaoFornecedorModel.Nota < 1 || avaliacaoFornecedorModel.Nota > 5)
+        {
+            throw new ArgumentException("A nota deve estar entre 1 e 5.");
+        }
+
+        var avaliacao = new AvaliacaoFornecedor
+        {
+            FornecedorId = avaliacaoFornecedorModel.FornecedorId,
+            UsuarioId = avaliacaoFornecedorModel.UsuarioId,
+            Nota = avaliacaoFornecedorModel.Nota,
+            Comentario = avaliacaoFornecedorModel.Comentario,
+            DataAvaliacao = DateTime.Now
+        };
+
+        await dbContextConfig.AvaliacoesFornecedores.AddAsync(avaliacao);
+        await dbContextConfig.SaveChangesAsync();
+    }
+
+    public async Task<List<AvaliacaoFornecedorModel>> ObterAvaliacoesFornecedor(int fornecedorId)
+    {
+        return await dbContextConfig.AvaliacoesFornecedores
+            .Where(a => a.FornecedorId == fornecedorId)
+            .Select(a => new AvaliacaoFornecedorModel
+            {
+                Id = a.Id,
+                FornecedorId = a.FornecedorId,
+                UsuarioId = a.UsuarioId,
+                Nota = a.Nota,
+                Comentario = a.Comentario,
+                DataAvaliacao = a.DataAvaliacao
+            })
+            .ToListAsync();
+    }
 }

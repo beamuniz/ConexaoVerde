@@ -12,4 +12,7 @@ public interface IFornecedorBusiness
 
     // Task ExcluirFornecedor(FornecedorModel fornecedorModel);
     Task<FornecedorModel> ObterFornecedorPorId(int id);
+    
+    Task RegistrarAvaliacaoFornecedor(AvaliacaoFornecedorModel avaliacaoFornecedorModel);
+    Task<List<AvaliacaoFornecedorModel>> ObterAvaliacoesFornecedor(int fornecedorId);
 }

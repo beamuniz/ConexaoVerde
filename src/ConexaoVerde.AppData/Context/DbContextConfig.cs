@@ -12,7 +12,8 @@ public class DbContextConfig(DbContextOptions<DbContextConfig> options) : DbCont
     public DbSet<Produto> Produtos { get; set; }
     public DbSet<Categoria> Categorias { get; set; }
     public DbSet<Endereco> Enderecos { get; set; }
-    public DbSet<Avaliacao> Avaliacoes { get; set; }
+    
+    public DbSet<AvaliacaoFornecedor> AvaliacoesFornecedores { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -40,13 +41,13 @@ public class DbContextConfig(DbContextOptions<DbContextConfig> options) : DbCont
             .HasForeignKey<Cliente>(c => c.Id)
             .OnDelete(DeleteBehavior.Cascade);
         
-        modelBuilder.Entity<Avaliacao>()
+        modelBuilder.Entity<AvaliacaoFornecedor>()
             .HasOne(a => a.Cliente)
             .WithMany()
             .HasForeignKey(a => a.ClienteId)
             .OnDelete(DeleteBehavior.NoAction);
 
-        modelBuilder.Entity<Avaliacao>()
+        modelBuilder.Entity<AvaliacaoFornecedor>()
             .HasOne(a => a.Fornecedor)
             .WithMany()
             .HasForeignKey(a => a.FornecedorId)
