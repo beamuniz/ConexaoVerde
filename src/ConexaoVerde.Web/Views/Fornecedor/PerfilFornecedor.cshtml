@@ -6,99 +6,115 @@
     var enderecoCompleto = $"{endereco.Rua}, {endereco.Numero}, {endereco.Cidade} - {endereco.Estado}, {endereco.CEP}";
 }
 
-<!-- Adicionar o link do FontAwesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 <style>
-        /* Estilo para a área de mensagens com rolagem */
-        #chatMessages {
-            max-height: 300px;
-            /* Tamanho máximo do chat */
-            overflow-y: auto;
-            /* Ativa a rolagem vertical */
-        }
-    </style>
+    /* Estilo para a área de mensagens com rolagem */
+    #chatMessages {
+        max-height: 300px;
+        overflow-y: auto;
+    }
 
-<section class="bg-white dark:bg-gray-900 py-16">
-    
+    /* Alterar cores para tons de verde */
+    .btn-green {
+        background-color: #4CAF50; /* Verde */
+        color: white;
+    }
+
+    .btn-green:hover {
+        background-color: #388E3C; /* Verde mais escuro */
+    }
+
+    .text-green {
+        color: #4CAF50;
+    }
+
+    .border-green {
+        border-color: #4CAF50;
+    }
+</style>
+
+<section class="bg-white py-16">
     <div class="container mx-auto px-6">
         <!-- Seta de Voltar -->
         <div class="mb-8">
             <a href="/Fornecedor/ListarFornecedor"
-                class="inline-flex items-center px-4 py-2 bg-blue-500 text-white font-semibold text-lg rounded-lg hover:bg-blue-600">
+               class="inline-flex items-center px-4 py-2 btn-green font-semibold text-lg rounded-lg">
                 <i class="fas fa-arrow-left mr-3"></i>
                 Voltar
             </a>
         </div>
 
         <!-- Título -->
-        <h1 class="text-4xl font-semibold text-gray-800 dark:text-white text-center mb-12">
+        <h1 class="text-4xl font-semibold text-gray-800 text-center mb-12">
             <span class="text-3xl font-bold text-black mb-8 text-center">@Model.Fornecedor.NomeFantasia</span>
         </h1>
 
         <div class="flex flex-wrap justify-center gap-12">
             <!-- Imagem do Fornecedor -->
             <div class="w-full md:w-2/3 lg:w-1/3 xl:w-1/4 mb-8 flex flex-col items-center">
-                <!-- Imagem de Perfil -->
                 <img src="@(Model.Usuario.FotoPerfil != null ? $"data:image/png;base64,{Convert.ToBase64String(Model.Usuario.FotoPerfil)}" : "https://via.placeholder.com/400x400")"
                      alt="Imagem Fornecedor"
-                     class="w-56 h-56 rounded-full shadow-xl border-4 border-blue-500 mb-6">
-
-                <!-- Botão Editar Perfil -->
-                <a href="/Usuario/Perfil" class="px-6 py-3 bg-[#98FF98] text-white font-medium rounded-full hover:bg-[#76e76b] transition duration-200">
-                    Editar Perfil
-                </a>
+                     class="w-56 h-56 rounded-full shadow-xl border-4 border-green-500 mb-6">
             </div>
-
-
             <!-- Informações do Fornecedor -->
             <div class="md:w-2/3 md:pl-8">
                 <div class="mb-6">
-                    <!-- Razão Social -->
-                    <h2 class="text-xl font-semibold text-gray-800 dark:text-white">@Model.Fornecedor.RazaoSocial</h2>
+                    <!-- Título com divisor -->
+                    <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+                        <i class="fas fa-building text-green-500 mr-2"></i>
+                        Informações do Fornecedor
+                    </h2>
+                    <div class="mt-2 h-1 bg-green-500 w-96 rounded"></div>
 
-                    <!-- Informações Adicionais -->
-                    <div class="mt-4 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <!-- Conteúdo -->
+                    <div class="mt-6 bg-gray-50 p-8 rounded-xl shadow-lg">
+                        <!-- Razão Social -->
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-id-card text-green-500 text-xl mr-3"></i>
+                            <h3 class="text-xl font-semibold text-gray-800">@Model.Fornecedor.RazaoSocial</h3>
+                        </div>
+
                         <!-- CNPJ -->
-                        <p class="text-lg text-gray-600 dark:text-gray-300">
-                            <strong>CNPJ:</strong>
-                            <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">@Model.Fornecedor.Cnpj</span>
-                        </p>
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-file-alt text-green-500 text-xl mr-3"></i>
+                            <p class="text-lg text-gray-600">
+                                <strong>Cnpj:</strong>
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
+                                    @Model.Fornecedor.Cnpj
+                                </span>
+                            </p>
+                        </div>
 
                         <!-- Descrição -->
-                        <p class="text-gray-700 dark:text-gray-300 mt-4">
-                            <strong>Sobre:</strong> @Model.Fornecedor.Descricao
-                        </p>
+                        <div class="flex items-start mt-4">
+                            <i class="fas fa-info-circle text-green-500 text-xl mr-3"></i>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                <strong>Sobre:</strong> @Model.Fornecedor.Descricao
+                            </p>
+                        </div>
                     </div>
-            </div>
-
+                </div>
+                
                 <!-- Informações de Contato -->
-                <div class="flex flex-col items-center text-center text-indigo-800 dark:text-white">
-                    <h2 class="text-3xl font-bold text-black mb-8 text-center">Contatos</h2>
-                    <ul class="space-y-4 text-gray-700 dark:text-gray-300">
+                <div class="flex flex-col items-center text-center">
+                    <h2 class="text-3xl font-bold text-black mb-8">Contatos</h2>
+                    <ul class="space-y-4 text-gray-700">
                         <!-- Telefone -->
                         <li class="flex items-center space-x-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-800 dark:text-blue-900" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                            </svg>
+                            <i class="fas fa-phone-alt text-green-500"></i>
                             <p class="text-lg">
                                 <strong>Telefone:</strong> @Model.Usuario.Telefone
                             </p>
                         </li>
                         <!-- E-mail -->
                         <li class="flex items-center space-x-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-800 dark:text-blue-900" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                            </svg>
+                            <i class="fas fa-envelope text-green-500"></i>
                             <p class="text-lg">
                                 <strong>E-mail:</strong> @Model.Usuario.Email
                             </p>
                         </li>
                         <!-- Endereço -->
                         <li class="flex items-center space-x-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-800 dark:text-blue-900" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                            </svg>
+                            <i class="fas fa-map-marker-alt text-green-500"></i>
                             <p class="text-lg">
                                 <strong>Endereço:</strong> @enderecoCompleto
                             </p>
@@ -108,9 +124,9 @@
 
                 <!-- Mapa do Endereço -->
                 <div class="mt-16">
-                    <div class="w-full" style="height: 300px;">
+                    <div class="w-full" style="height: 500px;">
                         <iframe src="https://www.google.com/maps?q=@enderecoCompleto&output=embed" width="100%"
-                            height="100%" style="border:0;">
+                                height="100%" style="border:0;">
                         </iframe>
                     </div>
                 </div>
@@ -119,64 +135,50 @@
 
         <!-- Galeria de Produtos -->
         <section class="flex flex-col lg:h-screen justify-center items-center overflow-scroll">
-            <div class="prose text-gray-500 prose-sm prose-headings:font-normal prose-headings:text-xl">
-                <h2 class="text-3xl font-bold text-black mb-8 text-center">
-                    Produtos de @Model.Fornecedor.NomeFantasia
-                </h2>
-
-                <div class="flex flex-wrap justify-center md:justify-start mt-6 gap-8">
-                    @foreach (var produto in Model.Produtos)
-                    {
-                        <div class="relative flex flex-col items-center w-full md:w-64 bg-white dark:bg-gray-800 rounded-3xl shadow-lg transition-transform transform hover:scale-105">
-                            <!-- Imagem do Produto -->
-                            <img src="data:image/jpeg;base64,@produto.ImgProdutoBase64"
-                                 alt="@produto.NomeProduto"
-                                 class="w-full h-64 object-cover rounded-t-3xl">
-
-                            <!-- Informações do Produto -->
-                            <div class="p-6">
-                                <h3 class="text-lg font-semibold text-gray-800 dark:text-white">@produto.NomeProduto</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-300 mt-2">R$ @produto.Preco.ToString("F2")</p>
-                            </div>
+            <h2 class="text-3xl font-bold text-black mb-8 text-center">
+                Produtos de @Model.Fornecedor.NomeFantasia
+            </h2>
+            <div class="flex flex-wrap justify-center md:justify-start mt-6 gap-8">
+                @foreach (var produto in Model.Produtos)
+                {
+                    <div class="relative flex flex-col items-center w-full md:w-64 bg-white rounded-3xl shadow-lg transition-transform transform hover:scale-105">
+                        <img src="data:image/jpeg;base64,@produto.ImgProdutoBase64"
+                             alt="@produto.NomeProduto"
+                             class="w-full h-64 object-cover rounded-t-3xl">
+                        <div class="p-6">
+                            <h3 class="text-lg font-semibold text-gray-800">@produto.NomeProduto</h3>
+                            <p class="text-sm text-gray-600 mt-2">R$ @produto.Preco.ToString("F2")</p>
                         </div>
-                    }
-                </div>
+                    </div>
+                }
             </div>
         </section>
 
-
         <!-- Botão de Chat -->
-        <button id="chatToggleButton" class="p-6 bg-blue-500 text-white rounded-full fixed bottom-6 right-6 shadow-lg">
+        <button id="chatToggleButton" class="p-6 btn-green rounded-full fixed bottom-6 right-6 shadow-lg">
             <i class="fas fa-comment-alt fa-3x"></i>
         </button>
 
         <!-- Caixa de Chat -->
         <div id="chatContainer"
-            class="hidden fixed bottom-24 right-6 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg w-80 max-w-xs">
+             class="hidden fixed bottom-24 right-6 bg-white p-4 rounded-lg shadow-lg w-80 max-w-xs">
             <div id="chatHeader" class="flex items-center mb-4">
                 <img src="@(Model.Usuario.FotoPerfil != null ? $"data:image/png;base64,{Convert.ToBase64String(Model.Usuario.FotoPerfil)}" : "https://via.placeholder.com/400x400")"
-                    alt="Foto Fornecedor" class="w-12 h-12 rounded-full border-2 border-blue-500">
-                <span
-                    class="ml-4 text-lg font-semibold text-gray-800 dark:text-black">@Model.Fornecedor.RazaoSocial</span>
+                     alt="Foto Fornecedor" class="w-12 h-12 rounded-full border-2 border-green-500">
+                <span class="ml-4 text-lg font-semibold text-gray-800">@Model.Fornecedor.RazaoSocial</span>
             </div>
-
-            <!-- Área de mensagens -->
-            <div id="chatMessages" class="flex-1 overflow-y-auto mb-4">
-                <!-- Mensagens aparecerão aqui -->
-            </div>
-
-            <!-- Caixa de input de mensagens -->
+            <div id="chatMessages" class="flex-1 overflow-y-auto mb-4"></div>
             <div class="flex items-center space-x-2">
                 <input id="userMessage" type="text" placeholder="Escreva uma mensagem"
-                    class="w-full px-4 py-2 text-lg border rounded-lg">
-                <button id="sendButton"
-                    class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center">
+                       class="w-full px-4 py-2 text-lg border rounded-lg text-gray-600">
+                <button id="sendButton" class="w-12 h-12 btn-green flex items-center justify-center">
                     <i class="fas fa-paper-plane"></i>
                 </button>
             </div>
         </div>
     </div>
 </section>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -229,7 +231,7 @@
                 var userMessageElement = document.createElement('div');
                 userMessageElement.classList.add('flex', 'justify-end', 'mb-4');
                 userMessageElement.innerHTML = `
-                <div class="bg-blue-500 text-white px-4 py-2 rounded-lg max-w-xs">
+                <div class="bg-green-500 text-white px-4 py-2 rounded-lg max-w-xs">
                     ${userMessage}
                 </div>
             `;

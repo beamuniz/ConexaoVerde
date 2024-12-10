@@ -1,6 +1,7 @@
 ﻿using ConexaoVerde.Web.Business.Interfaces;
 using ConexaoVerde.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using X.PagedList.Extensions;
 
 namespace ConexaoVerde.Web.Controllers;
 
@@ -10,11 +11,25 @@ public class FornecedorController(
     IUsuarioBusiness usuarioBusiness) : Controller
 {
     [HttpGet]
-    public async Task<IActionResult> ListarFornecedor()
+    public async Task<IActionResult> ListarFornecedor(string searchTerm, int? page)
     {
-        var fornecedores = await fornecedorBusiness.ListarFornecedores();
+        const int pageSize = 5; // Número de fornecedores por página
+        var pageNumber = page ?? 1;
+        
+        var fornecedores = await fornecedorBusiness.ListarFornecedores(searchTerm);
+        
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+            fornecedores = fornecedores
+                .Where(f => f.NomeFantasia.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
 
-        return View(fornecedores);
+        var pagedFornecedores = fornecedores
+            .OrderBy(f => f.NomeFantasia) // Ordenar antes de paginar
+            .ToPagedList(pageNumber, pageSize);
+        
+        return View(pagedFornecedores);
     }
 
     [HttpGet]

@@ -1,7 +1,9 @@
-﻿@model IEnumerable<FornecedorModel>
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model X.PagedList.IPagedList<FornecedorModel>
+@using X.PagedList.Mvc.Core;
 
 @{
-    ViewData["Title"] = "Lista de Fornecedores";
+ViewData["Title"] = "Lista de Fornecedores";
 }
 
 <section class="bg-gray-100 py-16">
@@ -10,6 +12,26 @@
             Catálogo de Fornecedores
         </h1>
 
+        <!-- Formulário de Pesquisa -->
+        <form method="get" class="mb-8 text-center">
+            <div class="flex justify-center items-center space-x-2">
+                <input
+                    type="text"
+                    name="searchTerm"
+                    value="@ViewData["SearchTerm"]"
+                    placeholder="Pesquisar"
+                    class="px-4 py-2 w-80 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-800"
+                />
+                <button
+                    type="submit"
+                    class="px-6 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600">
+                    Buscar
+                </button>
+            </div>
+        </form>
+
+
+        <!-- Tabela de Fornecedores -->
         <div class="overflow-x-auto bg-white shadow-md rounded-lg">
             <table class="min-w-full table-auto">
                 <thead>
@@ -24,40 +46,72 @@
                 <tbody class="divide-y divide-gray-200">
                 @foreach (var fornecedor in Model)
                 {
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-5">
-                            @if (fornecedor.FotoPerfil != null)
-                            {
-                                <img src="data:image/jpeg;base64,@Convert.ToBase64String(fornecedor.FotoPerfil)"
-                                     alt="Foto de Perfil do Fornecedor"
-                                     class="w-16 h-16 object-cover rounded-full border border-gray-300">
-                            }
-                            else
-                            {
-                                <img src="https://via.placeholder.com/150"
-                                     alt="Logo do Fornecedor"
-                                     class="w-16 h-16 object-cover rounded-full border border-gray-300">
-                            }
-                        </td>
-                        <td class="px-6 py-5 text-lg font-medium text-gray-700">
-                            @fornecedor.NomeFantasia
-                        </td>
-                        <td class="px-6 py-5 text-lg text-gray-600">
-                            @fornecedor.Cnpj
-                        </td>
-                        <td class="px-6 py-5 text-lg text-gray-600">
-                            @fornecedor.Endereco.Rua
-                        </td>
-                        <td class="px-6 py-5">
-                            <a href="@Url.Action("PerfilFornecedor", "Fornecedor", new { id = fornecedor.Id })"
-                               class="text-green-400 hover:text-green-400 font-semibold text-lg">
-                                Ver Perfil
-                            </a>
-                        </td>
-                    </tr>
+                <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-5">
+                        @if (fornecedor.FotoPerfil != null)
+                        {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(fornecedor.FotoPerfil)"
+                             alt="Foto de Perfil do Fornecedor"
+                             class="w-16 h-16 object-cover rounded-full border border-gray-300">
+                        }
+                        else
+                        {
+                        <img src="https://via.placeholder.com/150"
+                             alt="Logo do Fornecedor"
+                             class="w-16 h-16 object-cover rounded-full border border-gray-300">
+                        }
+                    </td>
+                    <td class="px-6 py-5 text-lg font-medium text-gray-700">
+                        @fornecedor.NomeFantasia
+                    </td>
+                    <td class="px-6 py-5 text-lg text-gray-600">
+                        @fornecedor.Cnpj
+                    </td>
+                    <td class="px-6 py-5 text-lg text-gray-600">
+                        @fornecedor.Endereco.Rua
+                    </td>
+                    <td class="px-6 py-5">
+                        <a href="@Url.Action("PerfilFornecedor", "Fornecedor", new { id = fornecedor.Id })"
+                           class="text-green-400 hover:text-green-600 font-semibold text-lg">
+                            Ver Perfil
+                        </a>
+                    </td>
+                </tr>
                 }
                 </tbody>
             </table>
         </div>
+
+        <!-- Paginação com Tailwind CSS (Horizontal) -->
+        <div class="mt-6">
+            <ul class="flex space-x-2">
+                <!-- Página Anterior -->
+                <li class="@(Model.HasPreviousPage ? "" : "opacity-50 cursor-not-allowed")">
+                    <a class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400" href="@Url.Action("ListarFornecedor", new { page = Model.PageNumber - 1, searchTerm = ViewData["SearchTerm"] })">&laquo;</a>
+                </li>
+
+                <!-- Páginas -->
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                <li class="@(i == Model.PageNumber ? "bg-green-500 text-white" : "bg-gray-200 text-gray-700")">
+                    <a class="px-4 py-2 rounded-lg hover:bg-gray-300" href="@Url.Action("ListarFornecedor", new { page = i, searchTerm = ViewData["SearchTerm"] })">@i</a>
+                </li>
+                }
+
+                <!-- Página Próxima -->
+                <li class="@(Model.HasNextPage ? "" : "opacity-50 cursor-not-allowed")">
+                    <a class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400" href="@Url.Action("ListarFornecedor", new { page = Model.PageNumber + 1, searchTerm = ViewData["SearchTerm"] })">&raquo;</a>
+                </li>
+
+                <!-- Última Página -->
+                <li class="@(Model.HasNextPage ? "" : "opacity-50 cursor-not-allowed")">
+                    <a class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400" href="@Url.Action("ListarFornecedor", new { page = Model.PageCount, searchTerm = ViewData["SearchTerm"] })">
+                        <span class="fa fa-angle-double-right"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
     </div>
 </section>
