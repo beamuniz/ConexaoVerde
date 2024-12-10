@@ -14,7 +14,21 @@ public class ProdutoController(
     [HttpGet]
     public async Task<IActionResult> ListarProduto()
     {
-        var produtos = await produtoBusiness.ListarProdutos();
+        var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+
+        if (userIdClaim == null)
+            return Unauthorized();
+
+        var userId = int.Parse(userIdClaim);
+        var perfilClaim = User.Claims.FirstOrDefault(c => c.Type == "Perfil")?.Value;
+
+        List<ProdutoModel> produtos;
+
+        if (perfilClaim == "Fornecedor")
+            produtos = await produtoBusiness.ObterProdutosPorFornecedor(userId);
+
+        else
+            produtos = await produtoBusiness.ListarProdutos();
 
         foreach (var produto in produtos.Where(produto => produto.ImgProduto != null))
         {
@@ -43,14 +57,14 @@ public class ProdutoController(
     }
 
 
-    [HttpPost] 
+    [HttpPost]
     public async Task<IActionResult> CriarProduto(ProdutoModel produtoModel, IFormFile fotoProduto)
     {
         if (!ModelState.IsValid)
             return View(produtoModel);
 
         var fornecedorId = User.FindFirst("UserId")?.Value;
-        
+
         var imgProduto = fotoProduto is { Length: > 0 }
             ? await fotoProduto.OpenReadStream().ReadToEndAsync()
             : null;

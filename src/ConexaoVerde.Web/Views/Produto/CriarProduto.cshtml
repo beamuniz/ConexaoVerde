@@ -4,24 +4,17 @@
 ViewData["Title"] = "Cadastro de Produto";
 }
 
-<h1>Cadastro de Produto</h1>
 <section class="bg-white dark:bg-gray-900">
 <div class="flex justify-center min-h-screen">
     <div class="hidden bg-cover lg:block lg:w-2/5"
-         style="background-image: url('https://img.freepik.com/free-photo/natural-cosmetic-product-collection_23-2148574896.jpg?t=st=1730999797~exp=1731003397~hmac=f7bc3c6e2e719e6563099bbc2f92097672da642ac6bb07be523ca64cbd8f6876&w=740')">
+         style="background-image: url('@Url.Content("~/images/criar_produto.png")');">
     </div>
     <!-- Exibindo o título com estilo -->
     <div class="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
         <div class="w-full">
-            <h1 class="text-2xl font-semibold tracking-wider text-gray-800 capitalize dark:text-white">
-                @ViewData["Title"]
-            </h1>
-
-            <p class="mt-4 text-gray-500 dark:text-gray-400">
-                Preencha as informações abaixo para cadastrar um novo produto.
-            </p>
-        
-
+            <h1 class="text-2xl font-semibold tracking-wider text-gray-800 capitalize dark:text-white">Cadastro de Produto</h1>
+            <p class="mt-4 text-gray-500 dark:text-gray-400">Preencha as informações abaixo para cadastrar um novo produto.</p>
+            
             <!-- Formulário -->
             <form asp-action="CriarProduto" method="post" enctype="multipart/form-data"
                   class="grid grid-cols-1 gap-6 mt-8">
