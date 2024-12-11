@@ -2,6 +2,5 @@
 
 public class CategoriaModel
 {
-    public int Id { get; set; }
-    public string NomeCategoria { get; set; }
+    public int Id { get; init; }
 }
