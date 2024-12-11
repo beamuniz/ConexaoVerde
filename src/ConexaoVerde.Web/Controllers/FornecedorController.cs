@@ -1,4 +1,5 @@
-﻿using ConexaoVerde.Web.Business.Interfaces;
+﻿using ConexaoVerde.AppData.Entities;
+using ConexaoVerde.Web.Business.Interfaces;
 using ConexaoVerde.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList.Extensions;
@@ -15,9 +16,9 @@ public class FornecedorController(
     {
         const int pageSize = 5; // Número de fornecedores por página
         var pageNumber = page ?? 1;
-        
+
         var fornecedores = await fornecedorBusiness.ListarFornecedores(searchTerm);
-        
+
         if (!string.IsNullOrEmpty(searchTerm))
         {
             fornecedores = fornecedores
@@ -28,7 +29,7 @@ public class FornecedorController(
         var pagedFornecedores = fornecedores
             .OrderBy(f => f.NomeFantasia) // Ordenar antes de paginar
             .ToPagedList(pageNumber, pageSize);
-        
+
         return View(pagedFornecedores);
     }
 
@@ -43,15 +44,36 @@ public class FornecedorController(
         var produtos = await produtoBusiness.ObterProdutosPorFornecedor(id);
         var usuarios = await usuarioBusiness.ObterUsuariosPorFornecedor(id);
 
+        var avaliacoes = await fornecedorBusiness.ObterAvaliacoesPorFornecedor(id) 
+                         ?? [];
+
         var viewModel = new FornecedorPerfilModel
         {
             Fornecedor = fornecedor,
             Produtos = produtos,
-            Usuario = usuarios
+            Usuario = usuarios,
+            Avaliacoes = avaliacoes
         };
 
         return View(viewModel);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> DeixarComentario(int avaliacao, string comentario, int fornecedorId)
+    {
+        // Verificar se o usuário está logado
+        if (User.Identity!.IsAuthenticated)
+        {
+            var clienteId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+            
+            await fornecedorBusiness.AdicionarAvaliacao(avaliacao, comentario, fornecedorId, int.Parse(clienteId!));
+
+            return RedirectToAction("Perfil", new { id = fornecedorId });
+        }
+
+        return RedirectToAction("Login", "Login");
+    }
+
 
     [HttpPost]
     public IActionResult ChatResposta([FromBody] ChatRequestModel request)
@@ -99,38 +121,5 @@ public class FornecedorController(
         }
 
         return "Desculpe, não entendi sua mensagem. Tente novamente!";
-    }
-    
-    [HttpGet]
-    public async Task<IActionResult> AvaliarFornecedor(int fornecedorId)
-    {
-        var fornecedor = await fornecedorBusiness.ObterFornecedorPorId(fornecedorId);
-        if (fornecedor == null)
-        {
-            return NotFound();
-        }
-
-        var avaliacoes = await fornecedorBusiness.ObterAvaliacoesFornecedor(fornecedorId);
-
-        //var viewModel = new AvaliacaoFornecedorViewModel
-       // {
-         //   Fornecedor = fornecedor,
-        //    Avaliacoes = avaliacoes
-      //  };
-
-      return null; //View(viewModel);
-    }
-
-    // Método para registrar uma nova avaliação
-    [HttpPost]
-    public async Task<IActionResult> AvaliarFornecedor(AvaliacaoFornecedorModel avaliacaoFornecedorModel)
-    {
-        if (ModelState.IsValid)
-        {
-            await fornecedorBusiness.RegistrarAvaliacaoFornecedor(avaliacaoFornecedorModel);
-            return RedirectToAction("AvaliarFornecedor", new { fornecedorId = avaliacaoFornecedorModel.FornecedorId });
-        }
-
-        return View(avaliacaoFornecedorModel);
     }
 }

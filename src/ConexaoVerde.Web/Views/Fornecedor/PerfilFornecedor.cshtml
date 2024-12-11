@@ -134,7 +134,7 @@
         </div>
 
         <!-- Galeria de Produtos -->
-        <section class="flex flex-col lg:h-screen justify-center items-center overflow-scroll">
+        <section class="flex flex-col lg:h-screen justify-center items-center">
             <h2 class="text-3xl font-bold text-black mb-8 text-center">
                 Produtos de @Model.Fornecedor.NomeFantasia
             </h2>
@@ -154,6 +154,70 @@
             </div>
         </section>
 
+        <!-- Seção de Feedbacks -->
+        <section class="bg-white py-16">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-black mb-8 text-center">Feedbacks e Avaliações</h2>
+
+                <!-- Comentários dos usuários -->
+                <div class="space-y-6">
+                    @foreach (var comentario in Model.Avaliacoes ?? [])
+                    {
+                    <div class="flex items-start gap-4 bg-gray-50 p-6 rounded-xl shadow-lg">
+                        <!-- Foto de Perfil do Usuário -->
+                        <img src="@(comentario.Cliente.FotoPerfil != null ? $"data:image/png;base64,{Convert.ToBase64String(comentario.Cliente.FotoPerfil)}" : "https://via.placeholder.com/100")"
+                             alt="Foto Perfil" class="w-16 h-16 rounded-full border-2 border-green-500">
+                        <div class="flex-1">
+                            <!-- Nome do Usuário -->
+                            <h3 class="font-semibold text-lg text-gray-800">@comentario.Cliente!.Nome</h3>
+                            <!-- Estrelas -->
+                            <div class="flex items-center text-yellow-500 mt-2">
+                                @for (var i = 0; i < 5; i++)
+                                {
+                                <i class="fas fa-star @(i < comentario.Nota ? "text-yellow-500" : "text-gray-300")"></i>
+                                }
+                            </div>
+                            <!-- Comentário -->
+                            <p class="text-gray-600 mt-4">@comentario.Comentario</p>
+                        </div>
+                    </div>
+                    }
+                </div>
+
+                <!-- Avaliação de 5 Estrelas e Comentário -->
+                <div class="mt-12 bg-gray-50 p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-6">Deixe sua Avaliação</h3>
+
+                    <form id="feedbackForm" action="@Url.Action("DeixarComentario", "Fornecedor")" method="post" onsubmit="return handleFormSubmit(event)">
+                        <div class="flex items-center mb-4">
+                            <label for="rating" class="text-lg font-medium text-gray-700 mr-4">Avaliação:</label>
+                            <div class="flex items-center space-x-1" id="ratingStars">
+                                @for (var i = 1; i <= 5; i++)
+                                {
+                                <div class="star cursor-pointer text-2xl text-gray-300" data-value="@i">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Campo de Comentário -->
+                        <div class="mb-6">
+                            <label for="comentario" class="block text-sm font-medium text-gray-700">Comentário</label>
+                            <textarea id="comentario" name="Comentario" rows="4"
+                                      class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
+                                      placeholder="Escreva seu comentário"></textarea>
+                        </div>
+
+                        <input type="hidden" name="FornecedorId" value="@Model.Fornecedor.Id" />
+                        <input type="hidden" name="ClienteId" value="@User.Identity!.Name" /> <!-- Substitua com o ID do usuário logado -->
+
+                        <button type="submit" class="btn-green px-6 py-3 rounded-lg text-white">Enviar Avaliação</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        
         <!-- Botão de Chat -->
         <button id="chatToggleButton" class="p-6 btn-green rounded-full fixed bottom-6 right-6 shadow-lg">
             <i class="fas fa-comment-alt fa-3x"></i>
@@ -179,6 +243,68 @@
     </div>
 </section>
 
+<script>
+    // Lógica de interação das estrelas
+    document.querySelectorAll('.star').forEach(function(star) {
+        star.addEventListener('mouseover', function() {
+            const value = parseInt(this.getAttribute('data-value'));
+            updateStarColors(value);
+        });
+
+        star.addEventListener('click', function() {
+            const value = parseInt(this.getAttribute('data-value'));
+            document.getElementById('ratingStars').setAttribute('data-rating', value); // Armazenar a avaliação
+        });
+    });
+
+    function updateStarColors(rating) {
+        document.querySelectorAll('.star').forEach(function(star, index) {
+            if (index < rating) {
+                star.classList.remove('text-gray-300');
+                star.classList.add('text-yellow-500');
+            } else {
+                star.classList.remove('text-yellow-500');
+                star.classList.add('text-gray-300');
+            }
+        });
+    }
+
+    // Atualiza as estrelas quando o formulário for enviado, mantendo a cor das estrelas selecionadas
+    function handleFormSubmit(event) {
+        event.preventDefault(); // Impede o recarregamento da página
+
+        const form = event.target;
+        const formData = new FormData(form);
+        const rating = document.getElementById('ratingStars').getAttribute('data-rating'); // Obtém a avaliação
+        formData.append('Avaliacao', rating); // Adiciona a avaliação no FormData
+
+        fetch(form.action, {
+            method: form.method,
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao enviar o formulário');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);  // Adicione este log para depuração
+                if (data.success) {
+                    alert("Avaliação enviada com sucesso!");
+                    location.reload(); // Atualiza para refletir as mudanças
+                } else {
+                    alert(`Erro ao enviar avaliação: ${data.message}`);
+                }
+            })
+            .catch(error => {
+                console.error("Erro:", error);
+                alert("Erro inesperado. Tente novamente mais tarde.");
+            });
+
+        return false; // Previne o envio tradicional
+    }
+</script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

@@ -61,32 +61,30 @@ public class FornecedorBusiness(DbContextConfig dbContextConfig) : IFornecedorBu
         return await query.ToListAsync();
     }
 
+    public async Task AdicionarAvaliacao(int avaliacao, string comentario, int fornecedorId, int clienteId)
+    {
+        // Criação da avaliação
+        var novaAvaliacao = new Avaliacao
+        {
+            Comentario = comentario,
+            Nota = avaliacao,
+            FornecedorId = fornecedorId,
+            ClienteId = clienteId,
+            DataCriacao = DateTime.Now
+        };
 
-    // public async Task AtualizarFornecedor(FornecedorModel fornecedorModel)
-    // {
-    //     var fornecedorExistente = await ObterIdFornecedor(fornecedorModel.Cnpj);
-    //
-    //     if (fornecedorExistente == null)
-    //         throw new KeyNotFoundException("Fornecedor não encontrado.");
-    //
-    //     fornecedorExistente.NomeFantasia = fornecedorModel.NomeFantasia;
-    //     fornecedorExistente.RazaoSocial = fornecedorModel.RazaoSocial;
-    //     fornecedorExistente.Endereco = fornecedorModel.Endereco;
-    //
-    //     dbContextConfig.Fornecedores.Update(fornecedorExistente);
-    //     await dbContextConfig.SaveChangesAsync();
-    // }
+        await dbContextConfig.Avaliacoes.AddAsync(novaAvaliacao);
+        await dbContextConfig.SaveChangesAsync();
+    }
 
-    // public async Task ExcluirFornecedor(FornecedorModel fornecedorModel)
-    // {
-    //     var fornecedorExistente = await ObterIdFornecedor(fornecedorModel.Cnpj);
-    //
-    //     if (fornecedorExistente == null)
-    //         throw new KeyNotFoundException("Fornecedor não encontrado.");
-    //
-    //     dbContextConfig.Fornecedores.Remove(fornecedorExistente);
-    //     await dbContextConfig.SaveChangesAsync();
-    // }
+    public async Task<List<Avaliacao>> ObterAvaliacoesPorFornecedor(int fornecedorId)
+    {
+        return await dbContextConfig.Avaliacoes
+            .Where(a => a.FornecedorId == fornecedorId)
+            .Include(a => a.Cliente) // Inclui informações do usuário, se necessário
+            .Include(a => a.Fornecedor) // Inclui informações do fornecedor, se necessário
+            .ToListAsync();
+    }
 
     public async Task<List<SelectListItem>> ListaDeFornecedores()
     {
@@ -116,41 +114,5 @@ public class FornecedorBusiness(DbContextConfig dbContextConfig) : IFornecedorBu
             .FirstOrDefaultAsync();
 
         return fornecedor;
-    }
-
-    public async Task RegistrarAvaliacaoFornecedor(AvaliacaoFornecedorModel avaliacaoFornecedorModel)
-    {
-        if (avaliacaoFornecedorModel.Nota < 1 || avaliacaoFornecedorModel.Nota > 5)
-        {
-            throw new ArgumentException("A nota deve estar entre 1 e 5.");
-        }
-
-        var avaliacao = new AvaliacaoFornecedor
-        {
-            FornecedorId = avaliacaoFornecedorModel.FornecedorId,
-            UsuarioId = avaliacaoFornecedorModel.UsuarioId,
-            Nota = avaliacaoFornecedorModel.Nota,
-            Comentario = avaliacaoFornecedorModel.Comentario,
-            DataAvaliacao = DateTime.Now
-        };
-
-        await dbContextConfig.AvaliacoesFornecedores.AddAsync(avaliacao);
-        await dbContextConfig.SaveChangesAsync();
-    }
-
-    public async Task<List<AvaliacaoFornecedorModel>> ObterAvaliacoesFornecedor(int fornecedorId)
-    {
-        return await dbContextConfig.AvaliacoesFornecedores
-            .Where(a => a.FornecedorId == fornecedorId)
-            .Select(a => new AvaliacaoFornecedorModel
-            {
-                Id = a.Id,
-                FornecedorId = a.FornecedorId,
-                UsuarioId = a.UsuarioId,
-                Nota = a.Nota,
-                Comentario = a.Comentario,
-                DataAvaliacao = a.DataAvaliacao
-            })
-            .ToListAsync();
     }
 }

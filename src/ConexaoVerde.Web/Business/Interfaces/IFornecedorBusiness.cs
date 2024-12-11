@@ -1,4 +1,5 @@
-﻿using ConexaoVerde.Web.Models;
+﻿using ConexaoVerde.AppData.Entities;
+using ConexaoVerde.Web.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ConexaoVerde.Web.Business.Interfaces;
@@ -12,7 +13,7 @@ public interface IFornecedorBusiness
 
     // Task ExcluirFornecedor(FornecedorModel fornecedorModel);
     Task<FornecedorModel> ObterFornecedorPorId(int id);
-    
-    Task RegistrarAvaliacaoFornecedor(AvaliacaoFornecedorModel avaliacaoFornecedorModel);
-    Task<List<AvaliacaoFornecedorModel>> ObterAvaliacoesFornecedor(int fornecedorId);
+
+    Task AdicionarAvaliacao(int avaliacao, string comentario, int fornecedorId, int clienteId);
+    Task<List<Avaliacao>> ObterAvaliacoesPorFornecedor(int fornecedorId);
 }
