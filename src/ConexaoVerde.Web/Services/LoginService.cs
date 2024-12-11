@@ -3,7 +3,7 @@ using ConexaoVerde.Web.Models;
 
 namespace ConexaoVerde.Web.Services;
 
-public class UsuarioService
+public class LoginService
 {
     public async Task VerificarAtualizarUsuario(UsuarioModel usuarioModel, IFormFile fotoPerfil, UsuarioModel usuarioExistente)
     {

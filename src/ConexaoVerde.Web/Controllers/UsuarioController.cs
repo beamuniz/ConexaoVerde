@@ -13,7 +13,7 @@ public class UsuarioController(
     IFornecedorBusiness fornecedor,
     IClienteBusiness cliente,
     IUsuarioBusiness usuario,
-    UsuarioService usuarioService) : Controller
+    LoginService loginService) : Controller
 {
     [HttpGet]
     public IActionResult Cadastro()
@@ -68,15 +68,15 @@ public class UsuarioController(
         if (usuarioExistente == null)
             return NotFound();
 
-        await usuarioService.VerificarAtualizarUsuario(usuarioModel, fotoPerfil, usuarioExistente);
+        await loginService.VerificarAtualizarUsuario(usuarioModel, fotoPerfil, usuarioExistente);
 
         switch (usuarioExistente.Perfil)
         {
             case "Cliente":
-                usuarioService.VerificarAtualizarCliente(usuarioModel, usuarioExistente);
+                loginService.VerificarAtualizarCliente(usuarioModel, usuarioExistente);
                 break;
             case "Fornecedor":
-                usuarioService.VerificarAtualizarFornecedor(usuarioModel, usuarioExistente);
+                loginService.VerificarAtualizarFornecedor(usuarioModel, usuarioExistente);
                 break;
         }
 
@@ -86,47 +86,6 @@ public class UsuarioController(
         return RedirectToAction("Perfil");
     }
 
-    [HttpGet]
-    public IActionResult AlterarSenha()
-    {
-        return View(); 
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> AlterarSenha(AlterarSenhaModel model)
-    {
-        if (!ModelState.IsValid)
-        {
-            return View(model);
-        }
-
-        var usuarioAtualAsync = await GetUsuarioLogado();
-
-        // Verifica se a senha atual está correta
-        if (!usuarioService.VerificarSenhaAtual(usuarioAtualAsync, model.SenhaAtual))
-        {
-            ModelState.AddModelError("SenhaAtual", "A senha atual está incorreta.");
-            return View(model);
-        }
-
-        // Se a nova senha e a confirmação não coincidirem
-        if (model.NovaSenha != model.ConfirmarSenha)
-        {
-            ModelState.AddModelError("NovaSenha", "A nova senha e a confirmação não coincidem.");
-            return View(model);
-        }
-
-        var resultado = await usuario.AtualizarSenha(usuarioAtualAsync, model.NovaSenha);
-
-        if (resultado)
-        {
-            TempData["SuccessMessage"] = "Senha alterada com sucesso!";
-            return RedirectToAction("Perfil", "Usuario");
-        }
-
-        ModelState.AddModelError("", "Ocorreu um erro ao alterar a senha.");
-        return View(model);
-    }
 
     private async Task<UsuarioModel> GetUsuarioLogado()
     {
