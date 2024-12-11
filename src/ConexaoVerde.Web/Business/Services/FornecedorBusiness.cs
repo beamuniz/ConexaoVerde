@@ -63,7 +63,6 @@ public class FornecedorBusiness(DbContextConfig dbContextConfig) : IFornecedorBu
 
     public async Task AdicionarAvaliacao(int avaliacao, string comentario, int fornecedorId, int clienteId)
     {
-        // Criação da avaliação
         var novaAvaliacao = new Avaliacao
         {
             Comentario = comentario,
@@ -81,8 +80,8 @@ public class FornecedorBusiness(DbContextConfig dbContextConfig) : IFornecedorBu
     {
         return await dbContextConfig.Avaliacoes
             .Where(a => a.FornecedorId == fornecedorId)
-            .Include(a => a.Cliente) // Inclui informações do usuário, se necessário
-            .Include(a => a.Fornecedor) // Inclui informações do fornecedor, se necessário
+            .Include(a => a.Cliente)
+            .Include(a => a.Fornecedor) 
             .ToListAsync();
     }
 

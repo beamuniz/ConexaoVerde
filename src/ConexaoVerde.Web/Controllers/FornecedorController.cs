@@ -14,7 +14,7 @@ public class FornecedorController(
     [HttpGet]
     public async Task<IActionResult> ListarFornecedor(string searchTerm, int? page)
     {
-        const int pageSize = 5; // Número de fornecedores por página
+        const int pageSize = 5; 
         var pageNumber = page ?? 1;
 
         var fornecedores = await fornecedorBusiness.ListarFornecedores(searchTerm);
@@ -27,7 +27,7 @@ public class FornecedorController(
         }
 
         var pagedFornecedores = fornecedores
-            .OrderBy(f => f.NomeFantasia) // Ordenar antes de paginar
+            .OrderBy(f => f.NomeFantasia) 
             .ToPagedList(pageNumber, pageSize);
 
         return View(pagedFornecedores);
@@ -44,8 +44,7 @@ public class FornecedorController(
         var produtos = await produtoBusiness.ObterProdutosPorFornecedor(id);
         var usuarios = await usuarioBusiness.ObterUsuariosPorFornecedor(id);
 
-        var avaliacoes = await fornecedorBusiness.ObterAvaliacoesPorFornecedor(id) 
-                         ?? [];
+        var avaliacoes = await fornecedorBusiness.ObterAvaliacoesPorFornecedor(id) ?? [];
 
         var viewModel = new FornecedorPerfilModel
         {
@@ -59,19 +58,28 @@ public class FornecedorController(
     }
 
     [HttpPost]
-    public async Task<IActionResult> DeixarComentario(int avaliacao, string comentario, int fornecedorId)
+    public async Task<IActionResult> AvaliarFornecedor(int avaliacao, string comentario, int fornecedorId)
     {
-        // Verificar se o usuário está logado
         if (User.Identity!.IsAuthenticated)
         {
             var clienteId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
-            
-            await fornecedorBusiness.AdicionarAvaliacao(avaliacao, comentario, fornecedorId, int.Parse(clienteId!));
+            if (string.IsNullOrEmpty(clienteId))
+            {
+                return Json(new { success = false, message = "Usuário não autenticado" });
+            }
 
-            return RedirectToAction("Perfil", new { id = fornecedorId });
+            try
+            {
+                await fornecedorBusiness.AdicionarAvaliacao(avaliacao, comentario, fornecedorId, int.Parse(clienteId));
+                return Json(new { success = true, message = "Obrigado pela sua avaliação!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Ocorreu um erro ao salvar sua avaliação. Tente novamente mais tarde." });
+            }
         }
 
-        return RedirectToAction("Login", "Login");
+        return Json(new { success = false, message = "Usuário não autenticado" });
     }
 
 
