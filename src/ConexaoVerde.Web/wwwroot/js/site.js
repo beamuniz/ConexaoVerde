@@ -1,4 +1,22 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿// Hamburguer
+const hamburgerButton = document.getElementById('hamburger');
+const menuItems = document.querySelector('.toggle.hidden');
 
-// Write your JavaScript code.
+hamburgerButton.addEventListener('click', () => {
+    menuItems.classList.toggle('hidden');
+});
+
+// Perfil
+document.getElementById('profileIcon').addEventListener('click', function (event) {
+    event.stopPropagation();
+    const dropdown = document.getElementById('dropdownMenu');
+    dropdown.classList.toggle('hidden');
+});
+window.addEventListener('click', function (event) {
+    const dropdown = document.getElementById('dropdownMenu');
+    const profileIcon = document.getElementById('profileIcon');
+
+    if (!profileIcon.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.classList.add('hidden');
+    }
+});

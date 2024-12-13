@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - Conexão Verde</title>
     <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true"/>
-    @* <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true"/> *@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="icon" type="image/x-icon" href="~/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -40,32 +40,32 @@
         </div>
 
         <!-- Links de navegação (centralizados na versão desktop) -->
-        @if (User.Identity!.IsAuthenticated && isFornecedor)
+        @switch (User.Identity!.IsAuthenticated)
         {
-            <div class="toggle hidden md:flex justify-center flex-grow text-bold mt-5 md:mt-0 md:border-none">
-                <a href="/" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Home</a>
-                <a href="/Produto/ListarProduto" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Meus Produtos</a>
-                <a href="/Produto/CriarProduto" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Criar Produto</a>
-                <a href="#contactUs" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Visite Nós</a>
-            </div>
-        }
-        else if (!User.Identity!.IsAuthenticated)
-        {
-            <div class="toggle hidden md:flex justify-center flex-grow text-bold mt-5 md:mt-0 md:border-none">
-                <a href="/" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Home</a>
-                <a href="#services" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Serviços</a>
-                <a href="#aboutus" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Sobre Nós</a>
-                <a href="#contactUs" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Visite Nós</a>
-            </div>
-        }
-        else
-        {
-            <div class="toggle hidden md:flex justify-center flex-grow text-bold mt-5 md:mt-0 md:border-none">
-                <a href="/" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Home</a>
-                <a href="/Fornecedor/ListarFornecedor" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Fornecedores</a>
-                <a href="/Produto/ListarProduto" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Produtos</a>
-                <a href="#contactUs" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Visite Nós</a>
-            </div>
+            case true when isFornecedor:
+                <div class="toggle hidden md:flex justify-center flex-grow text-bold mt-5 md:mt-0 md:border-none">
+                    <a href="/" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Home</a>
+                    <a href="/Produto/ListarProduto" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Meus Produtos</a>
+                    <a href="/Produto/CriarProduto" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Criar Produto</a>
+                    <a href="#contactUs" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Visite Nós</a>
+                </div>
+                break;
+            case false:
+                <div class="toggle hidden md:flex justify-center flex-grow text-bold mt-5 md:mt-0 md:border-none">
+                    <a href="/" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Home</a>
+                    <a href="#services" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Serviços</a>
+                    <a href="#aboutus" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Sobre Nós</a>
+                    <a href="#contactUs" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Visite Nós</a>
+                </div>
+                break;
+            default:
+                <div class="toggle hidden md:flex justify-center flex-grow text-bold mt-5 md:mt-0 md:border-none">
+                    <a href="/" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Home</a>
+                    <a href="/Fornecedor/ListarFornecedor" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Fornecedores</a>
+                    <a href="/Produto/ListarProduto" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Produtos</a>
+                    <a href="#contactUs" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Visite Nós</a>
+                </div>
+                break;
         }
 
         @if (User.Identity!.IsAuthenticated)
@@ -131,39 +131,10 @@
     </div>
 </footer>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
 
-<script>
-    const hamburgerButton = document.getElementById('hamburger');
-    const menuItems = document.querySelector('.toggle.hidden');
-
-    hamburgerButton.addEventListener('click', () => {
-        menuItems.classList.toggle('hidden');
-    });
-</script>
-
-<script>
-    // Função para alternar a visibilidade do menu
-    document.getElementById('profileIcon').addEventListener('click', function(event) {
-        event.stopPropagation(); // Previne o clique de se propagar e fechar o dropdown imediatamente
-        const dropdown = document.getElementById('dropdownMenu');
-        dropdown.classList.toggle('hidden'); // Alterna a classe 'hidden'
-    });
-
-    // Fecha o menu caso o clique seja fora do menu ou ícone
-    window.addEventListener('click', function(event) {
-        const dropdown = document.getElementById('dropdownMenu');
-        const profileIcon = document.getElementById('profileIcon');
-
-        // Verifica se o clique foi fora do ícone de perfil e do menu
-        if (!profileIcon.contains(event.target) && !dropdown.contains(event.target)) {
-            dropdown.classList.add('hidden');
-        }
-    });
-</script>
-
+<!-- Plugin de Libras -->
 <div vw class="enabled">
     <div vw-access-button class="active"></div>
     <div vw-plugin-wrapper>

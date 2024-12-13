@@ -23,21 +23,21 @@
                     <!-- Campo Senha -->
                     <div class="relative">
                         <label for="SenhaAtual" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Senha Atual</label>
-                        <input asp-for="SenhaAtual" type="password" id="SenhaAtual" name="SenhaAtual" class="block w-full px-5 py-3 pl-10 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Senha Atual" required>
+                        <input asp-for="SenhaAtual" type="password" id="SenhaAtual" name="SenhaAtual" class="block w-full px-5 py-3 pl-5 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Senha Atual" required>
                         <span asp-validation-for="SenhaAtual" class="text-red-500 text-sm"></span>
                     </div>
 
                     <!-- Campo Nova Senha -->
                     <div class="relative">
                         <label for="NovaSenha" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Nova Senha</label>
-                        <input asp-for="NovaSenha" type="password" id="NovaSenha" name="NovaSenha" class="block w-full px-5 py-3 pl-10 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Nova Senha" required>
+                        <input asp-for="NovaSenha" type="password" id="NovaSenha" name="NovaSenha" class="block w-full px-5 py-3 pl-5 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Nova Senha" required>
                         <span asp-validation-for="NovaSenha" class="text-red-500 text-sm"></span>
                     </div>
 
                     <!-- Confirme a nova Senha -->
                     <div class="relative">
                         <label for="ConfirmarSenha" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Confirmar Nova Senha</label>
-                        <input asp-for="ConfirmarSenha" type="password" id="ConfirmarSenha" name="ConfirmarSenha" class="block w-full px-5 py-3 pl-10 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Confirmar Senha" required>
+                        <input asp-for="ConfirmarSenha" type="password" id="ConfirmarSenha" name="ConfirmarSenha" class="block w-full px-5 py-3 pl-5 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Confirmar Senha" required>
                         <span asp-validation-for="ConfirmarSenha" class="text-red-500 text-sm"></span>
                     </div>
 
@@ -46,10 +46,9 @@
                         Salvar
                     </button>
 
-                    <button type="reset" class="w-full py-3 mt-4 text-white bg-red-500 rounded-md hover:bg-red-600 focus:outline-none">
+                    <button type="reset" class="w-full py-3 mt-4 text-white bg-gray-500 rounded-md hover:bg-gray-600 focus:outline-none">
                         Cancelar
                     </button>
-
                 </form>
             </div>
         </div>
