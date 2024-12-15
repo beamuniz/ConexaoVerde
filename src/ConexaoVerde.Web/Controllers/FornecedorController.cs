@@ -1,5 +1,4 @@
-﻿using ConexaoVerde.AppData.Entities;
-using ConexaoVerde.Web.Business.Interfaces;
+﻿using ConexaoVerde.Web.Business.Interfaces;
 using ConexaoVerde.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList.Extensions;

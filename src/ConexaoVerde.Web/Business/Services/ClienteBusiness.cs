@@ -34,6 +34,22 @@ public class ClienteBusiness (DbContextConfig dbContextConfig) : IClienteBusines
         await dbContextConfig.SaveChangesAsync();
     }
 
+    public async Task<ClienteModel> ObterClientePorId(int id)
+    {
+        var cliente = await dbContextConfig.Clientes
+            .Where(c => c.Id == id)
+            .Select(c => new ClienteModel
+            {
+                Id = c.Id,
+                Nome = c.Nome,
+                Sobrenome = c.Sobrenome,
+                Cpf = c.Cpf,
+            })
+            .FirstOrDefaultAsync();
+
+        return cliente;
+    }
+
     public async Task<Cliente> ObterIdCliente(string cpf)
     {
         var cliente = await dbContextConfig.Clientes
@@ -53,35 +69,6 @@ public class ClienteBusiness (DbContextConfig dbContextConfig) : IClienteBusines
             throw new KeyNotFoundException("Cliente não encontrado.");
 
         dbContextConfig.Clientes.Remove(clienteExistente);
-        await dbContextConfig.SaveChangesAsync();
-    }
-
-    public async Task<ClienteModel> ObterClientePorId(int id)
-    {
-        var cliente = await dbContextConfig.Clientes
-            .Where(c => c.Id == id)
-            .Select(c => new ClienteModel
-            {
-                Id = c.Id,
-                Nome = c.Nome,
-                Sobrenome = c.Sobrenome,
-                Cpf = c.Cpf,
-            })
-            .FirstOrDefaultAsync();
-
-        return cliente;
-    }
-
-    public async Task AtualizarCliente(ClienteModel clienteModel)
-    {
-        var clienteExistente = await ObterIdCliente(clienteModel.Cpf);
-
-        if (clienteExistente == null)
-            throw new KeyNotFoundException("Cliente não encontrado.");
-
-        clienteExistente.Nome = clienteModel.Nome;
-
-        dbContextConfig.Clientes.Update(clienteExistente);
         await dbContextConfig.SaveChangesAsync();
     }
 }

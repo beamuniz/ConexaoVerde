@@ -52,11 +52,8 @@ public class FornecedorBusiness(DbContextConfig dbContextConfig) : IFornecedorBu
                     FotoPerfil = u.FotoPerfil
                 });
 
-        // Filtro de pesquisa no banco
         if (!string.IsNullOrEmpty(searchTerm))
-        {
             query = query.Where(f => f.NomeFantasia.Contains(searchTerm));
-        }
 
         return await query.ToListAsync();
     }

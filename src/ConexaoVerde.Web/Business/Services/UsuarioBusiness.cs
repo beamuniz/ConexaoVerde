@@ -41,11 +41,6 @@ public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
         return usuarioExistente;
     }
 
-    public List<UsuarioModel> Favoritos(int id)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<UsuarioModel> ObterUsuariosPorFornecedor(int id)
     {
         var usuarioFornecedor = await (from fornecedor in dbContextConfig.Fornecedores
@@ -118,16 +113,20 @@ public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
     public async Task<bool> AtualizarSenha(UsuarioModel usuario, string novaSenha)
     {
         var usuarioExistente = await dbContextConfig.Usuarios.FindAsync(usuario.Id);
-        
+
         if (usuarioExistente == null)
             return false;
 
-        // Criptografa a nova senha
         usuarioExistente.Senha = BCrypt.Net.BCrypt.HashPassword(novaSenha);
 
         dbContextConfig.Usuarios.Update(usuarioExistente);
         await dbContextConfig.SaveChangesAsync();
 
         return true;
+    }
+
+    public List<UsuarioModel> Favoritos(int id)
+    {
+        throw new NotImplementedException();
     }
 }
