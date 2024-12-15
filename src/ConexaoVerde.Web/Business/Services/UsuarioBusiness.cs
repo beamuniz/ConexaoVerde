@@ -124,9 +124,4 @@ public class UsuarioBusiness(DbContextConfig dbContextConfig) : IUsuarioBusiness
 
         return true;
     }
-
-    public List<UsuarioModel> Favoritos(int id)
-    {
-        throw new NotImplementedException();
-    }
 }
