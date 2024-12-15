@@ -49,26 +49,4 @@ public class ClienteBusiness (DbContextConfig dbContextConfig) : IClienteBusines
 
         return cliente;
     }
-
-    public async Task<Cliente> ObterIdCliente(string cpf)
-    {
-        var cliente = await dbContextConfig.Clientes
-            .FirstOrDefaultAsync(c => c.Cpf == cpf);
-
-        if (cliente == null)
-            throw new KeyNotFoundException("Cliente não encontrado.");
-
-        return cliente;
-    }
-
-    public async Task ExcluirCliente(ClienteModel clienteModel)
-    {
-        var clienteExistente = await ObterIdCliente(clienteModel.Cpf);
-
-        if (clienteExistente == null)
-            throw new KeyNotFoundException("Cliente não encontrado.");
-
-        dbContextConfig.Clientes.Remove(clienteExistente);
-        await dbContextConfig.SaveChangesAsync();
-    }
 }

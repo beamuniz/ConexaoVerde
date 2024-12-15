@@ -38,15 +38,6 @@ public class ProdutoController(
         return View(produtos);
     }
 
-    [HttpGet("{id:int}")]
-    public async Task<IActionResult> ObterProdutoPorId(int id)
-    {
-        var produto = await produtoBusiness.ObterProdutoPorId(id);
-        if (produto == null) return NotFound();
-
-        return Ok(produto);
-    }
-
     [HttpGet]
     public async Task<IActionResult> CriarProduto()
     {
@@ -84,23 +75,58 @@ public class ProdutoController(
         return RedirectToAction(nameof(ListarProduto));
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> AtualizarProduto(int id, [FromBody] Produto produto)
+    public async Task<IActionResult> EditarProduto(int id)
     {
-        if (!ModelState.IsValid) return BadRequest(ModelState);
+        var produto = await produtoBusiness.ObterProdutoPorId(id);
+        if (produto == null) return NotFound();
 
-        var produtoAtualizado = await produtoBusiness.AtualizarProduto(id, produto);
-        if (produtoAtualizado == null) return NotFound();
-
-        return Ok(produtoAtualizado);
+        return View(produto);
     }
 
-    [HttpDelete("{id:int}")]
+    [HttpPost]
+    public async Task<IActionResult> EditarProduto(Produto produtoModel, IFormFile fotoProduto)
+    {
+        var produtoAtual = await produtoBusiness.ObterProdutoPorId(produtoModel.Id);
+        if (produtoAtual == null)
+        {
+            ModelState.AddModelError("", "Produto não encontrado.");
+            return View(produtoModel);
+        }
+
+        produtoModel.FornecedorId = produtoAtual.FornecedorId;
+
+        var imgProduto = fotoProduto is { Length: > 0 }
+            ? await fotoProduto.OpenReadStream().ReadToEndAsync()
+            : null;
+
+        var produtoAtualizado = new Produto
+        {
+            Id = produtoModel.Id,
+            NomeProduto = produtoModel.NomeProduto,
+            Preco = produtoModel.Preco,
+            Descricao = produtoModel.Descricao,
+            FornecedorId = produtoModel.FornecedorId,
+            ImgProduto = imgProduto ?? produtoModel.ImgProduto
+        };
+
+        var sucesso = await produtoBusiness.AtualizarProduto(produtoModel.Id, produtoAtualizado);
+
+        if (sucesso != null)
+        {
+            ModelState.AddModelError("", "Erro ao atualizar o produto.");
+            return View(produtoModel);
+        }
+
+        return RedirectToAction(nameof(ListarProduto));
+    }
+
+    [HttpPost]
     public async Task<IActionResult> DeletarProduto(int id)
     {
         var sucesso = await produtoBusiness.DeletarProduto(id);
-        if (!sucesso) return NotFound();
+        if (!sucesso)
+            return NotFound();
 
-        return NoContent();
+        return Json(new { sucesso = true, mensagem = "Produto excluído com sucesso!" });
     }
 }

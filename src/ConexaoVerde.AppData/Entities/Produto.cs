@@ -17,6 +17,6 @@ public class Produto
 
     public byte[] ImgProduto { get; set; }
 
-    [Required] public int FornecedorId { get; set; }
+    [Required] public int? FornecedorId { get; set; }
     public Fornecedor Fornecedor { get; set; }
 }

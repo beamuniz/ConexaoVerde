@@ -24,7 +24,6 @@ public class ProdutoBusiness(DbContextConfig dbContextConfig) : IProdutoBusiness
             produtoExistente.NomeProduto = produto.NomeProduto;
             produtoExistente.Preco = produto.Preco;
             produtoExistente.Descricao = produto.Descricao;
-            produtoExistente.CategoriaId = produto.CategoriaId;
             produtoExistente.FornecedorId = produto.FornecedorId;
 
             dbContextConfig.Produtos.Update(produtoExistente);
@@ -47,13 +46,16 @@ public class ProdutoBusiness(DbContextConfig dbContextConfig) : IProdutoBusiness
         return false;
     }
 
-    public Task<Produto> ObterProdutoPorId(int id)
+    public async Task<Produto> ObterProdutoPorId(int id)
     {
-        return dbContextConfig.Produtos
-            .Include(p => p.Categoria)
-            .Include(p => p.Fornecedor)
+        var produto = await dbContextConfig.Produtos
+            .Include(p => p.Categoria)   
+            .Include(p => p.Fornecedor)   
             .FirstOrDefaultAsync(p => p.Id == id);
+
+        return produto;
     }
+
 
     public async Task<List<ProdutoModel>> ListarProdutos()
     {
