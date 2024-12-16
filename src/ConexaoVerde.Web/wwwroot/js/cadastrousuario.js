@@ -8,22 +8,22 @@
       document.getElementById('fornecedorFields').style.display = 'none';
   
       // Remover o estado de selecionado de ambos os botões
-      document.getElementById('clienteBtn').classList.remove('bg-blue-500', 'text-white', 'border-white');
-      document.getElementById('fornecedorBtn').classList.remove('bg-blue-500', 'text-white', 'border-white');
+      document.getElementById('clienteBtn').classList.remove('bg-green-500', 'text-white', 'border-white');
+      document.getElementById('fornecedorBtn').classList.remove('bg-green-500', 'text-white', 'border-white');
   
       // Aplica o estilo de "selecionado" no botão correto
       if (isCliente !== null) { // Se o tipo estiver definido
         if (isCliente) {
           // Estilos do botão para cliente
-          document.getElementById('clienteBtn').classList.add('bg-blue-500', 'text-white', 'border-white');
-          document.getElementById('fornecedorBtn').classList.remove('bg-blue-500', 'text-white', 'border-white');
+          document.getElementById('clienteBtn').classList.add('bg-white-500', 'text-white', 'border-white');
+          document.getElementById('fornecedorBtn').classList.remove('bg-white-500', 'text-white', 'border-white');
           
           // Exibe os campos do cliente
           document.getElementById('clienteFields').style.display = 'block';
         } else {
           // Estilos do botão para fornecedor
-          document.getElementById('fornecedorBtn').classList.add('bg-blue-500', 'text-white', 'border-white');
-          document.getElementById('clienteBtn').classList.remove('bg-blue-500', 'text-white', 'border-white');
+          document.getElementById('fornecedorBtn').classList.add('bg-white-500', 'text-white', 'border-white');
+          document.getElementById('clienteBtn').classList.remove('bg-white-500', 'text-white', 'border-white');
           
           // Exibe os campos do fornecedor
           document.getElementById('fornecedorFields').style.display = 'block';
