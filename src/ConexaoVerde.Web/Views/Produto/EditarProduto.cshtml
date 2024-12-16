@@ -8,10 +8,10 @@
 <div class="bg-white border border-4 rounded-lg shadow relative m-10">
     <!-- Cabeçalho -->
     <div class="flex items-start justify-between p-5 border-b rounded-t">
-        <h3 class="text-xl font-semibold text-gray-800">
+        <h3 class="text-xl font-semibold text-[#2C2F33]">
             Editar Produto
         </h3>
-        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="product-modal">
+        <button type="button" class="text-[#2C2F33] bg-transparent hover:bg-[#98FF98] hover:text-[#2C2F33] rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="product-modal">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
             </svg>
@@ -24,40 +24,40 @@
             <div class="grid grid-cols-6 gap-6">
                 <!-- Nome do Produto -->
                 <div class="col-span-6 sm:col-span-3">
-                    <label for="nomeProduto" class="text-sm font-medium text-gray-900 block mb-2">Nome do Produto</label>
-                    <input type="text" name="nomeProduto" id="nomeProduto" asp-for="NomeProduto" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="Exemplo: Imac 27”" required>
+                    <label for="nomeProduto" class="text-sm font-medium text-[#2C2F33] block mb-2">Nome do Produto</label>
+                    <input type="text" name="nomeProduto" id="nomeProduto" asp-for="NomeProduto" class="shadow-sm bg-gray-50 border border-[#2C2F33] text-[#2C2F33] sm:text-sm rounded-lg focus:ring-[#98FF98] focus:border-[#98FF98] block w-full p-2.5" placeholder="Exemplo: Imac 27”" required>
                     <span asp-validation-for="NomeProduto" class="text-red-500"></span>
                 </div>
 
                 <!-- Preço -->
                 <div class="col-span-6 sm:col-span-3">
-                    <label for="preco" class="text-sm font-medium text-gray-900 block mb-2">Preço</label>
-                    <input type="number" name="preco" id="preco" asp-for="Preco" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="$2300" required>
+                    <label for="preco" class="text-sm font-medium text-[#2C2F33] block mb-2">Preço</label>
+                    <input type="number" name="preco" id="preco" asp-for="Preco" class="shadow-sm bg-gray-50 border border-[#2C2F33] text-[#2C2F33] sm:text-sm rounded-lg focus:ring-[#98FF98] focus:border-[#98FF98] block w-full p-2.5" placeholder="$2300" required>
                     <span asp-validation-for="Preco" class="text-red-500"></span>
                 </div>
 
                 <!-- Descrição -->
                 <div class="col-span-full">
-                    <label for="descricao" class="text-sm font-medium text-gray-900 block mb-2">Descrição do Produto</label>
-                    <textarea id="descricao" rows="6" asp-for="Descricao" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4" placeholder="Detalhes sobre o produto" required></textarea>
+                    <label for="descricao" class="text-sm font-medium text-[#2C2F33] block mb-2">Descrição do Produto</label>
+                    <textarea id="descricao" rows="6" asp-for="Descricao" class="bg-gray-50 border border-[#2C2F33] text-[#2C2F33] sm:text-sm rounded-lg focus:ring-[#98FF98] focus:border-[#98FF98] block w-full p-4" placeholder="Detalhes sobre o produto" required></textarea>
                     <span asp-validation-for="Descricao" class="text-red-500"></span>
                 </div>
 
                 <!-- Imagem do Produto -->
                 <div class="col-span-6 sm:col-span-3">
-                    <label for="fotoProduto" class="text-sm font-medium text-gray-900 block mb-2">Imagem do Produto</label>
-                    <input type="file" name="fotoProduto" id="fotoProduto" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5">
+                    <label for="fotoProduto" class="text-sm font-medium text-[#2C2F33] block mb-2">Imagem do Produto</label>
+                    <input type="file" name="fotoProduto" id="fotoProduto" class="shadow-sm bg-gray-50 border border-[#2C2F33] text-[#2C2F33] sm:text-sm rounded-lg focus:ring-[#98FF98] focus:border-[#98FF98] block w-full p-2.5">
                 </div>
             </div>
 
             <!-- Rodapé com Botões -->
             <div class="p-6 border-t border-gray-200 rounded-b flex justify-between">
                 <!-- Botão Salvar -->
-                <button class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center border-2 border-green-600 hover:border-green-700" type="submit">Salvar</button>
+                <button class="text-white bg-[#98FF98] hover:bg-[#66cc66] focus:ring-4 focus:ring-[#98FF98] font-medium rounded-lg text-sm px-5 py-2.5 text-center border-2 border-[#98FF98] hover:border-[#66cc66]" type="submit">Salvar</button>
 
                 <!-- Botão Cancelar -->
                 <a href="@Url.Action("ListarProduto", "Produto")"
-                   class="text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm p-2.5 border-2 border-gray-500 hover:border-gray-600">
+                   class="text-white bg-[#2C2F33] hover:bg-[#2C2F33] focus:ring-4 focus:ring-[#98FF98] font-medium rounded-lg text-sm p-2.5 border-2 border-[#2C2F33] hover:border-[#98FF98]">
                     Cancelar
                 </a>
             </div>
