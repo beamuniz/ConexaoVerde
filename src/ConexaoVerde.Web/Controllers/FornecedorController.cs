@@ -1,5 +1,6 @@
 ﻿using ConexaoVerde.Web.Business.Interfaces;
 using ConexaoVerde.Web.Models;
+using ConexaoVerde.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList.Extensions;
 
@@ -8,12 +9,13 @@ namespace ConexaoVerde.Web.Controllers;
 public class FornecedorController(
     IFornecedorBusiness fornecedorBusiness,
     IProdutoBusiness produtoBusiness,
-    IUsuarioBusiness usuarioBusiness) : Controller
+    IUsuarioBusiness usuarioBusiness,
+    FornecedorService fornecedorService) : Controller
 {
     [HttpGet]
     public async Task<IActionResult> ListarFornecedor(string searchTerm, int? page)
     {
-        const int pageSize = 5; 
+        const int pageSize = 5;
         var pageNumber = page ?? 1;
 
         var fornecedores = await fornecedorBusiness.ListarFornecedores(searchTerm);
@@ -26,7 +28,7 @@ public class FornecedorController(
         }
 
         var pagedFornecedores = fornecedores
-            .OrderBy(f => f.NomeFantasia) 
+            .OrderBy(f => f.NomeFantasia)
             .ToPagedList(pageNumber, pageSize);
 
         return View(pagedFornecedores);
@@ -74,7 +76,10 @@ public class FornecedorController(
             }
             catch (Exception ex)
             {
-                return Json(new { success = false, message = "Ocorreu um erro ao salvar sua avaliação. Tente novamente mais tarde." });
+                return Json(new
+                {
+                    success = false, message = "Ocorreu um erro ao salvar sua avaliação. Tente novamente mais tarde."
+                });
             }
         }
 
@@ -93,40 +98,8 @@ public class FornecedorController(
             return Json(new { resposta = "Fornecedor não encontrado." });
         }
 
-        var respostaBot = ProcessarMensagem(request.Mensagem, fornecedor, usuario);
+        var respostaBot = fornecedorService.ProcessarMensagem(request.Mensagem, fornecedor, usuario);
 
         return Json(new { resposta = respostaBot });
-    }
-
-    private static string ProcessarMensagem(string mensagem, FornecedorModel fornecedor, UsuarioModel usuario)
-    {
-        if (string.IsNullOrEmpty(mensagem))
-        {
-            return "Por favor, envie uma mensagem.";
-        }
-
-        if (mensagem.Contains("Olá", StringComparison.OrdinalIgnoreCase))
-        {
-            return $"Olá! Eu sou o fornecedor {fornecedor.NomeFantasia}. Como posso ajudar?";
-        }
-
-        if (mensagem.Contains("endereço", StringComparison.OrdinalIgnoreCase))
-        {
-            var endereco =
-                $"{fornecedor.Endereco.Rua}, {fornecedor.Endereco.Numero}, {fornecedor.Endereco.Cidade} - {fornecedor.Endereco.Estado}, {fornecedor.Endereco.CEP}";
-            return $"O meu endereço é: {endereco}.";
-        }
-
-        if (mensagem.Contains("telefone", StringComparison.OrdinalIgnoreCase))
-        {
-            return $"Meu telefone de contato é: {usuario.Telefone}.";
-        }
-
-        if (mensagem.Contains("email", StringComparison.OrdinalIgnoreCase))
-        {
-            return $"Meu e-mail de contato é: {usuario.Email}.";
-        }
-
-        return "Desculpe, não entendi sua mensagem. Tente novamente!";
     }
 }

@@ -10,10 +10,7 @@ public interface IFornecedorBusiness
 
     Task<List<FornecedorModel>> ListarFornecedores(string searchTerm );
     Task<List<SelectListItem>> ListaDeFornecedores();
-
-    // Task ExcluirFornecedor(FornecedorModel fornecedorModel);
     Task<FornecedorModel> ObterFornecedorPorId(int id);
-
     Task AdicionarAvaliacao(int avaliacao, string comentario, int fornecedorId, int clienteId);
     Task<List<Avaliacao>> ObterAvaliacoesPorFornecedor(int fornecedorId);
 }

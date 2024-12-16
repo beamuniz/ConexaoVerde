@@ -14,5 +14,6 @@ public static class ConfigurationExtensions
         services.AddScoped<IFornecedorBusiness, FornecedorBusiness>();
         services.AddScoped<IClienteBusiness, ClienteBusiness>();
         services.AddScoped<LoginService>();
+        services.AddScoped<FornecedorService>();
     }
 }
