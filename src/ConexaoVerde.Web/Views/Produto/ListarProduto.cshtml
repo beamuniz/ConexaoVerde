@@ -30,21 +30,25 @@
                     <!-- Informações Extras e Botões -->
                     <div class="bg-[#98FF98] p-5 rounded-b-xl">
                         <div class="sm:flex sm:justify-between items-center">
-                            <div>
+                            @if (User.Claims.FirstOrDefault(c => c.Type == "Perfil")?.Value == "Fornecedor")
+                            {
                                 <!-- Botão Editar -->
-                                <button class="py-2 px-5 bg-[#98FF98] hover:bg-[#66cc66] font-bold text-[#2C2F33] text-lg rounded-lg shadow-md"
-                                        onclick="window.location.href='@Url.Action("EditarProduto", "Produto", new { id = produto.Id })'">
-                                    Editar
-                                </button>
-                            </div>
+                                <div>
+                                    <button class="py-2 px-5 bg-[#98FF98] hover:bg-[#66cc66] font-bold text-[#2C2F33] text-lg rounded-lg shadow-md"
+                                            onclick="window.location.href='@Url.Action("EditarProduto", "Produto", new { id = produto.Id })'">
+                                        Editar
+                                    </button>
+                                </div>
 
-                            <!-- Botão Excluir -->
-                            <div>
-                                <button class="excluirButton py-2 px-5 bg-red-600 hover:bg-red-700 font-bold text-white text-lg rounded-lg shadow-md"
-                                        data-produto-id="@produto.Id">
-                                    Excluir
-                                </button>
-                            </div>
+                                <!-- Botão Excluir -->
+                                <div>
+                                    <button class="excluirButton py-2 px-5 bg-red-600 hover:bg-red-700 font-bold text-white text-lg rounded-lg shadow-md"
+                                            data-produto-id="@produto.Id">
+                                        Excluir
+                                    </button>
+                                </div>
+                            }
+
                         </div>
                     </div>
                 </article>
