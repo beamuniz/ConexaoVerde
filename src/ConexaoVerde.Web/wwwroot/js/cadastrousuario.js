@@ -1,56 +1,70 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
-    let currentType = true; // Cliente por padrão
-
+    // Nenhum botão deve estar selecionado por padrão
+    let currentType = null; // Nenhum tipo de conta está selecionado inicialmente
+  
     function toggleAccountType(isCliente) {
-        document.getElementById('clienteFields').style.display = 'none';
-        document.getElementById('fornecedorFields').style.display = 'none';
-
+      // Esconde os campos de ambos os tipos
+      document.getElementById('clienteFields').style.display = 'none';
+      document.getElementById('fornecedorFields').style.display = 'none';
+  
+      // Remover o estado de selecionado de ambos os botões
+      document.getElementById('clienteBtn').classList.remove('bg-blue-500', 'text-white', 'border-white');
+      document.getElementById('fornecedorBtn').classList.remove('bg-blue-500', 'text-white', 'border-white');
+  
+      // Aplica o estilo de "selecionado" no botão correto
+      if (isCliente !== null) { // Se o tipo estiver definido
         if (isCliente) {
-            // Estilos do botão para cliente
-            document.getElementById('clienteBtn').classList.add('bg-blue-500', 'text-white');
-            document.getElementById('fornecedorBtn').classList.remove('bg-blue-500', 'text-white');
-            // Exibe os campos do cliente
-            document.getElementById('clienteFields').style.display = 'block';
+          // Estilos do botão para cliente
+          document.getElementById('clienteBtn').classList.add('bg-blue-500', 'text-white', 'border-white');
+          document.getElementById('fornecedorBtn').classList.remove('bg-blue-500', 'text-white', 'border-white');
+          
+          // Exibe os campos do cliente
+          document.getElementById('clienteFields').style.display = 'block';
         } else {
-            // Estilos do botão para fornecedor
-            document.getElementById('fornecedorBtn').classList.add('bg-blue-500', 'text-white');
-            document.getElementById('clienteBtn').classList.remove('bg-blue-500', 'text-white');
-            // Exibe os campos do fornecedor
-            document.getElementById('fornecedorFields').style.display = 'block';
+          // Estilos do botão para fornecedor
+          document.getElementById('fornecedorBtn').classList.add('bg-blue-500', 'text-white', 'border-white');
+          document.getElementById('clienteBtn').classList.remove('bg-blue-500', 'text-white', 'border-white');
+          
+          // Exibe os campos do fornecedor
+          document.getElementById('fornecedorFields').style.display = 'block';
         }
+      }
     }
-
-    // Inicializa a exibição do tipo de conta com base no valor de currentType
+  
+    // Inicializa a exibição do tipo de conta sem nenhum tipo de conta selecionado
     toggleAccountType(currentType);
-
+  
     // Event listeners para os botões de cliente e fornecedor
     document.getElementById('clienteBtn').addEventListener('click', function () {
-        toggleAccountType(true); // Cliente
+      toggleAccountType(true); // Cliente
     });
+  
     document.getElementById('fornecedorBtn').addEventListener('click', function () {
-        toggleAccountType(false); // Fornecedor
+      toggleAccountType(false); // Fornecedor
     });
-});
+  });
+  
+  
 
 
-// Função para verificar se as senhas coincidem
-const senhaInput = document.getElementById('senha');
-const confirmSenhaInput = document.getElementById('confirm-senha');
-const senhaError = document.getElementById('senha-error');
+// Função para verificar se as senhas coincidem (para o formulário de fornecedor)
+const senhaFornecedor = document.getElementById('senha-fornecedor');
+const confirmSenhaFornecedor = document.getElementById('confirm-senha-fornecedor');
+const senhaErrorFornecedor = document.getElementById('senha-error-fornecedor');
 
-confirmSenhaInput.addEventListener('input', () => {
-    if (confirmSenhaInput.value !== senhaInput.value) {
-        senhaError.classList.remove('hidden');
+confirmSenhaFornecedor.addEventListener('input', () => {
+    if (confirmSenhaFornecedor.value !== senhaFornecedor.value) {
+        senhaErrorFornecedor.classList.remove('hidden');
     } else {
-        senhaError.classList.add('hidden');
+        senhaErrorFornecedor.classList.add('hidden');
     }
 });
 
-// Função para calcular a força da senha
-const strengthBar = document.getElementById('password-strength-bar');
+// Função para calcular a força da senha (para o formulário de fornecedor)
+const strengthBarFornecedor = document.getElementById('password-strength-bar-fornecedor');
 
-senhaInput.addEventListener('input', () => {
-    const password = senhaInput.value;
+senhaFornecedor.addEventListener('input', () => {
+    const password = senhaFornecedor.value;
     let strength = 0;
 
     // Regras para avaliar a força da senha
@@ -62,25 +76,75 @@ senhaInput.addEventListener('input', () => {
 
     // Alterar a cor da barra de força
     if (strength === 0) {
-        strengthBar.style.width = '0%';
-        strengthBar.style.backgroundColor = '#e0e0e0'; // cinza
+        strengthBarFornecedor.style.width = '0%';
+        strengthBarFornecedor.style.backgroundColor = '#e0e0e0'; // cinza
     } else if (strength === 1) {
-        strengthBar.style.width = '20%';
-        strengthBar.style.backgroundColor = '#ff4d4d'; // vermelho
+        strengthBarFornecedor.style.width = '20%';
+        strengthBarFornecedor.style.backgroundColor = '#ff4d4d'; // vermelho
     } else if (strength === 2) {
-        strengthBar.style.width = '40%';
-        strengthBar.style.backgroundColor = '#ffcc00'; // amarelo
+        strengthBarFornecedor.style.width = '40%';
+        strengthBarFornecedor.style.backgroundColor = '#ffcc00'; // amarelo
     } else if (strength === 3) {
-        strengthBar.style.width = '60%';
-        strengthBar.style.backgroundColor = '#66cc66'; // verde claro
+        strengthBarFornecedor.style.width = '60%';
+        strengthBarFornecedor.style.backgroundColor = '#66cc66'; // verde claro
     } else if (strength === 4) {
-        strengthBar.style.width = '80%';
-        strengthBar.style.backgroundColor = '#339933'; // verde
+        strengthBarFornecedor.style.width = '80%';
+        strengthBarFornecedor.style.backgroundColor = '#339933'; // verde
     } else if (strength === 5) {
-        strengthBar.style.width = '100%';
-        strengthBar.style.backgroundColor = '#006600'; // verde escuro
+        strengthBarFornecedor.style.width = '100%';
+        strengthBarFornecedor.style.backgroundColor = '#006600'; // verde escuro
     }
 });
+
+// Função para verificar se as senhas coincidem (para o formulário "outro")
+const senhaOutro = document.getElementById('senha-outro');
+const confirmSenhaOutro = document.getElementById('confirm-senha-outro');
+const senhaErrorOutro = document.getElementById('senha-error-outro');
+
+confirmSenhaOutro.addEventListener('input', () => {
+    if (confirmSenhaOutro.value !== senhaOutro.value) {
+        senhaErrorOutro.classList.remove('hidden');
+    } else {
+        senhaErrorOutro.classList.add('hidden');
+    }
+});
+
+// Função para calcular a força da senha (para o formulário "outro")
+const strengthBarOutro = document.getElementById('password-strength-bar-outro');
+
+senhaOutro.addEventListener('input', () => {
+    const password = senhaOutro.value;
+    let strength = 0;
+
+    // Regras para avaliar a força da senha
+    if (password.length >= 8) strength += 1; // Comprimento mínimo de 8 caracteres
+    if (/[A-Z]/.test(password)) strength += 1; // Contém uma letra maiúscula
+    if (/[a-z]/.test(password)) strength += 1; // Contém uma letra minúscula
+    if (/[0-9]/.test(password)) strength += 1; // Contém um número
+    if (/[^A-Za-z0-9]/.test(password)) strength += 1; // Contém um caractere especial
+
+    // Alterar a cor da barra de força
+    if (strength === 0) {
+        strengthBarOutro.style.width = '0%';
+        strengthBarOutro.style.backgroundColor = '#e0e0e0'; // cinza
+    } else if (strength === 1) {
+        strengthBarOutro.style.width = '20%';
+        strengthBarOutro.style.backgroundColor = '#ff4d4d'; // vermelho
+    } else if (strength === 2) {
+        strengthBarOutro.style.width = '40%';
+        strengthBarOutro.style.backgroundColor = '#ffcc00'; // amarelo
+    } else if (strength === 3) {
+        strengthBarOutro.style.width = '60%';
+        strengthBarOutro.style.backgroundColor = '#66cc66'; // verde claro
+    } else if (strength === 4) {
+        strengthBarOutro.style.width = '80%';
+        strengthBarOutro.style.backgroundColor = '#339933'; // verde
+    } else if (strength === 5) {
+        strengthBarOutro.style.width = '100%';
+        strengthBarOutro.style.backgroundColor = '#006600'; // verde escuro
+    }
+});
+
 
 // Função para formatar o CPF
 function formatarCpf(input) {
@@ -258,4 +322,16 @@ window.onload = function () {
     document.getElementById("Endereco_Cidade").disabled = true;
     document.getElementById("Endereco_Estado").disabled = true;
 };
+
+
+// CNPJ
+function formatCNPJ(input) {
+    let value = input.value.replace(/\D/g, ''); // Remove tudo que não é número
     
+    // Formata o CNPJ para o padrão XX.XXX.XXX/XXXX-XX
+    if (value.length <= 14) {
+        value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5");
+    }
+    
+    input.value = value;
+}
