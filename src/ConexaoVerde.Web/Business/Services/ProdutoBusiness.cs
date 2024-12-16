@@ -25,6 +25,7 @@ public class ProdutoBusiness(DbContextConfig dbContextConfig) : IProdutoBusiness
             produtoExistente.Preco = produto.Preco;
             produtoExistente.Descricao = produto.Descricao;
             produtoExistente.FornecedorId = produto.FornecedorId;
+            produtoExistente.ImgProduto = produto.ImgProduto;
 
             dbContextConfig.Produtos.Update(produtoExistente);
             await dbContextConfig.SaveChangesAsync();
