@@ -32,10 +32,12 @@ var enderecoCompleto = $"{endereco.Rua}, {endereco.Numero}, {endereco.Cidade} - 
                 Voltar
             </a>
         </div>
+
         <!-- Título -->
         <h1 class="text-4xl font-semibold text-gray-800 text-center mb-12">
             <span class="text-3xl font-bold text-black mb-8 text-center">@Model.Fornecedor.NomeFantasia</span>
         </h1>
+
         <div class="flex flex-wrap justify-center gap-12">
             <!-- Imagem do Fornecedor -->
             <div class="w-full md:w-2/3 lg:w-1/3 xl:w-1/4 mb-8 flex flex-col items-center">
@@ -43,6 +45,7 @@ var enderecoCompleto = $"{endereco.Rua}, {endereco.Numero}, {endereco.Cidade} - 
                      alt="Imagem Fornecedor"
                      class="w-56 h-56 rounded-full shadow-xl border-4 border-green-500 mb-6">
             </div>
+
             <!-- Informações do Fornecedor -->
             <div class="md:w-2/3 md:pl-8">
                 <div class="mb-6">
@@ -112,8 +115,7 @@ var enderecoCompleto = $"{endereco.Rua}, {endereco.Numero}, {endereco.Cidade} - 
                 <!-- Mapa do Endereço -->
                 <div class="mt-16">
                     <div class="w-full" style="height: 500px;">
-                        <iframe src="https://www.google.com/maps?q=@enderecoCompleto&output=embed" width="100%"
-                                height="100%" style="border:0;">
+                        <iframe src="https://www.google.com/maps?q=@enderecoCompleto&output=embed" width="100%" height="70%" style="border:0;">
                         </iframe>
                     </div>
                 </div>
@@ -140,6 +142,7 @@ var enderecoCompleto = $"{endereco.Rua}, {endereco.Numero}, {endereco.Cidade} - 
                 }
             </div>
         </section>
+
         <!-- Seção de Feedbacks -->
         <section class="bg-white py-16">
             <div class="container mx-auto px-6">
@@ -229,111 +232,3 @@ var enderecoCompleto = $"{endereco.Rua}, {endereco.Numero}, {endereco.Cidade} - 
         </div>
     </div>
 </section>
-<script src="~/js/perfilfornecedor.js" asp-append-version="true"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const chatToggleButton = document.getElementById('chatToggleButton');
-        const chatContainer = document.getElementById('chatContainer');
-        const chatMessages = document.getElementById('chatMessages');
-        const userMessageInput = document.getElementById('userMessage');
-        const sendButton = document.getElementById('sendButton');
-
-        // Mensagem automática inicial
-        const initialMessage = "Olá! Esta é uma mensagem automática. Como posso ajudar?";
-        const botMessageElement = document.createElement('div');
-        botMessageElement.classList.add('flex', 'justify-start', 'mb-4');
-        botMessageElement.innerHTML = `
-        <div class="bg-gray-300 text-black px-4 py-2 rounded-lg max-w-xs">
-            ${initialMessage}
-        </div>
-    `;
-        chatMessages.appendChild(botMessageElement);
-
-        // Certifique-se de que o chat comece escondido
-        chatContainer.classList.add('hidden');
-
-        // Alterna a visibilidade do chat e ajusta o botão
-        chatToggleButton.addEventListener('click', function () {
-            // Alterna a classe 'hidden' para mostrar ou esconder o chat
-            chatContainer.classList.toggle('hidden');
-            // Alterando o conteúdo do botão conforme a visibilidade do chat
-            if (chatContainer.classList.contains('hidden')) {
-                chatToggleButton.innerHTML = `<i class="fas fa-comment-alt"></i>`;
-            } else {
-                chatToggleButton.innerHTML = `<i class="fas fa-times"></i>`;
-
-                // Quando o chat for aberto, focar no campo de mensagem
-                userMessageInput.focus();
-            }
-        });
-
-        // Função para rolar para a última mensagem
-        function scrollToBottom() {
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        // Função para enviar a mensagem
-        function sendMessage() {
-            const userMessage = userMessageInput.value;
-            if (userMessage.trim() !== "") {
-                const userMessageElement = document.createElement('div');
-                userMessageElement.classList.add('flex', 'justify-end', 'mb-4');
-                userMessageElement.innerHTML = `
-                <div class="bg-green-500 text-white px-4 py-2 rounded-lg max-w-xs">
-                    ${userMessage}
-                </div>
-            `;
-                chatMessages.appendChild(userMessageElement);
-                userMessageInput.value = ""; // Limpar o campo de entrada
-
-                // Enviar a mensagem para o backend
-                var fornecedorId = @Model.Fornecedor.Id; // Garantir que o Model.Fornecedor.Id seja interpolado corretamente
-                fetch('/Fornecedor/ChatResposta', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        fornecedorId: fornecedorId,
-                        mensagem: userMessage
-                    })
-                }).then(response => response.json()).then(data => {
-                    console.log("Dados recebidos do servidor:", data); // Debugging para ver os dados recebidos
-                    if (data.resposta) {
-                        const botResponseElement = document.createElement('div');
-                        botResponseElement.classList.add('flex', 'justify-start', 'mb-4');
-                        botResponseElement.innerHTML = `
-                        <div class="bg-gray-300 text-black px-4 py-2 rounded-lg max-w-xs">
-                            ${data.resposta}
-                        </div>
-                    `;
-                        chatMessages.appendChild(botResponseElement);
-                        scrollToBottom(); // Garante que o chat rola para a mensagem mais recente
-                    }
-                }).catch(error => {
-                    console.error("Erro ao enviar mensagem:", error);
-                });
-
-                // Rolar para a última mensagem
-                scrollToBottom();
-            }
-        }
-
-        // Evento para enviar mensagem ao pressionar Enter
-        userMessageInput.addEventListener('keydown', function (event) {
-            if (event.key === 'Enter') {
-                event.preventDefault(); // Evita que o formulário seja enviado ao pressionar Enter
-                sendMessage();
-            }
-        });
-
-        // Evento de clique no botão de envio
-        sendButton.addEventListener('click', function () {
-            sendMessage();
-        });
-
-        // Rolar para a última mensagem quando o chat é aberto pela primeira vez
-        scrollToBottom();
-    });
-
-</script>
