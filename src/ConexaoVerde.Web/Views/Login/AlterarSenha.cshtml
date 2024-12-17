@@ -1,0 +1,60 @@
+﻿@model ConexaoVerde.Web.Models.AlterarSenhaModel
+
+@{
+    ViewData["Title"] = "Alterar Senha";
+}
+
+<section class="bg-white dark:bg-gray-900">
+    <div class="flex justify-center min-h-screen">
+        <div class="hidden bg-cover lg:block lg:w-2/5" style="background-image: url('@Url.Content("~/images/caminhao.png")');">
+        </div>
+        <!-- Formulário -->
+        <div class="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
+            <div class="w-full">
+                <h1 class="text-2xl font-semibold tracking-wider text-[#2C2F33] capitalize">Alterar Senha</h1>
+                <p class="mt-4 text-[#2C2F33]">Altere sua Senha.</p>
+
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    <div class="text-red-500 mt-2">@ViewBag.ErrorMessage</div>
+                }
+
+                <form asp-action="AlterarSenha" asp-controller="Login" method="POST" class="space-y-6 mt-8">
+                    <!-- Campo Senha -->
+                    <div class="relative">
+                        <label for="SenhaAtual" class="block mb-2 text-sm text-[#2C2F33] ">Senha Atual</label>
+                        <input asp-for="SenhaAtual" type="password" id="SenhaAtual" name="SenhaAtual" class="block w-full px-5 py-3 pl-5 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#98FF98]" placeholder="Senha Atual" required>
+                        <span asp-validation-for="SenhaAtual" class="text-red-500 text-sm"></span>
+                    </div>
+
+                    <!-- Campo Nova Senha -->
+                    <div class="relative">
+                        <label for="NovaSenha" class="block mb-2 text-sm text-[#2C2F33] ">Nova Senha</label>
+                        <input asp-for="NovaSenha" type="password" id="NovaSenha" name="NovaSenha" class="block w-full px-5 py-3 pl-5 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#98FF98]" placeholder="Nova Senha" required>
+                        <span asp-validation-for="NovaSenha" class="text-red-500 text-sm"></span>
+                    </div>
+
+                    <!-- Confirme a nova Senha -->
+                    <div class="relative">
+                        <label for="ConfirmarSenha" class="block mb-2 text-sm text-[#2C2F33] ">Confirmar Nova Senha</label>
+                        <input asp-for="ConfirmarSenha" type="password" id="ConfirmarSenha" name="ConfirmarSenha" class="block w-full px-5 py-3 pl-5 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#98FF98]" placeholder="Confirmar Senha" required>
+                        <span asp-validation-for="ConfirmarSenha" class="text-red-500 text-sm"></span>
+                    </div>
+
+                    <!-- Botões de Ação -->
+                    <button type="submit" class="w-full py-3 mt-4 text-white bg-[#98FF98] rounded-md hover:bg-[#66cc66] focus:outline-none">
+                        Salvar
+                    </button>
+
+                    <button type="reset" class="w-full py-3 mt-4 text-white bg-gray-500 rounded-md hover:bg-gray-600 focus:outline-none">
+                        Cancelar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

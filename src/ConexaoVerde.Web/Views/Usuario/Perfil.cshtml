@@ -1,0 +1,138 @@
+﻿@model ConexaoVerde.Web.Models.UsuarioModel
+
+@{
+    ViewData["Title"] = "Meu Perfil";
+}
+
+<section class="py-10 my-auto">
+    <div class="max-w-screen-lg mx-auto flex flex-col gap-6">
+        <!-- Card de Perfil -->
+        <div class="bg-white shadow-xl p-6 rounded-lg">
+            <div class="text-center">
+                <h1 class="text-3xl font-serif font-extrabold mb-2 text-gray-800">Perfil</h1>
+                <h2 class="text-gray-500 text-base mb-6">Gerencie suas informações de perfil</h2>
+            </div>
+
+            <form id="profileForm" action="@Url.Action("AtualizarPerfil", "Usuario")" method="post" enctype="multipart/form-data" class="space-y-6">
+                <div class="relative">
+                    <!-- Capa -->
+                    <div class="w-full h-48 bg-gradient-to-r from-green-500 via-gray-500 to-green-500 rounded-lg"></div>
+
+                    <!-- Foto de Perfil -->
+                    <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
+                        <div class="w-24 h-24 rounded-full border-4 border-white overflow-hidden">
+                            @if (Model.FotoPerfil is { Length: > 0 })
+                            {
+                                var base64Image = Convert.ToBase64String(Model.FotoPerfil);
+                                <img src="data:image/png;base64,@base64Image" alt="Profile Picture" class="w-full h-full object-cover">
+                            }
+                            else
+                            {
+                                <img src="~/images/profile_pic.png" alt="Default Profile Picture" class="w-full h-full object-cover">
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Espaçamento entre foto e texto -->
+                <div class="mt-16 pt-12 text-center">
+                    @if (Model.Perfil == "Cliente")
+                    {
+                        <h2 class="text-lg font-semibold text-gray-800">@Model.ClienteModel.Nome @Model.ClienteModel.Sobrenome</h2>
+                    }
+                    else
+                    {
+                        <h2 class="text-lg font-semibold text-gray-800">@Model.FornecedorModel.RazaoSocial</h2>
+                    }
+                </div>
+
+                <!-- Campo de Upload de Imagem -->
+                <div>
+                    <label for="imageUpload" class="block text-sm font-medium text-gray-700">Alterar Foto de Perfil</label>
+                    <input type="file" id="imageUpload" name="FotoPerfil" class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800" accept="image/*" disabled>
+                </div>
+
+                <!-- Campos do Perfil -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    @if (Model.Perfil == "Cliente")
+                    {
+                        <div>
+                            <label for="nome" class="block text-sm font-medium text-gray-700">Primeiro Nome</label>
+                            <input type="text" id="nome" name="ClienteModel.Nome" value="@Model.ClienteModel.Nome"
+                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
+                                   placeholder="Primeiro Nome" readonly>
+                        </div>
+                        <div>
+                            <label for="sobrenome" class="block text-sm font-medium text-gray-700">Sobrenome</label>
+                            <input type="text" id="sobrenome" name="ClienteModel.Sobrenome" value="@Model.ClienteModel.Sobrenome"
+                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
+                                   placeholder="Sobrenome" readonly>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <label for="razaosocial" class="block text-sm font-medium text-gray-700">Razão Social</label>
+                            <input type="text" id="razaosocial" name="FornecedorModel.RazaoSocial" value="@Model.FornecedorModel.RazaoSocial"
+                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
+                                   placeholder="Razão Social" readonly>
+                        </div>
+                        <div>
+                            <label for="nomefantasia" class="block text-sm font-medium text-gray-700">Nome Fantasia</label>
+                            <input type="text" id="nomefantasia" name="FornecedorModel.NomeFantasia" value="@Model.FornecedorModel.NomeFantasia"
+                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
+                                   placeholder="Nome Fantasia" readonly>
+                        </div>
+                    }
+
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="text" id="email" name="Email" value="@Model.Email"
+                               class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
+                               placeholder="Email" readonly>
+                    </div>
+                    @if (Model.Perfil == "Cliente")
+                    {
+                        <div>
+                            <label for="cpf" class="block text-sm font-medium text-gray-700">CPF</label>
+                            <input type="text" id="cpf" name="ClienteModel.Cpf" value="@Model.ClienteModel.Cpf"
+                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
+                                   placeholder="CPF" readonly>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <label for="cnpj" class="block text-sm font-medium text-gray-700">CNPJ</label>
+                            <input type="text" id="cnpj" name="FornecedorModel.Cnpj" value="@Model.FornecedorModel.Cnpj"
+                                   class="mt-2 p-2 w-full border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
+                                   placeholder="CNPJ" readonly>
+                        </div>
+                    }
+                </div>
+
+                @if (Model.Perfil == "Fornecedor")
+                {
+                    <div class="w-full">
+                        <label class="block text-sm font-medium text-gray-700">Descrição</label>
+                        <textarea id="descricao" name="FornecedorModel.Descricao" rows="4"
+                              class="mt-2 p-2 w-full block border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 text-gray-800"
+                              placeholder="Descrição" readonly>@Model.FornecedorModel.Descricao</textarea>
+                    </div>
+                }
+
+                <!-- Botões de Ação -->
+                <div class="flex justify-between gap-4">
+                    <button type="button" id="editProfileBtn" class="flex-1 p-3 bg-gray-600 text-white rounded-lg shadow hover:bg-[#2C2F33]">
+                        Editar Perfil
+                    </button>
+                    <button type="submit" id="saveButton" class="flex-1 p-3 bg-green-500 text-white rounded-lg shadow hover:bg-[#98FF98] hidden">
+                        Salvar Mudanças
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script src="~/js/perfil.js" asp-append-version="true"></script>

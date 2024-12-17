@@ -1,0 +1,128 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Hero Section -->
+<div class="relative w-full h-[500px] bg-[#2C2F33]" id="home" style="height: 500px !important;">
+    <!-- Imagem de Fundo -->
+    <div class="absolute inset-0 opacity-70">
+        <img
+            src="https://image1.jdomni.in/banner/13062021/0A/52/CC/1AF5FC422867D96E06C4B7BD69_1623557926542.png"
+            alt="Background Image"
+            class="object-cover object-center w-full h-full"
+            onerror="this.src='https://via.placeholder.com/1200x320';"/>
+    </div>
+    <!-- Conteúdo -->
+    <div class="relative z-10 h-full flex flex-col md:flex-row items-center justify-center text-center text-white">
+        <div class="md:w-1/2 p-6">
+            <p class="font-regular text-xl mb-8 mt-4">Solução completa para produtos de saúde alimentar</p>
+            <a href="#contactUs"
+               class="px-6 py-3 bg-[#98FF98] text-white font-medium rounded-full hover:bg-[#76e76b] transition duration-200">
+                Contato
+            </a>
+        </div>
+    </div>
+</div>
+
+<section class="py-10" id="services">
+    <h2 class="text-3xl font-bold text-[#2C2F33] mb-8 text-center">Nossos Serviços</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-12">
+        <!-- Each service card -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden border-2 border-[#2C2F33]">
+            <img src="https://i.imgur.com/lWhURgw.jpeg" alt="wheat flour grinding" class="w-full h-64 object-cover">
+            <div class="p-6 text-center">
+                <h3 class="text-xl font-medium text-[#2C2F33] mb-2">Escolha suas frutas, legumes, pães e outros produtos orgânicos online</h3>
+                
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden border-2 border-[#2C2F33]">
+            <img src="https://i.imgur.com/e8exwXG.jpeg" alt="wheat flour grinding" class="w-full h-64 object-cover">
+            <div class="p-6 text-center">
+                <h3 class="text-xl font-medium text-[#2C2F33] mb-2">Suas verduras são colhidas no dia, para chegar fresquinho até você</h3>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden border-2 border-[#2C2F33]">
+            <img src="https://i.imgur.com/jD8IUwg.png" alt="wheat flour grinding" class="w-full h-64 object-cover">
+            <div class="p-6 text-center">
+                <h3 class="text-xl font-medium text-[#2C2F33] mb-2">Você incentiva o pequeno produtor, respeita a natureza e não prejudica sua saúde</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- QUEM SOMOS Section -->
+<section class="bg-gray-100" id="aboutus">
+    <div class="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
+            <div class="max-w-lg">
+                <h2 class="text-3xl font-bold text-[#2C2F33] mb-8 text-center">Sobre nós</h2>
+                <p class="mt-4 text-gray-600 text-lg">
+                    Somos uma empresa comprometida em oferecer produtos orgânicos e naturais de alta qualidade, provenientes tanto de pequenos quanto de grandes fornecedores. Nosso objetivo é fornecer soluções que atendam às necessidades de nossos clientes, sempre com inovação, responsabilidade social e ambiental.
+                    Trabalhamos com uma equipe apaixonada e especializada, focada em transformar ideias em soluções sustentáveis. Junte-se a nós e experimente a diferença de um futuro mais saudável e consciente!
+                </p>
+            </div>
+            <div class="mt-12 md:mt-0">
+                <img src="https://images.unsplash.com/photo-1531973576160-7125cd663d86" alt="About Us Image" class="object-cover rounded-lg shadow-md">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-gray-100">
+    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:py-20 lg:px-8">
+        <div class="max-w-2xl lg:max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-extrabold text-[#2C2F33]" id="contactUs">Nos visite</h2>
+            <p class="mt-3 text-lg text-gray-500"></p>
+        </div>
+
+        <div class="mt-8 lg:mt-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Contact Information -->
+                <div>
+                    <div class="max-w-full mx-auto rounded-lg overflow-hidden">
+                        <!-- Contact Section -->
+                        <div class="border-t border-gray-200 px-6 py-4">
+                            <h3 class="text-lg font-bold text-[#2C2F33]">Contato</h3>
+                            <p class="mt-1 font-bold text-gray-600">
+                                <a href="tel:+551139906000">Telefone: +55 (11) 3990-6000</a>
+                            </p>
+                            <a class="flex m-1" href="tel:+551139906000">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-between h-10 w-30 rounded-md bg-[#98FF98] text-white p-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
+                                        </svg>
+                                        <span class="ml-2">Ligue agora</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Address Section -->
+                        <div class="px-6 py-4">
+                            <h3 class="text-lg font-medium text-[#2C2F33]">Nosso Endereço</h3>
+                            <p class="mt-1 text-gray-600">Rua Pedro Vicente, 625, Canindé, São Paulo - SP, CEP: 01109-010 (IFSP - Campus São Paulo)</p>
+                        </div>
+
+                        <!-- Hours Section -->
+                        <div class="border-t border-gray-200 px-6 py-4">
+                            <h3 class="text-lg font-medium text-[#2C2F33]">Horário de Funcionamento</h3>
+                            <p class="mt-1 text-gray-600">Segunda a Sexta: 9h - 18h</p>
+                            <p class="mt-1 text-gray-600">Sábado: 10h - 14h</p>
+                            <p class="mt-1 text-gray-600">Domingo: Fechado</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Maps Embed -->
+                <div class="rounded-lg overflow-hidden order-none sm:order-first">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.8228485108816!2d-46.62519788440087!3d-23.51201566538227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59ba3b3cf7f1%3A0xe9138f365d9e6268!2sInstituto%20Federal%20de%20S%C3%A3o%20Paulo%20-%20IFSP%20Campus%20S%C3%A3o%20Paulo!5e0!3m2!1spt-BR!2sbr!4v1713433597892!5m2!1spt-BR!2sbr"
+                    class="w-full" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe></div>
+            </div>
+        </div>
+    </div>
+</section>

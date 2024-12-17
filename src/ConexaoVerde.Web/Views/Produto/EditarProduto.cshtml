@@ -1,0 +1,70 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model ConexaoVerde.AppData.Entities.Produto
+
+@{
+    ViewData["Title"] = "Editar Produto";
+}
+
+<div class="max-w-4xl mx-auto bg-white border-2 border-[#1c1f1c] rounded-lg shadow-lg mt-10 mb-10">
+    <!-- Cabeçalho -->
+    <div class="flex justify-between items-center bg-[#98FF98] text-[#2C2F33] p-4 rounded-t-lg">
+        <h2 class="text-xl font-semibold">Editar Produto</h2>
+        <button type="button" class="text-[#2C2F33] hover:text-white p-2 rounded-full hover:bg-[#66cc66] transition duration-300" data-modal-toggle="product-modal">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Formulário -->
+    <form asp-action="EditarProduto" enctype="multipart/form-data" method="post" class="p-6 space-y-6">
+        <!-- Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Nome do Produto -->
+            <div>
+                <label for="nomeProduto" class="block text-sm font-medium text-[#2C2F33] mb-2">Nome do Produto</label>
+                <input type="text" id="nomeProduto" asp-for="NomeProduto" placeholder="Exemplo: Imac 27”" required
+                    class="w-full p-2.5 rounded-lg border border-[#2C2F33] focus:ring-[#98FF98] focus:border-[#98FF98] shadow-sm text-[#2C2F33] placeholder:text-[#2C2F33]">
+                <span asp-validation-for="NomeProduto" class="text-red-500 text-sm"></span>
+            </div>
+
+            <!-- Preço -->
+            <div>
+                <label for="preco" class="block text-sm font-medium text-[#2C2F33] mb-2">Preço</label>
+                <input type="number" id="preco" asp-for="Preco" placeholder="$2300" required
+                    class="w-full p-2.5 rounded-lg border border-[#2C2F33] focus:ring-[#98FF98] focus:border-[#98FF98] shadow-sm text-[#2C2F33] placeholder:text-[#2C2F33]">
+                <span asp-validation-for="Preco" class="text-red-500 text-sm"></span>
+            </div>
+        </div>
+
+        <!-- Descrição -->
+        <div>
+            <label for="descricao" class="block text-sm font-medium text-[#2C2F33] mb-2">Descrição do Produto</label>
+            <textarea id="descricao" rows="5" asp-for="Descricao" placeholder="Detalhes sobre o produto" required
+                class="w-full p-4 rounded-lg border border-[#2C2F33] focus:ring-[#98FF98] focus:border-[#98FF98] shadow-sm text-[#2C2F33] placeholder:text-[#2C2F33]"></textarea>
+            <span asp-validation-for="Descricao" class="text-red-500 text-sm"></span>
+        </div>
+
+        <!-- Imagem do Produto -->
+        <div>
+            <label for="fotoProduto" class="block text-sm font-medium text-[#2C2F33] mb-2">Imagem do Produto</label>
+            <input type="file" id="fotoProduto" name="fotoProduto"
+                class="w-full p-2.5 rounded-lg border border-[#2C2F33] focus:ring-[#98FF98] focus:border-[#98FF98] shadow-sm">
+        </div>
+
+        <!-- Rodapé com Botões -->
+        <div class="flex justify-end space-x-4 border-t pt-6">
+            <!-- Cancelar -->
+            <a href="@Url.Action("ListarProduto", "Produto")"
+                class="text-white bg-[#2C2F33] hover:bg-[#424649] px-5 py-2.5 rounded-lg border-2 border-[#2C2F33] transition duration-300">
+                Cancelar
+            </a>
+
+            <!-- Salvar -->
+            <button type="submit"
+                class="text-white bg-[#98FF98] hover:bg-[#66cc66] px-5 py-2.5 rounded-lg border-2 border-[#98FF98] hover:border-[#66cc66] transition duration-300">
+                Salvar
+            </button>
+        </div>
+    </form>
+</div>

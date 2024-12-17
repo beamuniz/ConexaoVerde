@@ -1,0 +1,23 @@
+{
+  "name": "conexaoverdemvc",
+  "version": "1.0.0",
+  "description": "Para configurar acesse a pasta \"ConexaoVerdeAppData\" e rode os comandos:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "npx postcss wwwroot/css/tailwind.css -o wwwroot/css/styles.css",
+    "watch:css": "npx postcss wwwroot/css/tailwind.css -o wwwroot/css/styles.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "conexaoverdemvc": "file:",
+    "postcss-cli": "^11.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.16"
+  }
+}

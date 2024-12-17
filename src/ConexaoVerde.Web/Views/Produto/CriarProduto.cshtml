@@ -1,0 +1,87 @@
+﻿@model ConexaoVerde.Web.Models.ProdutoModel
+
+@{
+    ViewData["Title"] = "Cadastro de Produto";
+}
+
+<section class="bg-white">
+    <div class="flex justify-center min-h-screen">
+        <div class="hidden bg-cover lg:block lg:w-2/5"
+             style="background-image: url('@Url.Content("~/images/criar_produto.png")');">
+        </div>
+        <!-- Exibindo o título com estilo -->
+        <div class="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
+            <div class="w-full">
+                <h1 class="text-2xl font-semibold tracking-wider text-[#2C2F33] capitalize">Cadastro de Produto</h1>
+                <p class="mt-4 text-[#2C2F33]">Preencha as informações abaixo para cadastrar um novo produto.</p>
+
+                <!-- Formulário -->
+                <form asp-action="CriarProduto" method="post" enctype="multipart/form-data"
+                      class="grid grid-cols-1 gap-6 mt-8">
+
+                    <!-- Nome do Produto -->
+                    <div>
+                        <label asp-for="NomeProduto" class="block mb-2 text-sm text-[#2C2F33]">Produto</label>
+                        <input asp-for="NomeProduto"
+                               type="text"
+                               placeholder="Nome do Produto"
+                               class="block w-full px-5 py-3 text-[#2C2F33] placeholder-gray-400 bg-white border border-[#2C2F33] rounded-md focus:border-[#98FF98] focus:ring-[#98FF98] focus:outline-none focus:ring focus:ring-opacity-40"/>
+                        <span asp-validation-for="NomeProduto" class="text-red-500"></span>
+                    </div>
+
+                    <!-- Preço -->
+                    <div>
+                        <label asp-for="Preco" class="block mb-2 text-sm text-[#2C2F33]">Preço</label>
+                        <input asp-for="Preco"
+                               type="number"
+                               step="0.01"
+                               placeholder="Digite o Preço"
+                               class="block w-full px-5 py-3 text-[#2C2F33] placeholder-gray-400 bg-white border border-[#2C2F33] rounded-md focus:border-[#98FF98] focus:ring-[#98FF98] focus:outline-none focus:ring focus:ring-opacity-40"/>
+                        <span asp-validation-for="Preco" class="text-red-500"></span>
+                    </div>
+
+                    <!-- Descrição -->
+                    <div>
+                        <label asp-for="Descricao" class="block mb-2 text-sm text-[#2C2F33]">Descrição</label>
+                        <textarea asp-for="Descricao"
+                      rows="3"
+                      placeholder="Escreva uma Descrição Detalhada do Produto"
+                      class="block w-full px-5 py-3 text-[#2C2F33] placeholder-gray-400 bg-white border border-[#2C2F33] rounded-md focus:border-[#98FF98] focus:ring-[#98FF98] focus:outline-none focus:ring focus:ring-opacity-40"></textarea>
+                        <span asp-validation-for="Descricao" class="text-red-500"></span>
+                    </div>
+
+                    <!-- Categoria -->
+                    <div>
+                        <label asp-for="Categoria.Id" class="block mb-2 text-sm text-[#2C2F33]">Categoria</label>
+                        <select asp-for="Categoria.Id" asp-items="ViewBag.Categorias"
+                                class="block w-full px-5 py-3 text-[#2C2F33] placeholder-gray-400 bg-white border border-[#2C2F33] rounded-md focus:border-[#98FF98] focus:ring-[#98FF98] focus:outline-none focus:ring focus:ring-opacity-40">
+                            <option value="0">Selecione a Categoria</option> <!-- Aqui alterei para 0 -->
+                        </select>
+                        <span asp-validation-for="Categoria.Id" class="text-red-500"></span>
+                    </div>
+
+                    <!-- Imagens -->
+                    <div>
+                        <label asp-for="ImgProduto" class="block mb-2 text-sm text-[#2C2F33]">Imagem do Produto</label>
+                        <input asp-for="ImgProduto"
+                               type="file"
+                               multiple
+                               class="block w-full px-5 py-3 text-[#2C2F33] placeholder-gray-400 bg-white border border-[#2C2F33] rounded-md focus:border-[#98FF98] focus:ring-[#98FF98] focus:outline-none focus:ring focus:ring-opacity-40" name="FotoProduto"/>
+                    </div>
+
+                    <!-- Botões -->
+                    <div class="flex items-center justify-between">
+                        <button type="submit"
+                                class="bg-[#98FF98] text-[#2C2F33] px-6 py-2 rounded-lg shadow-sm hover:bg-[#66cc66] focus:outline-none focus:ring-2 focus:ring-[#98FF98] focus:ring-offset-2">
+                            Salvar
+                        </button>
+                        <a href="/Home/Index"
+                           class="bg-[#2C2F33] text-white px-6 py-2 rounded-lg shadow-sm hover:bg-[#2C2F33] focus:outline-none focus:ring-2 focus:ring-[#98FF98] focus:ring-offset-2">
+                            Voltar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

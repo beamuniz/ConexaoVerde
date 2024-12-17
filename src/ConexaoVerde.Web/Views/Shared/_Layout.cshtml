@@ -1,0 +1,150 @@
+@{
+    var isFornecedor = false;
+    if (User.Identity!.IsAuthenticated)
+    {
+        var perfilClaim = User.Claims.FirstOrDefault(c => c.Type == "Perfil")?.Value;
+        isFornecedor = perfilClaim == "Fornecedor";
+    }
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - Conexão Verde</title>
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true"/>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-[#ffffff] text-white">
+
+<!-- Header -->
+<header>
+    <nav class="flex items-center justify-between p-3 bg-[#2C2F33]">
+        <!-- Logo -->
+        <div class="flex justify-center">
+            <a href="/" class="flex items-center">
+                <img src="~/images/logo.png" alt="Logo Home" class="h-20 w-auto">
+            </a>
+        </div>
+
+        <!-- Botão de menu para dispositivos móveis -->
+        <div class="flex md:hidden ml-4">
+            <button id="hamburger">
+                <img class="toggle block" src="https://img.icons8.com/fluent-systems-regular/2x/menu-squared-2.png" width="40" height="40" alt=""/>
+                <img class="toggle hidden" src="https://img.icons8.com/fluent-systems-regular/2x/close-window.png" width="40" height="40" alt=""/>
+            </button>
+        </div>
+
+        <!-- Links de navegação (centralizados na versão desktop) -->
+        @switch (User.Identity!.IsAuthenticated)
+        {
+            case true when isFornecedor:
+                <div class="toggle hidden md:flex justify-center flex-grow text-bold mt-5 md:mt-0 md:border-none">
+                    <a href="/" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Home</a>
+                    <a href="/Produto/ListarProduto" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Meus Produtos</a>
+                    <a href="/Produto/CriarProduto" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Criar Produto</a>
+                    <a href="#contactUs" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Visite Nós</a>
+                </div>
+                break;
+            case false:
+                <div class="toggle hidden md:flex justify-center flex-grow text-bold mt-5 md:mt-0 md:border-none">
+                    <a href="/" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Home</a>
+                    <a href="#services" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Serviços</a>
+                    <a href="#aboutus" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Sobre Nós</a>
+                    <a href="#contactUs" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Visite Nós</a>
+                </div>
+                break;
+            default:
+                <div class="toggle hidden md:flex justify-center flex-grow text-bold mt-5 md:mt-0 md:border-none">
+                    <a href="/" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Home</a>
+                    <a href="/Fornecedor/ListarFornecedor" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Fornecedores</a>
+                    <a href="/Produto/ListarProduto" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Produtos</a>
+                    <a href="#contactUs" class="block md:inline-block hover:text-[#98FF98] px-3 py-3 md:border-none">Visite Nós</a>
+                </div>
+                break;
+        }
+
+        @if (User.Identity!.IsAuthenticated)
+        {
+            <div class="relative inline-block">
+                <a href="javascript:void(0);" class="flex items-center" id="profileIcon">
+                    @if (Context.Items["FotoPerfil"] is byte[] fotoPerfil)
+                    {
+                        var base64Image = Convert.ToBase64String(fotoPerfil);
+                        <img src="data:image/png;base64,@base64Image" alt="Profile" class="w-16 h-16 rounded-full"/>
+                    }
+                    else
+                    {
+                        <img src="~/images/profile_pic.png" alt="Profile" class="w-16 h-16 rounded-full"/>
+                    }
+                </a>
+
+                <!-- Menu Suspenso -->
+                <div id="dropdownMenu" class="absolute hidden right-0 mt-2 bg-[#2C2F33] text-white p-4 rounded shadow-lg w-48 z-20">
+                    <a href="/Usuario/Perfil" class="block px-4 py-2 text-sm hover:text-[#98FF98]">
+                        <i class="fas fa-user mr-2"></i> <!-- Ícone de perfil -->
+                        Meu Perfil
+                    </a>
+                    <hr class="my-2 border-t border-[#98FF98]"/>
+                    <a href="/Login/AlterarSenha" class="block px-4 py-2 text-sm hover:text-[#98FF98]">
+                        <i class="fas fa-key mr-2"></i> <!-- Ícone de chave -->
+                        Alterar Senha
+                    </a>
+                    <hr class="my-2 border-t border-[#98FF98]"/>
+                    <form method="post" asp-controller="Login" asp-action="Logout" class="text-center mt-2">
+                        <button type="submit" class="block px-4 py-2 text-sm hover:text-[#98FF98]">
+                            <i class="fas fa-sign-out-alt mr-2"></i> <!-- Ícone de logout -->
+                            Sair
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+        else
+        {
+            <!-- Caso o usuário não esteja autenticado -->
+            <div class="toggle w-full text-end hidden md:flex md:w-auto px-2 py-2 md:rounded">
+                <a href="/Login/Login">
+                    <div class="flex justify-end items-center h-10 w-auto rounded-md bg-[#98FF98] text-[#2C2F33] font-medium p-2 space-x-2">
+                        <i class="fa-solid fa-right-to-bracket text-xl"></i>
+                        <span>Entrar</span>
+                    </div>
+                </a>
+            </div>
+        }
+    </nav>
+</header>
+
+<!-- Main Content -->
+<main class="min-h-screen">
+    @RenderBody()
+</main>
+
+<!-- Footer -->
+<footer class="bg-[#2C2F33] text-white py-6">
+    <div class="container mx-auto text-center">
+        <p>&copy; 2024 Conexão Verde. Todos os Direitos Reservados.</p>
+    </div>
+</footer>
+
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+
+<!-- Plugin de Libras -->
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+
+</body>
+</html>
