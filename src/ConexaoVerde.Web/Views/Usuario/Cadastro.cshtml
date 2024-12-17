@@ -61,37 +61,38 @@
                     <input type="hidden" asp-for="Perfil" value="Cliente" />
                     <!-- Campos do Cliente (Ocultos inicialmente) -->
                     <div id="clienteFields" style="display:none;" class="lg:col-span-1">
-                        <!-- Foto de Perfil -->
+                        <!-- Foto de Perfil Cliente -->
                         <div class="mb-4">
                             <label asp-for="FotoPerfil" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
                                 Foto de Perfil
                             </label>
-                            <div class="relative border-2 border-dashed border-gray-300 rounded-md p-6 flex flex-col items-center justify-center text-center w-full"
-                                id="upload-area">
-                                <div class="absolute inset-0 flex items-center justify-center bg-gray-100 border-4 border-dashed border-green-300 rounded-md z-0 p-4"
-                                    id="upload-message">
+                            <div
+                                class="relative border-2 border-dashed border-gray-300 rounded-md p-6 flex flex-col items-center justify-center text-center w-full upload-area">
+                                <div
+                                    class="absolute inset-0 flex items-center justify-center bg-gray-100 border-4 border-dashed border-green-300 rounded-md z-0 p-4 upload-message">
                                     <span class="text-gray-500 text-sm mb-2 font-semibold">
                                         Arraste e solte uma imagem aqui ou
                                     </span>
                                     <span class="text-gray-500 text-sm font-semibold">Clique para selecionar uma
                                         imagem</span>
                                 </div>
-                                <label for="fotoPerfilInput"
+                                <label for="fotoPerfilInput1"
                                     class="cursor-pointer w-full py-3 px-6 bg-green-500 text-white rounded-md hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 text-sm text-center z-10">
                                     Clique ou Arraste para selecionar uma imagem
                                 </label>
-                                <input id="fotoPerfilInput" type="file" accept="image/*" class="hidden"
-                                    name="fotoPerfil" />
+                                <input id="fotoPerfilInput1" class="fotoPerfilInput" type="file" accept="image/*"
+                                    class="hidden" name="fotoPerfil1" />
                                 <span asp-validation-for="FotoPerfil" class="text-red-500"></span>
                             </div>
                         </div>
 
                         <!-- Campo para exibir a pré-visualização da imagem -->
-                        <div id="image-preview" class="mt-4 hidden">
+                        <div class="image-preview mt-4 hidden preview1">
                             <h3 class="text-sm text-gray-600 dark:text-gray-200">Pré-visualização:</h3>
-                            <img id="preview-img" src="" alt="Pré-visualização da imagem"
-                                class="w-32 h-32 object-cover rounded-md border-2 border-gray-300 mt-2" />
+                            <img class="preview-img w-32 h-32 object-cover rounded-md border-2 border-gray-300 mt-2"
+                                src="" alt="Pré-visualização da imagem" />
                         </div>
+
 
                         <!-- Nome -->
                         <div class="mb-4">
@@ -195,29 +196,34 @@
                     <input type="hidden" asp-for="Perfil" value="Fornecedor" />
                     <div id="fornecedorFields" style="display:none;" class="lg:col-span-1">
 
-                        <!-- Foto de Perfil -->
+                        <!-- Foto de Fornecedor -->
                         <div class="mb-4">
                             <label asp-for="FotoPerfil" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
-                                Foto
-                                de Perfil
+                                Foto de Perfil
                             </label>
                             <div
-                                class="relative border-2 border-dashed border-gray-300 rounded-md p-6 flex flex-col items-center justify-center text-center w-full">
+                                class="relative border-2 border-dashed border-gray-300 rounded-md p-6 flex flex-col items-center justify-center text-center w-full upload-area">
                                 <div
-                                    class="absolute inset-0 flex items-center justify-center bg-gray-100 border-4 border-dashed border-green-300 rounded-md z-0 p-4">
+                                    class="absolute inset-0 flex items-center justify-center bg-gray-100 border-4 border-dashed border-green-300 rounded-md z-0 p-4 upload-message">
                                     <span class="text-gray-500 text-sm mb-2 font-semibold">
-                                        Arraste e solte uma imagem
-                                        aqui ou
+                                        Arraste e solte uma imagem aqui ou
                                     </span>
                                 </div>
                                 <label for="fotoPerfilInputFornecedor"
                                     class="cursor-pointer w-full py-3 px-6 bg-green-500 text-white rounded-md hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 text-sm text-center z-10">
                                     Clique ou Arraste para selecionar uma imagem
                                 </label>
-                                <input id="fotoPerfilInputFornecedor" type="file" accept="image/*" class="hidden"
-                                    name="fotoPerfil" />
+                                <input id="fotoPerfilInputFornecedor" class="fotoPerfilInput" type="file"
+                                    accept="image/*" class="hidden" name="fotoPerfil2" />
                                 <span asp-validation-for="FotoPerfil" class="text-red-500"></span>
                             </div>
+                        </div>
+
+                        <!-- Campo para exibir a pré-visualização da imagem -->
+                        <div class="image-preview mt-4 hidden preview2">
+                            <h3 class="text-sm text-gray-600 dark:text-gray-200">Pré-visualização:</h3>
+                            <img class="preview-img w-32 h-32 object-cover rounded-md border-2 border-gray-300 mt-2"
+                                src="" alt="Pré-visualização da imagem" />
                         </div>
                         <!-- Razão Social -->
                         <div class="mb-4">
