@@ -4,14 +4,14 @@
     ViewData["Title"] = "Login";
 }
 
-<section class="bg-white dark:bg-gray-900">
+<section class="bg-white">
     <div class="flex justify-center min-h-screen">
         <div class="hidden bg-cover lg:block lg:w-2/5" style="background-image: url('@Url.Content("~/images/login.png")');"></div>
         <!-- Formulário -->
         <div class="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
             <div class="w-full">
                 <h1 class="text-2xl font-semibold tracking-wider text-[#2C2F33] capitalize">Login</h1>
-                <p class="mt-4 text-[#2C2F33] dark:text-gray-400">Faça login para acessar sua conta.</p>
+                <p class="mt-4 text-[#2C2F33]">Faça login para acessar sua conta.</p>
 
                 @if (ViewBag.ErrorMessage != null)
                 {
@@ -21,15 +21,15 @@
                 <form asp-action="Login" asp-controller="Login" method="POST" class="space-y-6 mt-8">
                     <!-- Campo Login -->
                     <div class="relative">
-                        <label for="Email" class="block mb-2 text-sm text-[#2C2F33] dark:text-gray-200">Email</label>
-                        <input asp-for="Email" type="text" id="Email" name="Email" class="block w-full px-5 py-3 pl-5 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#98FF98]" placeholder="Email" required data-val="true" data-val-required="O campo Email é obrigatório">
+                        <label for="Email" class="block mb-2 text-sm text-[#2C2F33]">Email</label>
+                        <input asp-for="Email" type="text" id="Email" name="Email" class="block w-full px-5 py-3 pl-5 text-gray-700 bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-[#98FF98]" placeholder="Email" required data-val="true" data-val-required="O campo Email é obrigatório">
                         <span asp-validation-for="Email" class="text-red-500 text-sm"></span>
                     </div>
 
                     <!-- Campo Senha -->
                     <div class="relative">
-                        <label for="Senha" class="block mb-2 text-sm text-[#2C2F33] dark:text-gray-200">Senha</label>
-                        <input asp-for="Senha" type="password" id="Senha" name="Senha" class="block w-full px-5 py-3 pl-5 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#98FF98]" placeholder="Senha" required data-val="true" data-val-required="O campo Senha é obrigatório">
+                        <label for="Senha" class="block mb-2 text-sm text-[#2C2F33]">Senha</label>
+                        <input asp-for="Senha" type="password" id="Senha" name="Senha" class="block w-full px-5 py-3 pl-5 text-gray-700 bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-[#98FF98]" placeholder="Senha" required data-val="true" data-val-required="O campo Senha é obrigatório">
                         <span asp-validation-for="Senha" class="text-red-500 text-sm"></span>
                     </div>
 
@@ -37,9 +37,9 @@
                     <div class="flex justify-between items-center">
                         <div class="flex items-center space-x-2">
                             <input type="checkbox" id="RememberMe" name="RememberMe" class="form-checkbox text-[#98FF98]">
-                            <label for="RememberMe" class="text-sm text-[#2C2F33] dark:text-gray-200">Lembrar-me</label>
+                            <label for="RememberMe" class="text-sm text-[#2C2F33]">Lembrar-me</label>
                         </div>
-                        <a href="EsqueceuSenha" class="text-sm text-[#98FF98] hover:text-[#66cc66] dark:text-[#98FF98] dark:hover:text-[#66cc66]">Esqueceu a senha?</a>
+                        <a href="EsqueceuSenha" class="text-sm text-[#98FF98] hover:text-[#66cc66]">Esqueceu a senha?</a>
                     </div>
 
                     <!-- Botão de Login -->
@@ -51,8 +51,8 @@
 
                 <!-- Registro -->
                 <div class="mt-4 text-center">
-                    <span class="text-sm text-[#2C2F33] dark:text-gray-400">Não tem uma conta?</span>
-                    <a href="/Usuario/Cadastro" class="text-sm text-[#98FF98] hover:text-[#66cc66] dark:text-[#98FF98] dark:hover:text-[#66cc66]">Crie uma conta</a>
+                    <span class="text-sm text-[#2C2F33]">Não tem uma conta?</span>
+                    <a href="/Usuario/Cadastro" class="text-sm text-[#98FF98] hover:text-[#66cc66]">Crie uma conta</a>
                 </div>
             </div>
         </div>

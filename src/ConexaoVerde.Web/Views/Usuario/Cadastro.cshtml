@@ -5,7 +5,7 @@
 }
 
 <!-- component -->
-<section class="bg-white dark:bg-gray-900">
+<section class="bg-white">
     <div class="flex justify-center ">
         <div class="hidden bg-cover lg:block lg:w-2/5 lg:min-h-screen" style="background-image: url('https://img.freepik.com/free-photo/natural-cosmetic-product-collection_23-2148574896.jpg?t=st=1730999797~exp=1731003397~hmac=f7bc3c6e2e719e6563099bbc2f92097672da642ac6bb07be523ca64cbd8f6876&w=740');
     background-size: cover; background-position: center; background-repeat: no-repeat;">
@@ -14,11 +14,11 @@
 
         <div class="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
             <div class="w-full">
-                <h1 class="text-2xl font-semibold tracking-wider text-gray-800 capitalize dark:text-white">
+                <h1 class="text-2xl font-semibold tracking-wider text-gray-800 capitalize">
                     Registre-se
                 </h1>
 
-                <p class="mt-4 text-gray-500 dark:text-gray-400">
+                <p class="mt-4 text-gray-500">
                     Preencha o formulário abaixo para criar a sua conta.
                 </p>
 
@@ -63,7 +63,7 @@
                     <div id="clienteFields" style="display:none;" class="lg:col-span-1">
                         <!-- Foto de Perfil Cliente -->
                         <div class="mb-4">
-                            <label asp-for="FotoPerfil" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                            <label asp-for="FotoPerfil" class="block mb-2 text-sm text-gray-600">
                                 Foto de Perfil
                             </label>
                             <div
@@ -88,7 +88,7 @@
 
                         <!-- Campo para exibir a pré-visualização da imagem -->
                         <div class="image-preview mt-4 hidden preview1">
-                            <h3 class="text-sm text-gray-600 dark:text-gray-200">Pré-visualização:</h3>
+                            <h3 class="text-sm text-gray-600">Pré-visualização:</h3>
                             <img class="preview-img w-32 h-32 object-cover rounded-md border-2 border-gray-300 mt-2"
                                 src="" alt="Pré-visualização da imagem" />
                         </div>
@@ -97,33 +97,33 @@
                         <!-- Nome -->
                         <div class="mb-4">
                             <label asp-for="ClienteModel.Nome"
-                                class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                                class="block mb-2 text-sm text-gray-600">
                                 Nome
                             </label>
                             <input asp-for="ClienteModel.Nome" type="text" placeholder="Nome"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                             <span asp-validation-for="ClienteModel.Nome" class="text-red-500"></span>
                         </div>
 
                         <!-- SobrenomeNome -->
                         <div class="mb-4">
                             <label asp-for="ClienteModel.Sobrenome"
-                                class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                                class="block mb-2 text-sm text-gray-600">
                                 Sobrenome
                             </label>
                             <input asp-for="ClienteModel.Sobrenome" type="text" placeholder="Sobrenome"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400  focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                             <span asp-validation-for="ClienteModel.Sobrenome" class="text-red-500"></span>
                         </div>
 
                         <!-- CPF   -->
                         <div class="mb-4">
                             <label asp-for="ClienteModel.Cpf"
-                                class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                                class="block mb-2 text-sm text-gray-600">
                                 CPF
                             </label>
                             <input asp-for="ClienteModel.Cpf" type="text" placeholder="000.000.000-00"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400  focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40"
                                 oninput="formatarCpf(this)" />
                             <span id="cpfError" class="text-red-500 hidden">
                                 CPF inválido. Por favor, digite um CPF
@@ -133,38 +133,38 @@
 
                         <!-- Telefone -->
                         <div class="mb-4">
-                            <label asp-for="Telefone" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                            <label asp-for="Telefone" class="block mb-2 text-sm text-gray-600">
                                 Telefone
                             </label>
                             <input asp-for="Telefone" type="tel" id="telefone" placeholder="(11) 91234-5678"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40"
                                 maxlength="15" oninput="formatPhoneNumber(this)" />
                             <span asp-validation-for="Telefone" class="text-red-500"></span>
                         </div>
 
                         <!-- Email -->
                         <div class="mb-4">
-                            <label asp-for="Email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                            <label asp-for="Email" class="block mb-2 text-sm text-gray-600">
                                 Email
                             </label>
                             <input asp-for="Email" type="email" placeholder="exemplo@email.com"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                             <span asp-validation-for="Email" class="text-red-500"></span>
                         </div>
 
                         <!-- Senha -->
                         <div class="mb-4">
-                            <label asp-for="Senha" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                            <label asp-for="Senha" class="block mb-2 text-sm text-gray-600">
                                 Senha
                             </label>
                             <input asp-for="Senha" type="password" id="senha-outro" placeholder="********"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                             <span asp-validation-for="Senha" class="text-red-500"></span>
                         </div>
 
                         <!-- Barra de Força da Senha -->
                         <div class="mb-4">
-                            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Força da Senha</label>
+                            <label class="block mb-2 text-sm text-gray-600">Força da Senha</label>
                             <div id="password-strength-container-outro" class="w-full bg-gray-200 rounded-full">
                                 <div id="password-strength-bar-outro" class="h-1 rounded-full"
                                     style="width: 0%; background-color: #e0e0e0;"></div>
@@ -173,9 +173,9 @@
 
                         <!-- Confirmar Senha -->
                         <div class="mb-4">
-                            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Confirmar Senha</label>
+                            <label class="block mb-2 text-sm text-gray-600">Confirmar Senha</label>
                             <input type="password" id="confirm-senha-outro" placeholder="********"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400  focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                             <span id="senha-error-outro" class="text-red-500 hidden">As senhas não coincidem.</span>
                         </div>
 
@@ -198,7 +198,7 @@
 
                         <!-- Foto de Fornecedor -->
                         <div class="mb-4">
-                            <label asp-for="FotoPerfil" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                            <label asp-for="FotoPerfil" class="block mb-2 text-sm text-gray-600">
                                 Foto de Perfil
                             </label>
                             <div
@@ -221,29 +221,29 @@
 
                         <!-- Campo para exibir a pré-visualização da imagem -->
                         <div class="image-preview mt-4 hidden preview2">
-                            <h3 class="text-sm text-gray-600 dark:text-gray-200">Pré-visualização:</h3>
+                            <h3 class="text-sm text-gray-600">Pré-visualização:</h3>
                             <img class="preview-img w-32 h-32 object-cover rounded-md border-2 border-gray-300 mt-2"
                                 src="" alt="Pré-visualização da imagem" />
                         </div>
                         <!-- Razão Social -->
                         <div class="mb-4">
                             <label asp-for="FornecedorModel.RazaoSocial"
-                                class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                                class="block mb-2 text-sm text-gray-600">
                                 Razão Social
                             </label>
                             <input asp-for="FornecedorModel.RazaoSocial" type="text" placeholder="Exemplo Ltda."
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                             <span asp-validation-for="FornecedorModel.RazaoSocial" class="text-red-500"></span>
                         </div>
 
                         <!-- Nome Fantasia -->
                         <div class="mb-4">
                             <label asp-for="FornecedorModel.NomeFantasia"
-                                class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                                class="block mb-2 text-sm text-gray-600">
                                 Nome Fantasia
                             </label>
                             <input asp-for="FornecedorModel.NomeFantasia" type="text" placeholder="Exemplo Nome"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                             <span asp-validation-for="FornecedorModel.NomeFantasia" class="text-red-500"></span>
                         </div>
 
@@ -251,69 +251,69 @@
                         <!-- CNPJ -->
                         <div class="mb-4">
                             <label asp-for="FornecedorModel.Cnpj"
-                                class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                                class="block mb-2 text-sm text-gray-600">
                                 CNPJ
                             </label>
                             <input id="cnpj" asp-for="FornecedorModel.Cnpj" type="text" placeholder="00.000.000/0000-00"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40"
                                 maxlength="18" oninput="formatCNPJ(this)" />
                             <span id="cnpj-error" class="text-red-500"></span>
                         </div>
 
                         <div class="mb-4">
                             <label asp-for="FornecedorModel.Endereco.CEP"
-                                class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                                class="block mb-2 text-sm text-gray-600">
                                 CEP
                             </label>
                             <input asp-for="FornecedorModel.Endereco.CEP" type="text" placeholder="Ex: 12345-678"
                                 id="cep"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40"
                                 onblur="consultarCEP()" />
                             <span asp-validation-for="FornecedorModel.Endereco.CEP" class="text-red-500"></span>
                         </div>
 
                         <div class="mb-4">
                             <label asp-for="FornecedorModel.Endereco.Rua"
-                                class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                                class="block mb-2 text-sm text-gray-600">
                                 Rua
                             </label>
                             <input asp-for="FornecedorModel.Endereco.Rua" type="text" id="Endereco_Rua"
                                 placeholder="Ex: Rua das Flores"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40"
                                 disabled />
                             <span asp-validation-for="FornecedorModel.Endereco.Rua" class="text-red-500"></span>
                         </div>
 
                         <div class="mb-4">
                             <label asp-for="FornecedorModel.Endereco.Numero"
-                                class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                                class="block mb-2 text-sm text-gray-600">
                                 Número
                             </label>
                             <input asp-for="FornecedorModel.Endereco.Numero" type="number" placeholder="Ex: 123"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                             <span asp-validation-for="FornecedorModel.Endereco.Numero" class="text-red-500"></span>
                         </div>
 
                         <div class="mb-4">
                             <label asp-for="FornecedorModel.Endereco.Cidade"
-                                class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                                class="block mb-2 text-sm text-gray-600">
                                 Cidade
                             </label>
                             <input asp-for="FornecedorModel.Endereco.Cidade" type="text" id="Endereco_Cidade"
                                 placeholder="Ex: São Paulo"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40"
                                 disabled />
                             <span asp-validation-for="FornecedorModel.Endereco.Cidade" class="text-red-500"></span>
                         </div>
 
                         <div class="mb-4">
                             <label asp-for="FornecedorModel.Endereco.Estado"
-                                class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                                class="block mb-2 text-sm text-gray-600">
                                 Estado
                             </label>
                             <input asp-for="FornecedorModel.Endereco.Estado" type="text" id="Endereco_Estado"
                                 placeholder="Ex: SP"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40"
                                 disabled />
                             <span asp-validation-for="FornecedorModel.Endereco.Estado" class="text-red-500"></span>
                         </div>
@@ -321,38 +321,38 @@
 
                         <!-- Telefone -->
                         <div class="mb-4">
-                            <label asp-for="Telefone" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                            <label asp-for="Telefone" class="block mb-2 text-sm text-gray-600">
                                 Telefone
                             </label>
                             <input asp-for="Telefone" type="tel" id="telefone" placeholder="(11) 91234-5678"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40"
                                 maxlength="15" oninput="formatPhoneNumber(this)" />
                             <span asp-validation-for="Telefone" class="text-red-500"></span>
                         </div>
 
                         <!-- Email -->
                         <div class="mb-4">
-                            <label asp-for="Email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                            <label asp-for="Email" class="block mb-2 text-sm text-gray-600">
                                 Email
                             </label>
                             <input asp-for="Email" type="email" placeholder="contato@empresa.com"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                             <span asp-validation-for="Email" class="text-red-500"></span>
                         </div>
 
                         <!-- Senha -->
                         <div class="mb-4">
-                            <label asp-for="Senha" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                            <label asp-for="Senha" class="block mb-2 text-sm text-gray-600">
                                 Senha
                             </label>
                             <input asp-for="Senha" type="password" id="senha-fornecedor" placeholder="********"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                             <span asp-validation-for="Senha" class="text-red-500"></span>
                         </div>
 
                         <!-- Barra de Força da Senha -->
                         <div class="mb-4">
-                            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Força da Senha</label>
+                            <label class="block mb-2 text-sm text-gray-600">Força da Senha</label>
                             <div id="password-strength-container-fornecedor" class="w-full bg-gray-200 rounded-full">
                                 <div id="password-strength-bar-fornecedor" class="h-1 rounded-full"
                                     style="width: 0%; background-color: #e0e0e0;"></div>
@@ -361,9 +361,9 @@
 
                         <!-- Confirmar Senha -->
                         <div class="mb-4">
-                            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Confirmar Senha</label>
+                            <label class="block mb-2 text-sm text-gray-600">Confirmar Senha</label>
                             <input type="password" id="confirm-senha-fornecedor" placeholder="********"
-                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-green-400 dark:focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                class="block w-full px-5 py-3 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-green-400 focus:ring-green-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                             <span id="senha-error-fornecedor" class="text-red-500 hidden">As senhas não
                                 coincidem.</span>
                         </div>
