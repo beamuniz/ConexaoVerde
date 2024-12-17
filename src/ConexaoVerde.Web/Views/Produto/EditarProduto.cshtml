@@ -24,7 +24,7 @@
             <div>
                 <label for="nomeProduto" class="block text-sm font-medium text-[#2C2F33] mb-2">Nome do Produto</label>
                 <input type="text" id="nomeProduto" asp-for="NomeProduto" placeholder="Exemplo: Imac 27”" required
-                    class="w-full p-2.5 rounded-lg border border-[#2C2F33] focus:ring-[#98FF98] focus:border-[#98FF98] shadow-sm">
+                    class="w-full p-2.5 rounded-lg border border-[#2C2F33] focus:ring-[#98FF98] focus:border-[#98FF98] shadow-sm text-black placeholder:text-black">
                 <span asp-validation-for="NomeProduto" class="text-red-500 text-sm"></span>
             </div>
 
@@ -32,7 +32,7 @@
             <div>
                 <label for="preco" class="block text-sm font-medium text-[#2C2F33] mb-2">Preço</label>
                 <input type="number" id="preco" asp-for="Preco" placeholder="$2300" required
-                    class="w-full p-2.5 rounded-lg border border-[#2C2F33] focus:ring-[#98FF98] focus:border-[#98FF98] shadow-sm">
+                    class="w-full p-2.5 rounded-lg border border-[#2C2F33] focus:ring-[#98FF98] focus:border-[#98FF98] shadow-sm text-black placeholder:text-black">
                 <span asp-validation-for="Preco" class="text-red-500 text-sm"></span>
             </div>
         </div>
@@ -41,7 +41,7 @@
         <div>
             <label for="descricao" class="block text-sm font-medium text-[#2C2F33] mb-2">Descrição do Produto</label>
             <textarea id="descricao" rows="5" asp-for="Descricao" placeholder="Detalhes sobre o produto" required
-                class="w-full p-4 rounded-lg border border-[#2C2F33] focus:ring-[#98FF98] focus:border-[#98FF98] shadow-sm"></textarea>
+                class="w-full p-4 rounded-lg border border-[#2C2F33] focus:ring-[#98FF98] focus:border-[#98FF98] shadow-sm text-black placeholder:text-black"></textarea>
             <span asp-validation-for="Descricao" class="text-red-500 text-sm"></span>
         </div>
 
