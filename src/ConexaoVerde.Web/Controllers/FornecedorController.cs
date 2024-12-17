@@ -94,9 +94,8 @@ public class FornecedorController(
         var usuario = usuarioBusiness.ObterUsuariosPorFornecedor(request.FornecedorId).Result;
 
         if (fornecedor == null)
-        {
             return Json(new { resposta = "Fornecedor não encontrado." });
-        }
+
 
         var respostaBot = fornecedorService.ProcessarMensagem(request.Mensagem, fornecedor, usuario);
 
