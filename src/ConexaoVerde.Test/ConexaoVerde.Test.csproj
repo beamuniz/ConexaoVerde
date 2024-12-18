@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\src\ConexaoVerde.Web\ConexaoVerde.Web.csproj" />
+        <ProjectReference Include="..\ConexaoVerde.Web\ConexaoVerde.Web.csproj" />
     </ItemGroup>
 
 </Project>

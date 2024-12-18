@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConexaoVerde.AppData", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConexaoVerde.Web", "src\ConexaoVerde.Web\ConexaoVerde.Web.csproj", "{3F593230-5C42-46B3-A61B-12F57EDE0307}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConexaoVerde.Test", "ConexaoVerde.Test\ConexaoVerde.Test.csproj", "{85C4C69B-2CF9-4B52-9076-7430ED67EE2E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConexaoVerde.Test", "src\ConexaoVerde.Test\ConexaoVerde.Test.csproj", "{85C4C69B-2CF9-4B52-9076-7430ED67EE2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
