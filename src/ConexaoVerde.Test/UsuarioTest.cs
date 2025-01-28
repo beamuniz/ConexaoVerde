@@ -1,6 +1,7 @@
-﻿using ConexaoVerde.Web.Business.Interfaces;
+﻿using ConexaoVerde.Domain.Models;
+using ConexaoVerde.Infrastructure.Business.Interfaces;
+using ConexaoVerde.Web.Business.Interfaces;
 using ConexaoVerde.Web.Controllers;
-using ConexaoVerde.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 

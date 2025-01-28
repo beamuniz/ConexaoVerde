@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using ConexaoVerde.Web.Models;
+using ConexaoVerde.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConexaoVerde.Web.Controllers;

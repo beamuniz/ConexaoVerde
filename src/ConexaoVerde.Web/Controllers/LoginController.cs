@@ -1,9 +1,9 @@
 ﻿using System.Security.Claims;
-using ConexaoVerde.AppData.Context;
-using ConexaoVerde.AppData.Entities;
+using ConexaoVerde.Domain.Entities;
+using ConexaoVerde.Domain.Models;
+using ConexaoVerde.Infrastructure.Context;
+using ConexaoVerde.Infrastructure.Services;
 using ConexaoVerde.Web.Business.Interfaces;
-using ConexaoVerde.Web.Models;
-using ConexaoVerde.Web.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -90,7 +90,7 @@ public class LoginController(DbContextConfig dbContextConfig, IUsuarioBusiness u
 
         var usuarioAtualAsync = await GetUsuarioLogado();
 
-        if (!loginService.VerificarSenhaAtual(usuarioAtualAsync, model.SenhaAtual))
+        if (!LoginService.VerificarSenhaAtual(usuarioAtualAsync, model.SenhaAtual))
         {
             ModelState.AddModelError("SenhaAtual", "A senha atual está incorreta.");
             return View(model);

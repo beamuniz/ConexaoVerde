@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ConexaoVerde.AppData.Entities;
+﻿using ConexaoVerde.Domain.Entities;
+using ConexaoVerde.Domain.Models;
+using ConexaoVerde.Infrastructure.Business.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using ConexaoVerde.Web.Business.Interfaces;
 using ConexaoVerde.Web.Extensions;
-using ConexaoVerde.Web.Models;
 
 namespace ConexaoVerde.Web.Controllers;
 

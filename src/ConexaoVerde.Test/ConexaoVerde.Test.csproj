@@ -23,6 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\ConexaoVerde.Domain\ConexaoVerde.Domain.csproj" />
         <ProjectReference Include="..\ConexaoVerde.Web\ConexaoVerde.Web.csproj" />
     </ItemGroup>
 

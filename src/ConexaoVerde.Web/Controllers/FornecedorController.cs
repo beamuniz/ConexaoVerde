@@ -1,6 +1,7 @@
-﻿using ConexaoVerde.Web.Business.Interfaces;
-using ConexaoVerde.Web.Models;
-using ConexaoVerde.Web.Services;
+﻿using ConexaoVerde.Domain.Models;
+using ConexaoVerde.Infrastructure.Business.Interfaces;
+using ConexaoVerde.Infrastructure.Services;
+using ConexaoVerde.Web.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList.Extensions;
 
@@ -97,7 +98,7 @@ public class FornecedorController(
             return Json(new { resposta = "Fornecedor não encontrado." });
 
 
-        var respostaBot = fornecedorService.ProcessarMensagem(request.Mensagem, fornecedor, usuario);
+        var respostaBot = FornecedorService.ProcessarMensagem(request.Mensagem, fornecedor, usuario);
 
         return Json(new { resposta = respostaBot });
     }

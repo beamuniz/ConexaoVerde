@@ -1,9 +1,10 @@
 using System.Security.Claims;
+using ConexaoVerde.Domain.Models;
+using ConexaoVerde.Infrastructure.Business.Interfaces;
+using ConexaoVerde.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using ConexaoVerde.Web.Business.Interfaces;
 using ConexaoVerde.Web.Extensions;
-using ConexaoVerde.Web.Models;
-using ConexaoVerde.Web.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -68,15 +69,15 @@ public class UsuarioController(
         if (usuarioExistente == null)
             return NotFound();
 
-        await loginService.VerificarAtualizarUsuario(usuarioModel, fotoPerfil, usuarioExistente);
+        await LoginService.VerificarAtualizarUsuario(usuarioModel, fotoPerfil, usuarioExistente);
 
         switch (usuarioExistente.Perfil)
         {
             case "Cliente":
-                loginService.VerificarAtualizarCliente(usuarioModel, usuarioExistente);
+                LoginService.VerificarAtualizarCliente(usuarioModel, usuarioExistente);
                 break;
             case "Fornecedor":
-                loginService.VerificarAtualizarFornecedor(usuarioModel, usuarioExistente);
+                LoginService.VerificarAtualizarFornecedor(usuarioModel, usuarioExistente);
                 break;
         }
 

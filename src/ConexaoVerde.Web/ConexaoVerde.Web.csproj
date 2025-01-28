@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
-    <ProjectReference Include="..\ConexaoVerde.AppData\ConexaoVerde.AppData.csproj" />
+    <ProjectReference Include="..\ConexaoVerde.Infrastructure\ConexaoVerde.Infrastructure.csproj" />
   </ItemGroup>
   
   <ItemGroup>
