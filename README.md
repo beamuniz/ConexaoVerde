@@ -56,4 +56,20 @@ O **Conexão Verde** é um site desenvolvido para conectar fornecedores e client
 1. **Clone o repositório**:
    ```bash
    git clone https://github.com/seu-usuario/conexao-verde.git
-   execute a aplicação ConexaoVerde.Web
+	```
+   
+2. **Para instalar dependências Front**:
+
+- Em `ConexaoVerde.Web`, rode:
+
+   ```bash
+	npm install
+	```
+	```bash
+	npm install postcss-cli --save-dev
+	```
+	```bash
+	npm install tailwindcss postcss autoprefixer --save-dev
+	```
+ 
+3. **Execute a aplicação ConexaoVerde.Web**
