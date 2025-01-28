@@ -2,11 +2,10 @@
 using ConexaoVerde.Domain.Models;
 using ConexaoVerde.Infrastructure.Business.Interfaces;
 using ConexaoVerde.Infrastructure.Context;
-using ConexaoVerde.Web.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
-namespace ConexaoVerde.Web.Business.Services;
+namespace ConexaoVerde.Infrastructure.Business.Services;
 
 public class FornecedorBusiness(DbContextConfig dbContextConfig) : IFornecedorBusiness
 {

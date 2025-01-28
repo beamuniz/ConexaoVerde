@@ -2,7 +2,6 @@
 using ConexaoVerde.Domain.Models;
 using ConexaoVerde.Infrastructure.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using ConexaoVerde.Web.Business.Interfaces;
 using ConexaoVerde.Web.Extensions;
 
 namespace ConexaoVerde.Web.Controllers;
@@ -31,7 +30,7 @@ public class ProdutoController(
         else
             produtos = await produtoBusiness.ListarProdutos();
 
-        foreach (var produto in produtos.Where(produto => produto.ImgProduto != null))
+        foreach (var produto in produtos.Where(_ => true))
         {
             produto.ImgProdutoBase64 = Convert.ToBase64String(produto.ImgProduto);
         }

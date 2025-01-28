@@ -1,7 +1,6 @@
 ﻿using ConexaoVerde.Domain.Models;
 using ConexaoVerde.Infrastructure.Business.Interfaces;
 using ConexaoVerde.Infrastructure.Services;
-using ConexaoVerde.Web.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList.Extensions;
 

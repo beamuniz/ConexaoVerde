@@ -1,8 +1,6 @@
 ﻿using ConexaoVerde.Infrastructure.Business.Interfaces;
 using ConexaoVerde.Infrastructure.Business.Services;
 using ConexaoVerde.Infrastructure.Services;
-using ConexaoVerde.Web.Business.Interfaces;
-using ConexaoVerde.Web.Business.Services;
 
 namespace ConexaoVerde.Web.Configuration;
 

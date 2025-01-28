@@ -1,7 +1,7 @@
 ﻿using ConexaoVerde.Domain.Entities;
 using ConexaoVerde.Domain.Models;
 
-namespace ConexaoVerde.Web.Business.Interfaces;
+namespace ConexaoVerde.Infrastructure.Business.Interfaces;
 
 public interface IProdutoBusiness
 {

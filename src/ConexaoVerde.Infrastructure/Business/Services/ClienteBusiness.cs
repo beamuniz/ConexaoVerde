@@ -1,7 +1,7 @@
 ﻿using ConexaoVerde.Domain.Entities;
 using ConexaoVerde.Domain.Models;
+using ConexaoVerde.Infrastructure.Business.Interfaces;
 using ConexaoVerde.Infrastructure.Context;
-using ConexaoVerde.Web.Business.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConexaoVerde.Infrastructure.Business.Services;

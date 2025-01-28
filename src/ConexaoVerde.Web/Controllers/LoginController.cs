@@ -1,9 +1,9 @@
 ﻿using System.Security.Claims;
 using ConexaoVerde.Domain.Entities;
 using ConexaoVerde.Domain.Models;
+using ConexaoVerde.Infrastructure.Business.Interfaces;
 using ConexaoVerde.Infrastructure.Context;
 using ConexaoVerde.Infrastructure.Services;
-using ConexaoVerde.Web.Business.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;

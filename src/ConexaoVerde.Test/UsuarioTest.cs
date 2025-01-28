@@ -1,6 +1,5 @@
 ﻿using ConexaoVerde.Domain.Models;
 using ConexaoVerde.Infrastructure.Business.Interfaces;
-using ConexaoVerde.Web.Business.Interfaces;
 using ConexaoVerde.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -15,7 +14,7 @@ public class UsuarioTest
         // Arrange
         var mockCliente = new Mock<IClienteBusiness>();
         var mockUsuario = new Mock<IUsuarioBusiness>();
-        var controller = new UsuarioController(null, mockCliente.Object, mockUsuario.Object, null);
+        var controller = new UsuarioController(null, mockCliente.Object, mockUsuario.Object);
 
         var usuarioModel = new UsuarioModel
         {
@@ -52,7 +51,7 @@ public class UsuarioTest
         // Arrange
         var mockFuncionario = new Mock<IFornecedorBusiness>();
         var mockUsuario = new Mock<IUsuarioBusiness>();
-        var controller = new UsuarioController(mockFuncionario.Object, null, mockUsuario.Object, null);
+        var controller = new UsuarioController(mockFuncionario.Object, null, mockUsuario.Object);
 
         var usuarioModel = new UsuarioModel
         {

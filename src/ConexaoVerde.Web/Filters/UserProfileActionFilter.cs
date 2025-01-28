@@ -1,4 +1,4 @@
-﻿using ConexaoVerde.Web.Business.Interfaces;
+﻿using ConexaoVerde.Infrastructure.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace ConexaoVerde.Web.Filters;

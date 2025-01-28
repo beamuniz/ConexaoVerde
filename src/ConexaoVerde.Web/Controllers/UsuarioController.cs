@@ -3,7 +3,6 @@ using ConexaoVerde.Domain.Models;
 using ConexaoVerde.Infrastructure.Business.Interfaces;
 using ConexaoVerde.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
-using ConexaoVerde.Web.Business.Interfaces;
 using ConexaoVerde.Web.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -13,8 +12,7 @@ namespace ConexaoVerde.Web.Controllers;
 public class UsuarioController(
     IFornecedorBusiness fornecedor,
     IClienteBusiness cliente,
-    IUsuarioBusiness usuario,
-    LoginService loginService) : Controller
+    IUsuarioBusiness usuario) : Controller
 {
     [HttpGet]
     public IActionResult Cadastro()
