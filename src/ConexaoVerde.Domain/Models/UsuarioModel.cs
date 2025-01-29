@@ -10,9 +10,9 @@ public class UsuarioModel
     [Required(ErrorMessage = "A senha é obrigatória.")]
     public string Senha { get; set; }
 
-    public string Telefone { get; set; }
+    public string? Telefone { get; set; }
     public byte[]? FotoPerfil { get; set; }
-    public string Perfil { get; set; }
-    public ClienteModel ClienteModel { get; set; }
-    public FornecedorModel FornecedorModel { get; set; }
+    public string? Perfil { get; set; }
+    public ClienteModel? ClienteModel { get; set; }
+    public FornecedorModel? FornecedorModel { get; set; }
 }

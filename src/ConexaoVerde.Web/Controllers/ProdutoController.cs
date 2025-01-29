@@ -30,7 +30,7 @@ public class ProdutoController(
         else
             produtos = await produtoBusiness.ListarProdutos();
 
-        foreach (var produto in produtos.Where(_ => true))
+        foreach (var produto in produtos.Where(produto => produto.ImgProduto != null))
         {
             produto.ImgProdutoBase64 = Convert.ToBase64String(produto.ImgProduto);
         }
